@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectIscart, selectUserToken, selectUserid } from '../redux/authSlice'
 import { setIscart } from '../redux/authSlice'
 import { motion } from 'framer-motion'
-
 import { FaHeart, FaPercentage, FaRupeeSign } from 'react-icons/fa'
 import { BiSolidOffer } from 'react-icons/bi'
 import { IoIosCloseCircleOutline } from 'react-icons/io'
