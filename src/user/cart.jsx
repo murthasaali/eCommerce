@@ -26,11 +26,10 @@ function Cart() {
       if (status === 'success') {
 
         // Successfully fetched cart items.
-        
+
         const products = data.products
         setCaritem(products)
         console.log(products)
-
 
       } else {
         console.error('Cart item retrieval failed. Message:', message);
