@@ -24,7 +24,9 @@ function Cart() {
       });
       const { status, message, data } = response.data;
       if (status === 'success') {
+
         // Successfully fetched cart items.
+        
         const products = data.products
         setCaritem(products)
         console.log(products)
