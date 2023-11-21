@@ -57,12 +57,12 @@ function Admin() {
          <h1>murthasa</h1>
           </div>
            
-            <motion.button  variants={item} whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><SiStackoverflow className='text-3xl text-blue-400'/>  <h1>DASH BOARD</h1></motion.button>
-            <motion.button  variants={item} whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><BiHomeAlt className='text-3xl text-blue-400'/>  <h1> HOME</h1></motion.button>
-            <motion.button  variants={item} whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><MdOutlineAutoGraph className='text-3xl  text-blue-400'/>  <h1>SALES</h1></motion.button>
-            <motion.button  variants={item} whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><BiUser className='text-3xl  text-blue-400'/>  <h1 onClick={()=>nav('/admin/user')}>USE DETAIL</h1></motion.button>
-            <motion.button  variants={item} whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><FaOpencart className='text-3xl  text-blue-400'/>  <h1 onClick={()=>nav('/admin/prosec')}>PRODUCT DETAILS</h1></motion.button>
-            <motion.button  variants={item}   whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><BiCartAdd className='text-3xl  text-blue-400'/> <h1 onClick={()=>nav('/admin/add')}>ADD PRODUCT</h1></motion.button>
+            <motion.button  variants={item} whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><SiStackoverflow className='text-3xl text-blue-400'/>  <p>DASH BOARD</p></motion.button>
+            <motion.button  variants={item} whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><BiHomeAlt className='text-3xl text-blue-400'/>  <p> HOME</p></motion.button>
+            <motion.button  variants={item} whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><MdOutlineAutoGraph className='text-3xl  text-blue-400'/>  <p>SALES</p></motion.button>
+            <motion.button  variants={item} whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><BiUser className='text-3xl  text-blue-400'/>  <p onClick={()=>nav('/admin/user')}>USE DETAIL</p></motion.button>
+            <motion.button  variants={item} whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><FaOpencart className='text-3xl  text-blue-400'/>  <p onClick={()=>nav('/admin/prosec')}>PRODUCT DETAILS</p></motion.button>
+            <motion.button  variants={item}   whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><BiCartAdd className='text-3xl  text-blue-400'/> <p onClick={()=>nav('/admin/add')}>ADD PRODUCT</p></motion.button>
            
         </motion.div >
         <motion.div 

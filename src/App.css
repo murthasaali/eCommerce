@@ -57,23 +57,32 @@
 
 .form {
   margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  
 }
 
 .input-group {
   margin-top: 0.25rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center ;
 }
 
 .input-group label {
-  display: block;
+  display: flex;
   color: rgb(0, 0, 0);
   margin-bottom: 4px;
 }
 
 .input-group input {
   width: 100%;
-  border-radius: 0.375rem;
   border: 1px solid rgb(137, 140, 144);
   outline: 0;
   background-color: rgb(254, 254, 255,0.3);
@@ -262,14 +271,15 @@
   background-size: contain;
 }
 .qoute{
-  font-family: 'Teko', sans-serif;
+  font-family:teko,sans-serif;
 }
 .headings{
-  font-family: 'Teko', sans-serif;
+  font-family:url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
   color:rgb(93, 93, 242);
   font-size: 40px;
 }
 .qoute1{
   font-family: 'Teko', sans-serif;
   font-size: 200px;
+  
 }

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { motion } from 'framer-motion'
 import { selectIsabout } from '../redux/authSlice'
 
-function About() {
+function Checkout() {
     const dispatch=useDispatch()
     const isAbout=useSelector(selectIsabout)
     console.log(isAbout)
@@ -24,7 +24,7 @@ function About() {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      background: 'rgba(0, 0, 0, 1)',
+      background: 'rgba(0, 0, 0, 0.9)',
       zIndex: 999,
     }}
     onClick={() =>dispatch(setIsabout(false))}
@@ -54,4 +54,4 @@ function About() {
   )
 }
 
-export default About
+export default Checkout

@@ -1,18 +1,22 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectIscart, selectUserToken, selectUserid } from '../redux/authSlice'
+import { selectIsabout, selectIscart, selectUserToken, selectUserid, setIsabout } from '../redux/authSlice'
 import { setIscart } from '../redux/authSlice'
 import { motion } from 'framer-motion'
 import { FaHeart, FaPercentage, FaRupeeSign } from 'react-icons/fa'
 import { BiSolidOffer } from 'react-icons/bi'
 import { IoIosCloseCircleOutline } from 'react-icons/io'
-
+import Checkout from './checkout'
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { MdOutlineSecurity } from "react-icons/md";
 
 function Cart() {
   const isCart = useSelector(selectIscart)
   const userToken = useSelector(selectUserToken)
   const [cartitem, setCaritem] = useState([])
+  const isAbout=useSelector(selectIsabout)
+  
   const userId = useSelector(selectUserid)
   const dispatch = useDispatch()
   const viewCart = async (userId, token) => {
@@ -59,7 +63,7 @@ function Cart() {
 
       if (response.data.status === 'success') {
         console.log('Product removed from cart.');
-        viewCart(userId, userToken)
+       
       } else {
         console.error('Removing product from cart failed. Message:', response.data.message);
       }
@@ -87,15 +91,18 @@ function Cart() {
           background: 'white',
           zIndex: 999,
         }}
-        onClick={() => dispatch(setIscart(false))}
+       
       >
+        <div className='bg-white w-full h-full'>
+
         <div className='bg-white w-full flex gap-56 items-center justify-around mt-14'>
 
-          <div className='headings'> CART DETAILS</div>
+          <div className='headings' onClick={()=>dispatch(setIsabout(true))}> CART DETAILS</div>
           <div className='flex items-center gap-10'>
 
-            <div className='flex items-center '> 100<FaPercentage />  &nbsp; secure</div>
+            <div className='flex items-center '> <MdOutlineSecurity className='text-green-600'/>&nbsp; 100 secure</div>
             < FaHeart className='text-pink-600' />
+            <IoArrowBackCircleOutline className='text-3xl'  onClick={() => dispatch(setIscart(false))}/>
           </div>
         </div>
         <motion.div
@@ -107,7 +114,7 @@ function Cart() {
           //   padding: '2rem',
           //   borderRadius: '0.5rem',
           // }}
-          className=" w-full h-full  bg-no-repeat bg-conatin bg-center   bg-[url('car.png')]"
+          className=" w-full h-full  bg-no-repeat bg-conatin bg-center   "
           onClick={(e) => e.stopPropagation()}
 
 
@@ -116,7 +123,7 @@ function Cart() {
             <div className='flex items-center p-3 w-3/4 border rounded-lg file: border-red-600 h-10 '> check delivery time and services   </div>
 
             <div className='flex flex-col border pl-3 pt-3 w-3/4 rounded-lg items-start '><p className='flex items-center'>   <BiSolidOffer className='text-sky-800' />  &nbsp; available offers</p>
-              <p>7.5% instant Discount on every spends with ck sons Kotak credit Card.TCA</p>
+              <p   >7.5% instant Discount on every spends with ck sons Kotak credit Card.TCA</p>
 
             </div>
             <div className='border p-4 w-3/4 h-auto overflow-scroll  mb- rounded-lg'>
@@ -162,6 +169,7 @@ function Cart() {
                   ));
                 })}
               </ul>
+          
             </div>
 
 
@@ -169,10 +177,14 @@ function Cart() {
 
 
           </div>
-
+          {
+            isAbout&&
+            <Checkout/>
+          }
 
 
         </motion.div>
+        </div>
 
       </motion.div>
       }

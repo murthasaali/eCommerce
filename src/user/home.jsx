@@ -51,11 +51,11 @@ function Home() {
       transition={{ duration: 1 }} // Animation duration
       className="your-container-class" // Replace with your custom class name
     >
-      <p className='qoute1'><motion.span className='text-stone-500 text-opacity-40' >CHASE YOUR </motion.span >  <motion.span className='text-opacity-70 text-cyan-600'
+      <p className='qoute1'><motion.span className='text-orange-700 text-opacity-90' >CRUNCHICK </motion.span >  <motion.span className='text-opacity-70 text-6xl text-red-600'
           initial={{ opacity: 0 }} // Initial state: hidden
           animate={{ opacity: 1 }} // Animated state: visible
           transition={{ delay: 0.5, duration: 1 }} // Animation delay and duration
-        >DREAMS !</motion.span></p>
+        >order now</motion.span></p>
     </motion.div>
    </div>
    <p className='qoute'>Drive Carefully</p>

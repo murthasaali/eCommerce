@@ -182,20 +182,20 @@ function Login() {
         <motion.p variants={container}
           className="title">Login</motion.p>
 
-        <form className="form" onSubmit={tologin}>
+        <motion.form className="form" onSubmit={tologin}>
           <div className="input-group">
-            <motion.label htmlFor="username" variants={item} ><span className="text-stone-600 text-opacity-80">Username</span></motion.label>
-            <input type="text" name="email" id="email" placeholder="" />
+        
+            <input type="text" name="email" autoComplete="true" id="email" placeholder="email" />
           </div>
           <div className="input-group">
-            <motion.label htmlFor="password" variants={item}><span className="text-stone-600 text-opacity-80">Password</span></motion.label>
-            <input type="password" name="password" id="password" placeholder="" />
+            
+            <input type="password" name="password" id="password" placeholder="password" />
             <div className="forgot">
               <p rel="noopener noreferrer" >Forgot Password ?</p>
             </div>
           </div>
           <button className="sign" type="submit">Sign in</button>
-        </form>
+        </motion.form>
         <div className="social-message">
           <div className="line"></div>
           <p className="message">Login with social accounts</p>
