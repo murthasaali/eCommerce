@@ -1,18 +1,24 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-  @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+  
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+@font-face {
+  font-family: 'Arista Pro Alternate Fat';
+  src: url('../fonts/Arista-Pro-Bold-trial.woff') format('opentype'); /* Replace with the correct path and font file */
+  /* You may need to specify different font file formats (e.g., .woff, .woff2, .ttf) for compatibility with various browsers */
+}
+
+/* You can create classes to apply this font to specific elements */
+/* Example class for applying the font */
+.arista-font {
+  font-family: 'Arista Pro Alternate Fat', sans-serif; /* Fallback to a similar font if Arista Pro is unavailable */
 }

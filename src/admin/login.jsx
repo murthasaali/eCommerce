@@ -157,8 +157,8 @@ function Login() {
     }}
     onClick={() =>dispatch(setIslogin(false))}
   >
-    <p className="qoute"><span className="text-blue-200 text-6xl">welcome to ck sons </span><br/>
-    <span className="text-3xl text-stone-200">car reandal service</span></p>
+    <p className="qoute"><span className="text-blue-200 text-6xl">welcome to  </span><br/>
+    <span className="text-3xl text-orange-600">CRUNCHICK</span></p>
     <motion.div
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}

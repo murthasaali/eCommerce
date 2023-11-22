@@ -265,9 +265,9 @@
   }
 }
 .icon-container {
-  width: 80px;
-  height: 80px;
-  background-image: url('car.png'); /* Adjust the path based on your file location */
+  width: 100px;
+  height: 100px;
+  background-image: url('crunchick.png'); /* Adjust the path based on your file location */
   background-size: contain;
 }
 .qoute{
@@ -279,7 +279,13 @@
   font-size: 40px;
 }
 .qoute1{
-  font-family: 'Teko', sans-serif;
+  font-family: 'Arista Pro Alternate Fat', sans-serif ;
   font-size: 200px;
+  -webkit-text-fill-color: transparent; /* Hide original text fill */
+  -webkit-text-stroke: 2px white; /* Create a white stroke around the text */
+
   
 }
+/* src/styles/fonts.css */
+
+

@@ -1,20 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectIsabout, selectIscart, selectUserToken, selectUserid, setIsabout } from '../redux/authSlice'
-import { setIscart } from '../redux/authSlice'
+
 import { motion } from 'framer-motion'
-import { FaHeart, FaPercentage, FaRupeeSign } from 'react-icons/fa'
+import { FaHeart,FaRupeeSign } from 'react-icons/fa'
 import { BiSolidOffer } from 'react-icons/bi'
 import { IoIosCloseCircleOutline } from 'react-icons/io'
-import Checkout from './checkout'
+import {useNavigate} from 'react-router-dom'
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { MdOutlineSecurity } from "react-icons/md";
+
 
 function Cart() {
   const isCart = useSelector(selectIscart)
   const userToken = useSelector(selectUserToken)
   const [cartitem, setCaritem] = useState([])
+  const nav=useNavigate()
   const isAbout=useSelector(selectIsabout)
   
   const userId = useSelector(selectUserid)
@@ -42,7 +44,12 @@ function Cart() {
       console.error('Error:', error.message);
     }
   };
+  useEffect(() => {
+    console.count('rerendering useEffect cart')
 
+  viewCart(userId,userToken)
+  }, [userId,userToken])
+  
 
 
   const handleRemoveCart = async (productId) => {
@@ -63,6 +70,8 @@ function Cart() {
 
       if (response.data.status === 'success') {
         console.log('Product removed from cart.');
+        
+        viewCart(userId,userToken)
        
       } else {
         console.error('Removing product from cart failed. Message:', response.data.message);
@@ -88,37 +97,35 @@ function Cart() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: 'center',
-          background: 'white',
+          background: 'black',
           zIndex: 999,
         }}
        
       >
-        <div className='bg-white w-full h-full'>
+        <div className='bg-black w-full h-full'>
 
-        <div className='bg-white w-full flex gap-56 items-center justify-around mt-14'>
+        <div className='bg-black w-full flex gap-56 items-center justify-around mt-14'>
 
           <div className='headings' onClick={()=>dispatch(setIsabout(true))}> CART DETAILS</div>
           <div className='flex items-center gap-10'>
 
             <div className='flex items-center '> <MdOutlineSecurity className='text-green-600'/>&nbsp; 100 secure</div>
             < FaHeart className='text-pink-600' />
-            <IoArrowBackCircleOutline className='text-3xl'  onClick={() => dispatch(setIscart(false))}/>
+            <IoArrowBackCircleOutline className='text-3xl'  onClick={() => nav('/')}/>
           </div>
         </div>
         <motion.div
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: 'tween', stiffness: 260, damping: 20 }}
-          // style={{
-          //   background: 'white',
-          //   padding: '2rem',
-          //   borderRadius: '0.5rem',
-          // }}
-          className=" w-full h-full  bg-no-repeat bg-conatin bg-center   "
+         
+          className=" w-full h-full  bg-no-repeat bg-conatin bg-center  flex   "
           onClick={(e) => e.stopPropagation()}
 
 
-        > <div className='w-4/6 h-full bg-white bg-opacity-90 p-4 flex flex-col gap-4'>
+        >
+           {/* */}
+          <div className='w-4/6 h-full bg-black bg-opacity-90 p-4 flex flex-col gap-4'>
 
             <div className='flex items-center p-3 w-3/4 border rounded-lg file: border-red-600 h-10 '> check delivery time and services   </div>
 
@@ -134,17 +141,19 @@ function Cart() {
                   return value.cart.map((item) => (
                     <li key={item._id} className='w-full flex '>
 
-                      <div className='card w-72 bg-base-100 shadow-xl image-full'>
+                      <div className=' w-full   overflow-hidden p-4'
+                       style={{
+                        backgroundImage: `url(${item.image})`, // Set background image URL for the card here
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        borderRadius:"8px",
+                        opacity:0.9}}>
 
-                        <figure>
-                          <img src={item.image} alt="Shoes" />
-                        </figure>
+                         
                         <div className='card-body'>
-                          <h2 className='card-title'>{item.title}</h2>
-                          <div className='card-actions justify-end'>
-                          </div>
+                          <p className='flex justify-evenly'>{item.title}  <span>  <IoIosCloseCircleOutline className='text-white text-2xl' onClick={()=>handleRemoveCart(item._id)}/></span></p>
+                         
                         </div>
-                      </div>
                       <div className='p-4 flex  w-full flex-col items-start'>
                         <div className='flex w-full justify-end'>
 
@@ -156,15 +165,17 @@ function Cart() {
                             onClick={() => handleRemoveCart(item._id)}
 
                           >
-                            <IoIosCloseCircleOutline className='text-black text-2xl' />
+                          
                           </motion.button >
                         </div>
-                        <p className='font-bold text-2xl text-stone-900'>{item.category}</p>
-                        <li className='font-thin flex items-center text-red-600'><FaRupeeSign className='text-black' />{item.price} 65% off now</li>
-                        <li>{item.description}</li>
+                        <p className='font-bold text-2xl text-stone-200'>{item.category}</p>
+                        <li className='font-thin flex items-center text-red-600'><FaRupeeSign className='text-white' />{item.price} 65% off now</li>
+                        <li className='text-stone-200'>{item.description}</li>
 
 
                       </div>
+                      </div>
+
                     </li>
                   ));
                 })}
@@ -176,11 +187,21 @@ function Cart() {
 
 
 
+          </div> 
+          <div className='w-2/6 bg-black h-56 mr-14 p-4 flex flex-col gap-4 item-start' >
+
+          <p  className='text-2xl  text-left' >Total Price</p>
+          <div className='flex items-center p-3 w-3/4 border rounded-lg file:  bg-stone-300 border-red-600 h-10 flex-col'> 
+          
+          <p></p>
+          
+            </div>
+
+
+
+
           </div>
-          {
-            isAbout&&
-            <Checkout/>
-          }
+
 
 
         </motion.div>

@@ -37,7 +37,7 @@ function GetAllproduct() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [updatedProductData,setupdatedProductData]=useState(null)
 
-  const dealerToken = token;
+
 
   // const getAllProducts = async (token) => {
   //   try {
@@ -81,7 +81,9 @@ function GetAllproduct() {
     }
   };
   useEffect(() => {
-    getAllProducts(dealerToken);
+    console.count('rerendering useEffect pro all get')
+
+    getAllProducts(token);
   }, [updatedProductData]);
 
   
@@ -102,7 +104,7 @@ function GetAllproduct() {
         // Successfully deleted the product.
         console.log('Product deleted.');
         // Call the API again to refresh the product list
-        getAllProducts(dealerToken);
+        getAllProducts(token);
       } else {
         console.error('Product deletion failed. Message:', message);
       }
@@ -111,7 +113,7 @@ function GetAllproduct() {
     }
   };
   const handleDelete = (productId) => {
-    deleteProduct(productId, dealerToken)
+    deleteProduct(productId, token)
   };
   const handleEdit = (productId) => {
     const productToEdit = products.find((product) => product._id === productId);
@@ -196,7 +198,7 @@ function GetAllproduct() {
                 <motion.td  variants={item} className="py-2 px-4 w-1/6 sm:w-1/3 rounded-lg">
                   <img src={product.image} alt={product.title} className="w-full h-20 overflow-hidden rounded-lg" />
                 </motion.td >
-                <motion.td  variants={item} className="py-2 px-4 w-1/6 sm:w-1/6">{product.description}</motion.td >
+                <motion.td  variants={item} className="py-2 px-4 w-1/6 sm:w-1/6"></motion.td >
                 <motion.td  variants={item} className="py-2 px-4 w-1/6 sm:w-1/6">
                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={()=>handleEdit(product._id)}>
                     <FaEdit/>

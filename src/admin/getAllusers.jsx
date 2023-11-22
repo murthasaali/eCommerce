@@ -55,6 +55,8 @@ const GetAllUsers = () => {
   };
 
   useEffect(() => {
+    console.count('rerendering useEffect all users')
+
     fetchUsers();
   }, [token]);
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaCartPlus, FaHeart, FaSearch, FaSignOutAlt, FaUser, FaUserPlus } from 'react-icons/fa';
+import {  FaHeart, FaSearch, FaSignOutAlt, FaUser, FaUserPlus } from 'react-icons/fa';
 
 import DotBadge from '../components/badge';
 import {  useNavigate } from 'react-router-dom';
@@ -55,7 +55,7 @@ function Mainbar() {
 
       {/* Navigation Links */}
       <div className="flex gap-4">
-        <ul className='flex justify-center items-center gap-4 font-thin text-blue-950'>
+        <ul className='flex justify-center items-center gap-4 font-thin text-orange-500'>
           <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover"  onClick={() => dispatch(setIsabout(true))}>
             about
             </motion.button>
@@ -117,7 +117,7 @@ function Mainbar() {
             justifyContent: 'center',
             alignItems: 'center',
             background: 'rgba(0, 0, 0, 0.7)',
-            zIndex: 999,
+            zIndex: 940,
           }}
           onClick={() => setIsSearch(false)}
         >
@@ -149,10 +149,7 @@ function Mainbar() {
       {isCollection&&(
         isLogin&&
         <Garage/>      )}
-      {
-        isCart&&
-        <Cart/>
-      }
+    
       {
         !isLogin&&
         <Offer/>

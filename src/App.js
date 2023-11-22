@@ -15,6 +15,7 @@ import Mainbar from './user/mainbar';
 import About from './user/about';
 import Registration from './admin/registration';
 import ViewAproduct from './user/viewAproduct';
+import Cart from './user/cart';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
    <Route path='/login'  element={<Login/>}/> 
    <Route path='/reg'  element={<Registration/>}/> 
       <Route path='/admin'  element={<Admin/>}/>
+      <Route path='/cart'  element={<Cart/>}/>
       <Route path='/about'  element={<About/>}/>
       <Route path='/admin/user' element={<Admin />} />
           {/* //  <Route path='/admin/addproduct' element={<Admin />} /> */}

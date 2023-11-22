@@ -8,7 +8,7 @@ function ViewAproduct() {
 
   return (
     <div>
-      {/* Display details of the product */}
+    {productId}
     </div>
   );
 }

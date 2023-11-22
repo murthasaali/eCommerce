@@ -6,9 +6,10 @@ import axios from 'axios';
 import { selectIscollection, selectProducts, selectUserToken, selectUserid, setIscollection, setProducts } from '../redux/authSlice';
 import { selectToken } from '../redux/authSlice';
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { FaEye, FaHeart } from 'react-icons/fa';
+import { FaDelicious, FaEye, FaHeart } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { MdDeliveryDining } from 'react-icons/md';
 
 function Garage() {
   const dispatch = useDispatch();
@@ -63,6 +64,8 @@ function Garage() {
   };
 
   useEffect(() => {
+    console.count('rerendering useEffect garage')
+
     getAllProducts(token);
     veiwWishList(userId, userToken);
   }, [ token]);
@@ -239,33 +242,11 @@ const tf= wishlistItems.some((value)=>value._id===productId);
             </div>
             <div className="flex ml-20 flex-wrap justify-start gap-6">
             {products.map((value) => (
-              <div className="card w-72 bg-white shadow-xl image-full" key={value._id}>
-                <figure>
-                  <img src={value.image} alt="Product" />
-                </figure>
-                <div className="card-body">
-                  <button onClick={() => handleCart(value._id)}>book now</button>
-                  <h2 className="card-title">{value.title}</h2>
-                  <p>{value.category}</p>
-                  <p className={isInWishlist(value._id) ? 'text-red-500' : 'text-blue-300'}>{value.price}</p>
-                  <div className="card-actions justify-end">
-                    <FaEye onClick={() => nav(`/viewproduct/${value._id}`)} className="z-40 top-0 text-white" />
-                    <input
-                      type="checkbox"
-                      checked={isInWishlist(value._id)?true : false}
-                      defaultValue={isInWishlist(value._id)?false:true}
-                      onChange={() => handleToggleWishlist(value._id)}
-                    />
-                    <FaHeart
-                      className={`${
-                        isInWishlist(value._id) ? 'text-pink-500' : 'text-stone-200'
-                      }`}
-                   
-                    />
-                    {/* Add any additional actions */}
-                  </div>
-                </div>
-              </div>
+             <div className="card w-72 bg-black ">
+             <figure><img src={value.image} alt="car!" className='bg-opacity-30'/></figure>
+             <p className='qoute'><span className='text-2xl flex items-center justify-around '>{value.title}<MdDeliveryDining onClick={()=>handleCart(value._id)}/>  <FaHeart className='text-2xl'  onClick={()=>handleWishlist(value._id)}/></span >  
+</p>
+           </div>
             ))}
             </div>
           </motion.div>
