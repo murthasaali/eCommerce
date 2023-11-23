@@ -16,6 +16,8 @@ import About from './user/about';
 import Registration from './admin/registration';
 import ViewAproduct from './user/viewAproduct';
 import Cart from './user/cart';
+import kitchen from './user/kitchen';
+import Kitchen from './user/kitchen';
 
 
 function App() {
@@ -31,9 +33,9 @@ function App() {
    <Route path='/reg'  element={<Registration/>}/> 
       <Route path='/admin'  element={<Admin/>}/>
       <Route path='/cart'  element={<Cart/>}/>
+      <Route path='/kitchen/:category'  element={<Kitchen/>}/>
       <Route path='/about'  element={<About/>}/>
       <Route path='/admin/user' element={<Admin />} />
-          {/* //  <Route path='/admin/addproduct' element={<Admin />} /> */}
             <Route path='/admin/sales' element={<Admin />} />
             <Route path='/admin/prosec' element={<Admin />} />
             <Route path='/admin/add' element={<Admin />} />

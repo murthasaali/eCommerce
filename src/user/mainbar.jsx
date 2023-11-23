@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectIsabout, selectIscart, selectIscollection, setIscollection,setIscart, clearUserToken, selectIslogin, clearIslogin } from '../redux/authSlice';
 import { setIsabout } from '../redux/authSlice';
 import Garage from './garage';
-import Cart from './cart';
+
 import Offer from './offer';
 import { Avatar } from '@mui/material';
 import toast from 'react-hot-toast';
@@ -21,6 +21,7 @@ const scaleVariants = {
 
 
 function Mainbar() {
+
 
   const [isSearch,setIsSearch]=useState(false)
 
@@ -55,7 +56,7 @@ function Mainbar() {
 
       {/* Navigation Links */}
       <div className="flex gap-4">
-        <ul className='flex justify-center items-center gap-4 font-thin text-orange-500'>
+        <ul className='flex justify-center items-center gap-4 font-thin text-white'>
           <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover"  onClick={() => dispatch(setIsabout(true))}>
             about
             </motion.button>
@@ -117,7 +118,7 @@ function Mainbar() {
             justifyContent: 'center',
             alignItems: 'center',
             background: 'rgba(0, 0, 0, 0.7)',
-            zIndex: 940,
+            zIndex: 1000,
           }}
           onClick={() => setIsSearch(false)}
         >
@@ -135,7 +136,7 @@ function Mainbar() {
         
            
           >
-          <input type="text" className='bg-stone-300 text-blue-950  w-3/4 h-14 rounded-3xl pl-4 overflow-hidden shadow-md   '
+          <input type="text" className='bg-stone-300 text-blue-950 w-3/4 h-14 rounded-3xl pl-4 overflow-hidden shadow-md '
            initial={{ opacity: 0, y: '-20%' }}
            animate={{ opacity: 1, y: 0 }}
            exit={{ opacity: 0, y: '-50%' }}/>

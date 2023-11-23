@@ -106,7 +106,7 @@ function Cart() {
 
         <div className='bg-black w-full flex gap-56 items-center justify-around mt-14'>
 
-          <div className='headings' onClick={()=>dispatch(setIsabout(true))}> CART DETAILS</div>
+          <div className='font-thin ' onClick={()=>dispatch(setIsabout(true))}><span className='text-3xl'> YOUR CART DETAILS</span></div>
           <div className='flex items-center gap-10'>
 
             <div className='flex items-center '> <MdOutlineSecurity className='text-green-600'/>&nbsp; 100 secure</div>

@@ -206,7 +206,7 @@
 
 .button-container {
   display: flex;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
   width: 290px;
   height: 60px;
   align-items: center;
@@ -217,13 +217,13 @@
         rgba(0, 0, 0, 0.5) 5px 10px 15px;
         z-index: 2;
         position: fixed;
-        bottom: 50px;       
+        bottom: 5px;       
 }
 .main-bar {
   display: flex;
   
   width: 100%;
-  height: 80px;
+  height: 100px;
   align-items: center;
   justify-content: space-around;
   position: sticky;
@@ -243,7 +243,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000000;
+  color: rgb(150, 147, 147);
   transition: all ease-in-out 0.3s;
   cursor: pointer;
 }
@@ -257,17 +257,43 @@
   .main-bar{
     display: flex;
   }
+  
 }
 @media only screen and (max-width: 900px) {
   
   .main-bar{
     display: none;
   }
+  .crme{
+    flex-direction: column;
+    height:  max-content;
+    gap: 4px;
+    background-color: aquamarine;
+  }
+  .qoute1{
+    font-size: 80px;
+    display: flex;
+    -webkit-text-stroke: 2px rgb(85, 70, 10); /* Create a white stroke around the text */
+
+  }
+  .co{
+    display: none;
+  }
+  .crme{
+    height:100%;
+    background-color: black;
+    margin-top: 10px;
+  }
+  .home_main{
+    height: 100%;
+  }
+  
 }
+
 .icon-container {
   width: 100px;
   height: 100px;
-  background-image: url('crunchick.png'); /* Adjust the path based on your file location */
+  background-image: url('cicon.png'); /* Adjust the path based on your file location */
   background-size: contain;
 }
 .qoute{
@@ -280,12 +306,36 @@
 }
 .qoute1{
   font-family: 'Arista Pro Alternate Fat', sans-serif ;
-  font-size: 200px;
+  font-size: 170px;
   -webkit-text-fill-color: transparent; /* Hide original text fill */
-  -webkit-text-stroke: 2px white; /* Create a white stroke around the text */
+  -webkit-text-stroke: 2px rgb(216, 178, 10); /* Create a white stroke around the text */
 
   
 }
 /* src/styles/fonts.css */
 
-
+.crme{
+  /* w-full  flex gap-4 p-2 h-1/2 */
+  width: 100%;
+  display:flex ;
+  gap: 16px;
+  height: 60%;
+}
+.home_main{
+  /* style={{justifyContent:"center",
+    display:"flex",
+    flexDirection:"column",
+    alignItems:"center",
+    overflow:"hidden",
+    width:"full",
+    height:"100v",
+    backgroundColor:"black"
+  }} */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  height:100vh;
+  background-color: #000000;
+}

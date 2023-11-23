@@ -31,6 +31,7 @@
 
 // export default Navbar
 import React from 'react'
+import {motion} from 'framer-motion'
 import {  BiHomeAlt2 ,BiBriefcaseAlt2,BiMessageDetail} from 'react-icons/bi';
 import {  AiOutlineUser} from 'react-icons/ai';
 
@@ -46,11 +47,18 @@ function Navber() {
       
      <AiOutlineUser className='text-main'/>
     </button>
-    <button className="button" >
+    <motion.button
+       initial={{ scale: 0 }}
+       whileHover={{ rotate: 160 }}
+       animate={{ rotate: 360, scale: 1 }}
+       transition={{
+         type: "spring",
+         stiffness: 260,
+         damping: 20
+       }}
+      className="icon-container" >
      
-      <BiBriefcaseAlt2 className='text-main'/>
-      
-    </button>
+    </motion.button>
 
     <button className="button" >
     
