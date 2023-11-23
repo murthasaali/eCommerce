@@ -4,7 +4,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     token: localStorage.getItem('token') || null,
-    products: [],
+    products:[],
     userToken:localStorage.getItem('usertoken')|| null,
     isSignIn: true,
     isAbout:false,
@@ -25,6 +25,7 @@ export const authSlice = createSlice({
     },
     setProducts: (state, action) => {
       state.products = action.payload;
+      
     },
     setUserid: (state, action) => {
       state.userId = action.payload;

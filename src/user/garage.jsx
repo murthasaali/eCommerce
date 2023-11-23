@@ -1,48 +1,26 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { color, motion } from 'framer-motion'; // Import useAnimation from framer-motion
-import axios from 'axios';
-import { selectIscollection, selectProducts, selectUserToken, selectUserid, setIscollection, setProducts } from '../redux/authSlice';
-import { selectToken } from '../redux/authSlice';
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import { FaDelicious, FaEye, FaHeart } from 'react-icons/fa';
-import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
-import { MdDeliveryDining } from 'react-icons/md';
+import React,{useEffect, useState} from 'react';
 
-function Garage() {
-  const dispatch = useDispatch();
-  const [wishlistItems, setWishlistItems] = useState([]);
-  
-  const isCollection = useSelector(selectIscollection);
-  const products = useSelector(selectProducts);
-  const token = useSelector(selectToken);
-  const userToken=useSelector(selectUserToken)
-  const userId=useSelector(selectUserid)
+import {  motion } from 'framer-motion'; // Import useAnimation from framer-motion
+import { selectProducts, selectToken, setProducts } from '../redux/authSlice';
+import { IoIosCloseCircleOutline } from "react-icons/io";
+import { FaCartPlus, FaHeart } from 'react-icons/fa';
+import { useParams ,useNavigate} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux'
+import axios from 'axios'
+
+
+
+
+function Kitchen() {
+  const token=useSelector(selectToken)
+
+// const products=useSelector(selectProducts)
+  const dispatch=useDispatch()
+  const [filters,setFilter]=useState([])
   const nav=useNavigate()
   
-    
 
-  console.log(userId);
-  console.log(userToken);
-  const [productsWishlist, setProductsWishlist] = useState({});
-
-  const handleToggleWishlist = async (productId) => {
-    const newWishlistState = {
-      ...productsWishlist,
-      [productId]: !productsWishlist[productId],
-    };
-    setProductsWishlist(newWishlistState);
-
-    if (newWishlistState[productId]) {
-      await handleWishlist(productId);
-    } else {
-      await handleRemoveWishlist(productId);
-    }
-  };
-
- 
+  const { category } = useParams();
   const getAllProducts = async (token) => {
     try {
       const response = await axios.get('https://ecommerce-api.bridgeon.in/products?accessKey=55eebc5550c70b2b7736', {
@@ -53,8 +31,10 @@ function Garage() {
       const { status, message, data } = response.data;
       if (status === 'success') {
         // Successfully fetched products.
-        dispatch(setProducts(data));
-        console.log('Fetched products:', products);
+        // dispatch(setProducts(data));
+        setFilter(data)
+      console.log('Fetched products:', data);
+      
       } else {
         console.error('Product retrieval failed. Message:', message);
       }
@@ -62,146 +42,17 @@ function Garage() {
       console.error('Error:', error.message);
     }
   };
-
   useEffect(() => {
-    console.count('rerendering useEffect garage')
-
-    getAllProducts(token);
-    veiwWishList(userId, userToken);
-  }, [ token]);
-
-  const handleClick = () => {
-    dispatch(setIscollection(false));
-  };
+   getAllProducts(token,category)
+  }, [token,category])
   
-  const handleRemoveWishlist = async (productId) => {
-    try {
-      console.log("Removing product from wishlist...");
-      console.log("Product ID:", productId);
-      console.log("User ID:", userId);
-      console.log("User Token:", userToken);
-
-      const response = await axios.delete(
-        `https://ecommerce-api.bridgeon.in/users/${userId}/wishlist/${productId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
-
-      if (response.data.status === 'success') {
-        console.log('Product removed from wishlist.');
-        toast.error("Product removed from wishlist successfully");
-      } else {
-        console.error('Removing product from wishlist failed. Message:', response.data.message);
-      }
-    } catch (error) {
-      console.error('Error:', error.message);
-    }
-  };
-
-
-
-const handleCart = async (productId) => {
-  try {
-    console.log("Adding product to cart...");
-    console.log("Product ID:", productId);
-    console.log("User ID:", userId);
-    console.log("User Token:", userToken);
-
-    const response = await axios.post(
-      `https://ecommerce-api.bridgeon.in/users/${userId}/cart/${productId}`,
-      null, // Assuming no data payload, pass null if not needed
-      {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      }
-    );
-
-// Log the response from the server
-
-    if (response.data.status === 'success') {
-      console.log('Product added to cart.');
-      toast.success("product added to cart  succussfully")
-    } else {
-      console.error('Product addition to cart failed. Message:', response.data.message);
-    }
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
-};
-const handleWishlist = async (productId) => {
-  try {
-    console.log("add to wishlist...");
-    console.log("Product ID:", productId);
-    console.log("User ID:", userId);
-    console.log("User Token:", userToken);
-
-
-    const response = await axios.post(
-      `https://ecommerce-api.bridgeon.in/users/${userId}/wishlist/${productId}`,
-      null,
-      {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      }
-    );
-
-   // Log the response from the server
-   const { status, message, data } = response.data;
-    if (response.data.status === 'success') {
-      console.log("wishilist")
-      toast.success("product added to wishlist  succussfully")
-      
-   
-     
-    } else {
-      console.error('Product addition to cart failed. Message:', response.data.message);
-    }
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
-};
-
-
-
-const veiwWishList = async (userId, token) => {
-  try {
-    const response = await axios.get(`https://ecommerce-api.bridgeon.in/users/${userId}/wishlist`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const { status, message, data } = response.data;
-    if (status === 'success') {
-      // Successfully fetched cart items.
-      console.log('wishlist:', data.products);
-      setWishlistItems(data.products);
-    } else {
-      console.error('Cart item retrieval failed. Message:', message);
-    }
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
-};
-
-const isInWishlist = (productId) => {
+  const filteredProducts=filters.filter((item)=>item.category===category)
   
-const tf= wishlistItems.some((value)=>value._id===productId);
- return tf
+  console.log(filteredProducts)
 
-
-
-};
-
-  return (
+  return(
     <>
-  
-      {isCollection && (
-        <motion.div
+    <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -217,43 +68,65 @@ const tf= wishlistItems.some((value)=>value._id===productId);
             alignItems: 'center',
             backgroundColor:"black",
             zIndex: 999,
-            overflow: "scroll", // Apply Framer Motion controls to the overflow property
+          // overflow: "scroll", // Apply Framer Motion controls to the overflow property
           }}
-          onClick={handleClick}
+          
         >
           <motion.div
-            initial={{ y: -50, opacity: 1 }}
-            animate={{ y: 0, opacity: 1 }}
+            initial={{x: -50, opacity: 1 }}
+            animate={{ x: 0, opacity: 1 }}
             transition={{ type: 'tween', stiffness: 260, damping: 20 }}
             className="w-full h-full bg-no-repeat bg-conatin bg-center  flex-col rounded-lg flex justify-start items-start gap-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-full h-40 bg-black flex justify-start rounded-lg p-4">
-              <p className='text-4xl font-thin text-white text-opacity' >p cars available right now !!!!</p>
+            <div className="w-full h-40 bg-black flex justify-start rounded-lg p-8">
+              <p className='text-2xl font-thin text-white text-opacity' >do you want {category} take an order and <span className='text-red-500'>chill</span></p>
               <motion.button
                 initial={{ rotate: 0 }}
                 whileHover={{ rotate: 90 }}
                 transition={{ duration: 0.2 }}
                 className="absolute top-0 right-0 m-4 cursor-pointer"
-                onClick={handleClick}
+             
               >
-                <IoIosCloseCircleOutline className='text-white text-5xl' />
+                <IoIosCloseCircleOutline className='text-white text-5xl'  onClick={()=>nav('/')}/>
               </motion.button>
             </div>
-            <div className="flex ml-20 flex-wrap justify-start gap-6">
-            {products.map((value) => (
-             <div className="card w-72 bg-black ">
-             <figure><img src={value.image} alt="car!" className='bg-opacity-30'/></figure>
-             <p className='qoute'><span className='text-2xl flex items-center justify-around '>{value.title}<MdDeliveryDining onClick={()=>handleCart(value._id)}/>  <FaHeart className='text-2xl'  onClick={()=>handleWishlist(value._id)}/></span >  
-</p>
-           </div>
+            <div className="flex p-8 flex-wrap justify-start gap-6">
+            {filteredProducts.map((value) => (
+            <div className='h-56 w-72 flex   flex-col rounded-lg justify-center gap-2 items-start overflow-hidden'
+            >
+             <motion.div
+             initial={{scale:1,opacity:0.8}}
+             whileHover={{scale:1.1,opacity:1}}
+            
+             className="h-5/6 w-full "   style={{
+              backgroundImage: `url("${value.image}")`,
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              overflow:"hidden",
+              borderTopRightRadius:"8px",
+              borderTopLeftRadius:"8px",
+              backgroundPosition: 'center',
+              // Transition for box shadow
+            }}
+            
+
+
+
+            >
+             
+     
+           </motion.div>
+                   <div className='font-thin text-yellow-600 w-full p-4 bg-stone-800 text-opacity-60 flex justify-center items-start gap-4 overflow-hidden'><span className='text-2xl flex items-center justify-around '></span >  {value.title}  <FaHeart className='text-xl text-white text-opacity-60'  />
+                   <FaCartPlus/>
+                   </div></div>
             ))}
             </div>
           </motion.div>
         </motion.div>
-      )}
+      
     </>
-  );
+  )
 }
 
-export default Garage
+export default Kitchen

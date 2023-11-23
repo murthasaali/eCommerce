@@ -291,8 +291,8 @@
 }
 
 .icon-container {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   background-image: url('cicon.png'); /* Adjust the path based on your file location */
   background-size: contain;
 }

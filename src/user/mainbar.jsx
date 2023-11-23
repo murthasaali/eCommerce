@@ -55,26 +55,28 @@ function Mainbar() {
     </motion.button>
 
       {/* Navigation Links */}
-      <div className="flex gap-4">
-        <ul className='flex justify-center items-center gap-4 font-thin text-white'>
+      <div className="flex  justify-center items-center gap-4">
+        <ul className='flex justify-center items-center gap-4 font-thin text-2xl text-stone-300' style={{
+          fontFamily:"'Arista Pro Alternate Fat', sans-serif"
+        }}>
           <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover"  onClick={() => dispatch(setIsabout(true))}>
-            about
+            ABOUT
             </motion.button>
           <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={()=>dispatch(setIscollection(true))}>
-           Collection
+           COLLECTION
           </motion.button>
           <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover">
-            Home
+            HOME
           </motion.button>
           <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover">
-            Contact
+            CONTACT
           </motion.button>
         </ul>
         {/* Additional navigation-related content */}
       </div>
 
       {/* User-related Elements */}
-      <div className="flex gap-4 justify-center items-center">
+      <div className="flex gap-4 justify-center items-center text-stone-300" >
         <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={()=>setIsSearch(true)}>
           <FaSearch />
         </motion.button>
