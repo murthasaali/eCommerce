@@ -33,6 +33,8 @@ function Home() {
     {title:"shavaya",src:"https://img.freepik.com/free-photo/roasted-chicken-with-spices-gray_23-2147765470.jpg?w=1060&t=st=1700646150~exp=1700646750~hmac=619113f5742de3bc95e6dfd58a3feec9e4fb034fc426e10867951fc631051fdb",nav:'/kitchen/shavaya'},
     {title:"prawns",src:"https://image.shutterstock.com/image-photo/jumbo-prawns-grilled-squids-black-260nw-129756848.jpg",nav:"/kitchen/prawn"},
     {title:"alfahm",src:"",},
+    {title:"mandi",src:"",nav:'/kitchen/rice'},
+    {title:"drinks",src:"https://img.freepik.com/free-photo/fresh-cola-drink-with-green-lime_144627-12395.jpg?size=626&ext=jpg&uid=R105963240&ga=GA1.1.922335369.1686896801&semt=ais",nav:"/kitchen/drinks"},
     {title:"mandi",src:"",},
    
 ]
@@ -52,7 +54,7 @@ function Home() {
     <Carousal />
   </div>
       <div className=' p-4 font-thin h-1/2 lg:h-full'> <p>choose by menu</p><motion.ul
-    className="w-full h-full sm:h-1/2 lg:h-full p-2 grid grid-cols-3 gap-4 grid-rows-2 gap-15 p-15 overflow-hidden bg-opacity-20 rounded-lg"
+    className="w-full h-full sm:h-1/2 lg:h-full p-2 grid grid-cols-4 gap-4 grid-rows-2 gap-15 p-15 overflow-hidden bg-opacity-20 rounded-lg"
     variants={container}
     initial="hidden"
     animate="visible"
