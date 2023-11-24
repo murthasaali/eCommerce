@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-
+import {  useSelector } from "react-redux";
+import 
 import axios from "axios";
 import {
   MDBContainer,
@@ -11,15 +10,15 @@ import {
   MDBCol,
   MDBCard,
   MDBCardBody,
-  MDBCardImage,
   MDBCardTitle,
-  MDBIcon,
+  
 } from "mdb-react-ui-kit";
 import { selectToken } from "../redux/authSlice";
 import { selectUserid } from "../redux/authSlice";
+import {  FaSearch } from "react-icons/fa";
 // import { selectUserid } from "../redux/authSlice";
 
-
+import { MdDelete } from "react-icons/md";
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
@@ -37,15 +36,10 @@ const responsive = {
     slidesToSlide: 1, // optional, default to 1.
   },
 };
-
 const Slider = () => {
-  
-  
-const userId=useSelector(selectUserid)
-const userToken=useSelector(selectToken)
-const [cartItem,setCaritem]=useState([])
- 
-
+  const userId = useSelector(selectUserid);
+  const userToken = useSelector(selectToken);
+  const [cartItem, setCartItem] = useState([]);
   const viewCart = async (userId, token) => {
     try {
       const response = await axios.get(`https://ecommerce-api.bridgeon.in/users/${userId}/cart`, {
@@ -55,13 +49,10 @@ const [cartItem,setCaritem]=useState([])
       });
       const { status, message, data } = response.data;
       if (status === 'success') {
-
         // Successfully fetched cart items.
-
-        const products = data.products
-        setCaritem(products)
-        console.log(products)
-
+       const products=data.products[0].cart
+        console.log('Cart items:',products );
+        setCartItem(products)
       } else {
         console.error('Cart item retrieval failed. Message:', message);
       }
@@ -70,12 +61,31 @@ const [cartItem,setCaritem]=useState([])
     }
   };
   useEffect(() => {
-    console.count('rerendering useEffect cart')
+    viewCart(userId,userToken)
+  }, [])
+  const removeFromCart = async (userId, productId, token) => {
+    try {
+      const response = await axios.delete(`https://ecommerce-api.bridgeon.in/users/${userId}/cart`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          productId,
+        },
+      });
+      const { status, message } = response.data;
+      if (status === 'success') {
+        // Product removed from cart successfully.
+        console.log('Product removed from cart.');
+      } else {
+        console.error('Product removal from cart failed. Message:', message);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
 
-  viewCart(userId,userToken)
-  }, [userId,userToken])
   
- 
   return (
   
       
@@ -84,7 +94,7 @@ const [cartItem,setCaritem]=useState([])
         autoPlay={true}
         swipeable={true}
         draggable={true}
-        showDots={false}
+        showDots={true}
         infinite={true}
         
         partialVisible={true}
@@ -92,42 +102,45 @@ const [cartItem,setCaritem]=useState([])
         itemClass="carousel-item-padding"
         customTransition="transform 300ms ease-in"
       >
-        {cartItem?.map((product) => (
+        {cartItem.map((product) => (
           <div className="bigcard"  style={{}}>
-            <Link to={`/add/${product._id}`}>
+           
             <MDBContainer fluid className="my-5">
       <MDBRow className="justify-content-center">
         <MDBCol md="8">
-          <MDBCard className="text-black">
-            <MDBCardImage
-              src={product.image}
-              position="top"
-              alt="..."
-            />
-            <MDBCardBody>
+          <MDBCard className="text-stone-300 bg-black w-72" >
+            <div className="w-ful h-40 rounded-md" style={{
+            backgroundImage:`url("${product.image}")`,
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            overflow:"hidden",
+
+          }}>
+
+            </div>
+
+          
+            <MDBCardBody className="bg-stone-500 bg-opacity-30">
               <div className="text-center">
-                <MDBCardTitle>{product.title}</MDBCardTitle>
-                <p className="text-muted mb-4">An Electric Magic</p>
+                <MDBCardTitle className="text-yellow-600" style={{
+              fontFamily:"'Arista Pro Alternate Fat', sans-serif",
+              textAlign:"start"
+            }}>{product.title}</MDBCardTitle>
               </div>
               <div>
-                <div className="d-flex justify-content-between">
-                  <span>Type:</span>
-                  <h6>{product.category}</h6>
-                </div>
+               
               </div>
-              <div className="d-flex justify-content-between total font-weight-bold mt-4">
-                <span>Price:</span>
+              <div className="d-flex justify-content-between  total font-weight-bold ">
+                <span></span>
                 <span>₹{product.price}</span>
               </div>
-                <div className="d-flex justify-content-between" style={{color:'green'}}>
-                  <span>*Free Delevery</span>
-                </div>
+                
             </MDBCardBody>
+            <div className="flex justify-evenly items-center p-2 gap-10"><FaSearch/> <MdDelete title="remove" onClick={()=>removeFromCart(product._id)}/></div>
           </MDBCard>
         </MDBCol>
       </MDBRow>
     </MDBContainer>
-    </Link>
           </div>
         ))}
       </Carousel>

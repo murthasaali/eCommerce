@@ -22,10 +22,10 @@ function Cart() {
   return (
     <>
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
+       initial={{ opacity: 0, scale: 0.5, x: -100 }}
+       animate={{ opacity: 1, scale: 1, x: 0 }}
+       exit={{ opacity: 0, scale: 0.5,x: -100 }}
+        transition={{ duration: 0.5 }}
         style={{
           position: 'fixed',
           top: 0,
@@ -100,7 +100,7 @@ function Cart() {
           </div>
         </div>
         <div className=' p-4  w-full  h-full gap-4  flex   rounded-lg'>
-          <div className=' bg-black h-full  w-4/6   border  rounded-lg'>
+          <div className=' bg-black h-full  w-4/6     rounded-lg'>
           <Slider />
            </div>
           <div className=' bg-black h-full  w-2/6   border  rounded-lg'

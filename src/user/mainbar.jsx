@@ -62,12 +62,7 @@ function Mainbar() {
           <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover"  onClick={() => dispatch(setIsabout(true))}>
             ABOUT
             </motion.button>
-          <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={()=>dispatch(setIscollection(true))}>
-           COLLECTION
-          </motion.button>
-          <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover">
-            HOME
-          </motion.button>
+          
           <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover">
             CONTACT
           </motion.button>
@@ -85,10 +80,10 @@ function Mainbar() {
         </motion.button>
         
       {!isLogin? <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={()=>nav("/login")}>
-          <FaUserPlus/>
+          <FaUserPlus title='login'/>
         </motion.button>:
          <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={handleLogout}>
-          <FaSignOutAlt/>
+          <FaSignOutAlt  title='logout'/>
         </motion.button> }
         <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" >
           <FaHeart className='text-pink-500'/>

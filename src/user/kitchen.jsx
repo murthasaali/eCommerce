@@ -32,33 +32,33 @@ function Kitchen() {
   };
 
   const { category } = useParams();
-  const getAllProducts = async (token) => {
-    console.log("getting all products")
-    try {
-      const response = await axios.get('https://ecommerce-api.bridgeon.in/products?accessKey=55eebc5550c70b2b7736', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const { status, message, data } = response.data;
-      if (status === 'success') {
-        // Successfully fetched products.
-        // dispatch(setProducts(data));
-        console.log(data)
-        
-      
-      } else {
-        console.error('Product retrieval failed. Message:', message);
-      }
-    } catch (error) {
-      console.error('Error:', error.message);
-    }
-  };
   useEffect(() => {
-   getAllProducts(token,category)
-  })
-  
-  
+    const getAllProducts = async (token) => {
+      console.log("getting all products");
+      try {
+        const response = await axios.get('https://ecommerce-api.bridgeon.in/products?accessKey=55eebc5550c70b2b7736', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const { status, message, data } = response.data;
+        if (status === 'success') {
+          dispatch(setProducts(data));
+          console.log(data);
+        } else {
+          console.error('Product retrieval failed. Message:', message);
+        }
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+    };
+
+    if (token) {
+      getAllProducts(token);
+    }
+  }, [token]);
+  const filteredProducts = products.filter(product => product.category === category);
+
   
 
 const handleCart = async (productId) => {
@@ -110,7 +110,6 @@ const handleCart = async (productId) => {
             backgroundColor:"black",
             zIndex:800,
             
-          overflow: "scroll", // Apply Framer Motion controls to the overflow property
           }}
           
         >
@@ -134,7 +133,7 @@ const handleCart = async (productId) => {
               </motion.button>
             </div>
             <div className="flex p-8 flex-wrap justify-start gap-6">
-            {products.map((value,index) => (
+            {filteredProducts.map((value,index) => (
             <div key={index} className='h-56 w-72 flex   flex-col rounded-lg justify-center gap-2 items-start overflow-hidden'
             >
              <motion.div
