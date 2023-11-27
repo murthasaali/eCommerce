@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {  FaHeart, FaSearch, FaSignOutAlt, FaUser, FaUserPlus } from 'react-icons/fa';
-
+import { Modal } from '@mui/material';
 import DotBadge from '../components/badge';
 import {  useNavigate } from 'react-router-dom';
 import About from './about';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsabout, selectIscart, selectIscollection, setIscollection,setIscart, clearUserToken, selectIslogin, clearIslogin } from '../redux/authSlice';
+import { selectIsabout, selectIscart, selectIscollection, setIscollection,setIscart, clearUserToken, selectIslogin, clearIslogin, clearUserId } from '../redux/authSlice';
 import { setIsabout } from '../redux/authSlice';
 import Garage from './garage';
-
+import Login from '../admin/login';
 import Offer from './offer';
 import { Avatar } from '@mui/material';
 import toast from 'react-hot-toast';
@@ -24,18 +24,26 @@ function Mainbar() {
 
 
   const [isSearch,setIsSearch]=useState(false)
-
+  const [modal ,setModal]=useState(false)
+  const [loginModal ,setloginModal]=useState(false)
   const isAbout=useSelector(selectIsabout)
   const isLogin=useSelector(selectIslogin)
   const nav=useNavigate()
   const dispatch=useDispatch()
   const isCollection = useSelector(selectIscollection);
-  const isCart=useSelector(selectIscart)
   const handleLogout=()=>{
-    dispatch(clearUserToken(true))
+    dispatch(clearUserToken())
     dispatch(clearIslogin())
+    dispatch(clearUserId())
     // alert("thank you welcome back")
     toast.error("logout")
+    toggleModal()
+  }
+  const toggleModal=()=>{
+    setModal(!modal)
+  }
+  const toggllogin=()=>{
+    setloginModal(!loginModal)
   }
   
   return (
@@ -79,12 +87,14 @@ function Mainbar() {
           Username
         </motion.button>
         
-      {!isLogin? <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={()=>nav("/login")}>
-          <FaUserPlus title='login'/>
+      {!isLogin? <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" >
+          <FaUserPlus title='login' onClick={()=>setloginModal(true)} />
         </motion.button>:
-         <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={handleLogout}>
-          <FaSignOutAlt  title='logout'/>
-        </motion.button> }
+        
+         <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" >
+          <FaSignOutAlt  title='logout' onClick={()=>setModal(true)}/>
+        </motion.button> 
+        }
         <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" >
           <FaHeart className='text-pink-500'/>
         </motion.button>
@@ -152,7 +162,29 @@ function Mainbar() {
         !isLogin&&
         <Offer/>
       }
+      {modal && (
+  <Modal open={modal} onClose={toggleModal} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div className="p-8 bg-stone-300 rounded-xl">
+      <p className="flex justify-center items-center gap-10 text-red-600">do yo want logout    <button className="btn" onClick={handleLogout}> yes</button></p>
       
+      {/* Additional modal content */}
+    </div>
+  </Modal>
+)}
+  {loginModal && (
+  <Modal open={loginModal} onClose={toggllogin} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+     <div className="p-8 bg-stone-400 h-auto w-auto rounded-xl">
+   
+      {/* Additional modal content */}
+    <Login />
+    </div>
+  </Modal>
+)}
+
+
+
+
+
 
     </div>
   );

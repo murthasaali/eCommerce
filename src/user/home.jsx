@@ -47,7 +47,7 @@ function Home() {
   
   
     
-   <div className='w-full h-full  flex flex-col '>
+   <div className='w-full h-auto  flex flex-col '>
     <Mainbar/>
     <div className='crme'>
       <div className='w-full  sm:w-4/6 rounded-lg bg-opacity-30 overflow-hidden flex justify-center items-center lg:p-20 sm:p-8'>
@@ -107,7 +107,7 @@ function Home() {
     
   </motion.ul></div>
     </div>
-    <motion.div
+    {/* <motion.div
       initial={{ opacity: 0, y: -20 }} // Initial state: hidden and slightly above
       animate={{ opacity: 1, y: 0 }} // Animated state: visible and at original position
       transition={{ duration: 1 }} // Animation duration
@@ -125,7 +125,14 @@ function Home() {
           animate={{ opacity: 1 }} // Animated state: visible
           transition={{ delay: 0.5, duration: 1 }} // Animation delay and duration
         >Order Now</motion.span></p>
-    </motion.div>
+    </motion.div> */}
+   </div>
+   <div className='w-full h-72 flex justify-center gap-7 flex-wrap '>
+
+<div className='sm:h-1/2 lg:h-full sm:w-28 lg:w-80  bg-white bg-opacity-50 '> </div>
+<div className='sm:h-1/2 lg:h-full  sm:w-28 lg:w-80  bg-white bg-opacity-50 '> </div>
+<div className='sm:h-1/2 lg:h-full  sm:w-28 lg:w-80  bg-white bg-opacity-50 '> </div>
+
    </div>
    
    <Navber/>

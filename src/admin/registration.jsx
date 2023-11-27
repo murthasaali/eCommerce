@@ -30,8 +30,6 @@ const container = {
 function Registration() {
   const dispatch=useDispatch()
   const [alert,setAlert]=useState(false)
-  const userToken= useSelector(selectUserToken);
-  const isSignIn = useSelector((state) => state.auth.isSignIn);
 
 
 
@@ -45,7 +43,6 @@ function Registration() {
       });
       const { status, message, data } = response.data;
       if (status === 'success') {
-        dispatch(setUserToken(data.token))
         console.log('Registration successful. Token:', data.token);
       } else {
         console.error('Registration failed. Message:', message);

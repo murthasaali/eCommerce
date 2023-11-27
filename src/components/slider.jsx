@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import {  useSelector } from "react-redux";
-import 
+import {toast} from 'react-hot-toast'
 import axios from "axios";
+import { Modal } from "@mui/material";
+import {motion} from 'framer-motion'
 import {
   MDBContainer,
   MDBRow,
@@ -13,7 +15,7 @@ import {
   MDBCardTitle,
   
 } from "mdb-react-ui-kit";
-import { selectToken } from "../redux/authSlice";
+import { selectIslogin, selectToken, selectUserToken } from "../redux/authSlice";
 import { selectUserid } from "../redux/authSlice";
 import {  FaSearch } from "react-icons/fa";
 // import { selectUserid } from "../redux/authSlice";
@@ -37,9 +39,28 @@ const responsive = {
   },
 };
 const Slider = () => {
+
+  
+  
+
   const userId = useSelector(selectUserid);
-  const userToken = useSelector(selectToken);
+  const userToken = useSelector(selectUserToken);
+  const isLogin=useSelector(selectIslogin)
+  console.log(userId)
+  const [modal,setModal]=useState(false)
   const [cartItem, setCartItem] = useState([]);
+
+  const [selectedProducts, setSelectedProducts] = useState([]);
+
+  const handleProductSelection = (productId) => {
+    if (selectedProducts.includes(productId)) {
+      // If product is already selected, remove it from the selection
+      setSelectedProducts(selectedProducts.filter((id) => id !== productId));
+    } else {
+      // If product is not selected, add it to the selection
+      setSelectedProducts([...selectedProducts, productId]);
+    }
+  }
   const viewCart = async (userId, token) => {
     try {
       const response = await axios.get(`https://ecommerce-api.bridgeon.in/users/${userId}/cart`, {
@@ -63,87 +84,146 @@ const Slider = () => {
   useEffect(() => {
     viewCart(userId,userToken)
   }, [])
-  const removeFromCart = async (userId, productId, token) => {
+  const remove = async ( productId, userToken,userId) => {
+    console.log(productId)
+    console.log(userToken)
+    console.log(userId)
     try {
-      const response = await axios.delete(`https://ecommerce-api.bridgeon.in/users/${userId}/cart`, {
+      const response = await axios.delete(`https://ecommerce-api.bridgeon.in/users/${userId}/cart/${productId}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        data: {
-          productId,
-        },
+          Authorization: `Bearer ${userToken}`,
+        }
       });
       const { status, message } = response.data;
       if (status === 'success') {
         // Product removed from cart successfully.
-        console.log('Product removed from cart.');
+        toast.error('product removed succussfully')
+        viewCart(userId,userToken)
+        toggleModal()
+
       } else {
         console.error('Product removal from cart failed. Message:', message);
+
       }
     } catch (error) {
       console.error('Error:', error.message);
     }
   };
+  const removeFromCart=(id)=>{
+    remove(id,userToken,userId)
 
+  }
+  const toggleModal = () => {
+    setModal(!modal);
+  };
   
   return (
+<>
+
+{isLogin?
+
+( <Carousel
+  responsive={responsive}
+  autoPlay={true}
+  swipeable={true}
+  draggable={true}
+  showDots={true}
+  infinite={true}
   
-      
-      <Carousel
-        responsive={responsive}
-        autoPlay={true}
-        swipeable={true}
-        draggable={true}
-        showDots={true}
-        infinite={true}
-        
-        partialVisible={true}
-        dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding"
-        customTransition="transform 300ms ease-in"
-      >
-        {cartItem.map((product) => (
-          <div className="bigcard"  style={{}}>
-           
-            <MDBContainer fluid className="my-5">
-      <MDBRow className="justify-content-center">
-        <MDBCol md="8">
-          <MDBCard className="text-stone-300 bg-black w-72" >
-            <div className="w-ful h-40 rounded-md" style={{
-            backgroundImage:`url("${product.image}")`,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            overflow:"hidden",
+  partialVisible={true}
+  dotListClass="custom-dot-list-style"
+  itemClass="carousel-item-padding"
+  customTransition="transform 300ms ease-in"
+>
+  {cartItem.map((product) => (
+    <div className="bigcard"  key={product._id}>
+      {modal && (
+<Modal open={modal} onClose={toggleModal} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' ,
+backgroundImage:"url('cicon.png')",
+backgroundRepeat:"repeat"
 
-          }}>
+}}>
+<div className="p-8 bg-white rounded-xl">
+<h2 className="text-2xl mb-4">hi </h2>
+<p className="flex justify-center items-center gap-10">do yo want remove this product    <button className="btn" onClick={()=>removeFromCart(product._id)}> yes</button></p>
 
-            </div>
+{/* Additional modal content */}
+</div>
+</Modal>
+)}
+     
+      <MDBContainer fluid className="my-5">
+<MDBRow className="justify-content-center">
+  <MDBCol md="8">
+    <MDBCard className="text-stone-300 bg-black  w-72" >
+      <div className="w-ful h-40 rounded-md" style={{
+      backgroundImage:`url("${product.image}")`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      overflow:"hidden",
 
+    }}>
+
+      </div>
+
+    
+      <MDBCardBody className="bg-stone-500 bg-opacity-30">
+        <div className="text-center">
+          <MDBCardTitle className="text-yellow-600" style={{
+        fontFamily:"'Arista Pro Alternate Fat', sans-serif",
+        textAlign:"start"
+      }}>{product.title}</MDBCardTitle>
+        </div>
+        <div>
+         
+        </div>
+        <div className="d-flex justify-content-between  total font-weight-bold ">
+          <span></span>
+          <span>₹{product.price}</span>
+        </div>
           
-            <MDBCardBody className="bg-stone-500 bg-opacity-30">
-              <div className="text-center">
-                <MDBCardTitle className="text-yellow-600" style={{
-              fontFamily:"'Arista Pro Alternate Fat', sans-serif",
-              textAlign:"start"
-            }}>{product.title}</MDBCardTitle>
-              </div>
-              <div>
-               
-              </div>
-              <div className="d-flex justify-content-between  total font-weight-bold ">
-                <span></span>
-                <span>₹{product.price}</span>
-              </div>
-                
-            </MDBCardBody>
-            <div className="flex justify-evenly items-center p-2 gap-10"><FaSearch/> <MdDelete title="remove" onClick={()=>removeFromCart(product._id)}/></div>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
-          </div>
-        ))}
-      </Carousel>
+      </MDBCardBody>
+      <div  className="flex justify-evenly items-center  gap-10">
+      <label className="flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={selectedProducts.includes(product._id)}
+                            onChange={() =>
+                              handleProductSelection(product._id)
+                            }
+                          />
+                          <span className="ml-2">
+                            Select for order
+                          </span>
+                        </label>
+      <button onClick={() => setModal(true)}>
+<MdDelete title="remove"/>
+
+</button>
+
+      </div>
+
+    </MDBCard>
+  </MDBCol>
+</MDBRow>
+</MDBContainer>
+    </div>
+  ))}
+
+
+
+  
+</Carousel>)
+
+
+
+:
+<div className="text-white"> your cart is empty plazz login</div>
+
+}  
+     
+</>
+
    
   );
 };

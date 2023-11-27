@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  justify-content: center;
+  display: flex;
 }
 
 .App-logo {
@@ -266,7 +268,6 @@
   }
   .crme{
     flex-direction: column;
-    height:  max-content;
     gap: 4px;
     background-color: aquamarine;
   }
@@ -284,9 +285,7 @@
     background-color: black;
     margin-top: 10px;
   }
-  .home_main{
-    height: 100%;
-  }
+ 
   
 }
 
@@ -306,9 +305,11 @@
 }
 .qoute1{
   font-family: 'Arista Pro Alternate Fat', sans-serif ;
-  font-size: 170px;
-  -webkit-text-fill-color: transparent; /* Hide original text fill */
-  -webkit-text-stroke: 2px rgb(216, 178, 10); /* Create a white stroke around the text */
+  font-size: 150px;
+  color: rgb(231, 231, 231);
+  opacity: 0.9;
+  -webkit-text-fill-color: transparent; 
+  -webkit-text-stroke: 2px rgb(216, 178, 10); 
 
   
 }
@@ -317,9 +318,8 @@
 .crme{
   /* w-full  flex gap-4 p-2 h-1/2 */
   width: 100%;
-  display:flex ;
-  gap: 16px;
-  height: 60%;
+  height: auto;
+  display:flex;
 }
 .home_main{
   /* style={{justifyContent:"center",
@@ -334,8 +334,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
+  
   width: 100%;
-  height:100vh;
+  height:100%;
   background-color: #000000;
 }

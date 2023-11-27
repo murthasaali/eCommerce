@@ -11,12 +11,10 @@ import GetaProduct from './admin/getaProduct';
 import GetAllUsers from './admin/getAllusers';
 import Admin from './admin/admin';
 import Home from './user/home';
-import Mainbar from './user/mainbar';
 import About from './user/about';
 import Registration from './admin/registration';
 import ViewAproduct from './user/viewAproduct';
 import Cart from './user/cart';
-import kitchen from './user/kitchen';
 import Kitchen from './user/kitchen';
 
 

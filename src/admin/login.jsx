@@ -151,7 +151,7 @@ function Login() {
       flexDirection:"column",
       justifyContent: 'center',
       alignItems: 'center',
-      background: 'rgba(0, 0, 0, 0.9)',
+      
       overflow:"auto",
       zIndex: 999,
     }}

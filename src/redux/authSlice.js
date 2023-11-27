@@ -51,6 +51,10 @@ export const authSlice = createSlice({
       state.userToken = null;
       localStorage.removeItem('usertoken'); // Remove the user token from local storage
     },
+    clearUserId: (state) => {
+      state.userToken = null;
+      localStorage.removeItem('usertoken'); // Remove the user token from local storage
+    },
     clearIslogin:(state) => {
       state.isLogin = false;
       localStorage.removeItem('login'); // Remove the user token from local storage
@@ -58,7 +62,7 @@ export const authSlice = createSlice({
   }
 });
 
-export const {setIscollection, setToken, setUserToken, setProducts, setSignIn ,setIsabout,setIslogin,setIscart,setUserid,clearUserToken,clearIslogin} = authSlice.actions;
+export const {setIscollection, setToken, setUserToken, setProducts, setSignIn ,setIsabout,setIslogin,setIscart,setUserid,clearUserToken,clearIslogin ,clearUserId} = authSlice.actions;
 
 export const selectToken = (state) => state.auth.token;
 export const selectUserToken = (state) => state.auth.userToken;

@@ -9,7 +9,10 @@ import { useNavigate } from 'react-router-dom'
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { MdOutlineSecurity } from "react-icons/md";
 import Slider from '../components/slider'
-
+const variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
 
 function Cart() {
   const isCart = useSelector(selectIscart)
@@ -22,10 +25,9 @@ function Cart() {
   return (
     <>
       <motion.div
-       initial={{ opacity: 0, scale: 0.5, x: -100 }}
-       animate={{ opacity: 1, scale: 1, x: 0 }}
-       exit={{ opacity: 0, scale: 0.5,x: -100 }}
-        transition={{ duration: 0.5 }}
+        initial="hidden"
+        animate="visible"
+        variants={variants}
         style={{
           position: 'fixed',
           top: 0,
@@ -33,12 +35,12 @@ function Cart() {
           width: '100%',
           height: '100%',
           display: 'flex',
-          flexDirection: "column",
-          alignItems: "center",
+          flexDirection: 'column',
+          alignItems: 'center',
           justifyContent: 'center',
           background: 'black',
-          zIndex: 999,
         }}
+        
 
       >
         <div className='bg-black w-full h-1/2'>
