@@ -178,23 +178,22 @@ backgroundRepeat:"repeat"
          
         </div>
         <div className="d-flex justify-content-between  total font-weight-bold ">
-          <span></span>
+          <div className="flex justify-center items-center gap-1"><button className="px-2 border rounded-lg">+</button>count<button className="px-2 border rounded-lg">-</button></div>
           <span>₹{product.price}</span>
         </div>
           
       </MDBCardBody>
-      <div  className="flex justify-evenly items-center  gap-10">
+      <div  className="flex justify-evenly items-center p-4 gap-10">
       <label className="flex items-center cursor-pointer">
                           <input
                             type="checkbox"
+                            className=""
                             checked={selectedProducts.includes(product._id)}
                             onChange={() =>
                               handleProductSelection(product._id)
                             }
                           />
-                          <span className="ml-2">
-                            Select for order
-                          </span>
+                        
                         </label>
       <button onClick={() => setModal(true)}>
 <MdDelete title="remove"/>

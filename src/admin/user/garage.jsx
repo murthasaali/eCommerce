@@ -1,91 +1,54 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 
 import {  motion } from 'framer-motion'; // Import useAnimation from framer-motion
-import { selectProducts, selectToken, selectUserToken, selectUserid, setProducts } from '../redux/authSlice';
+import { selectProducts, selectToken, setProducts } from '../redux/authSlice';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FaCartPlus, FaHeart } from 'react-icons/fa';
 import { useParams ,useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
-import toast from "react-hot-toast"
+
 
 
 
 function Kitchen() {
   const token=useSelector(selectToken)
-  const userToken=useSelector(selectUserToken)
-  const userId=useSelector(selectUserid)
-  const products=useSelector(selectProducts)
+
 // const products=useSelector(selectProducts)
   const dispatch=useDispatch()
-  
+  const [filters,setFilter]=useState([])
   const nav=useNavigate()
-
-  const handleAddToCart = (productId) => {
-    handleCart(productId)
-  };
-
-
+  
 
   const { category } = useParams();
-  useEffect(() => {
-    const getAllProducts = async (token) => {
-      console.log("getting all products");
-      try {
-        const response = await axios.get('https://ecommerce-api.bridgeon.in/products?accessKey=55eebc5550c70b2b7736', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const { status, message, data } = response.data;
-        if (status === 'success') {
-          dispatch(setProducts(data));
-          console.log(data);
-        } else {
-          console.error('Product retrieval failed. Message:', message);
-        }
-      } catch (error) {
-        console.error('Error:', error.message);
-      }
-    };
-
-    if (token) {
-      getAllProducts(token);
-    }
-  }, [token]);
-  const filteredProducts = products.filter(product => product.category === category);
-
-  
-
-const handleCart = async (productId) => {
-  try {
-    console.log("Adding product to cart...");
-    console.log("Product ID:", productId);
-    console.log("User ID:", userId);
-    console.log("User Token:", userToken);
-
-    const response = await axios.post(
-      `https://ecommerce-api.bridgeon.in/users/${userId}/cart/${productId}`,
-      null, // Assuming no data payload, pass null if not needed
-      {
+  const getAllProducts = async (token) => {
+    try {
+      const response = await axios.get('https://ecommerce-api.bridgeon.in/products?accessKey=55eebc5550c70b2b7736', {
         headers: {
-          Authorization: `Bearer ${userToken}`,
+          Authorization: `Bearer ${token}`,
         },
+      });
+      const { status, message, data } = response.data;
+      if (status === 'success') {
+        // Successfully fetched products.
+        // dispatch(setProducts(data));
+        setFilter(data)
+      console.log('Fetched products:', data);
+      
+      } else {
+        console.error('Product retrieval failed. Message:', message);
       }
-    );
-
-// Log the response from the server
-
-    if (response.data.status === 'success') {
-      console.log('Product added to cart.');
-      toast.success("product added to cart  succussfully")
-    } else {
-      console.error('Product addition to cart failed. Message:', response.data.message);
+    } catch (error) {
+      console.error('Error:', error.message);
     }
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
-};
+  };
+  useEffect(() => {
+   getAllProducts(token,category)
+  }, [token,category])
+  
+  const filteredProducts=filters.filter((item)=>item.category===category)
+  
+  console.log(filteredProducts)
 
   return(
     <>
@@ -104,8 +67,8 @@ const handleCart = async (productId) => {
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor:"black",
-            zIndex:800,
-            
+            zIndex: 999,
+          // overflow: "scroll", // Apply Framer Motion controls to the overflow property
           }}
           
         >
@@ -117,7 +80,7 @@ const handleCart = async (productId) => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-full h-40 bg-black flex justify-start rounded-lg p-8">
-              <p className='text-2xl font-thin text-white text-opacity' >do you want {category} take an order and <span className='text-red-500'  >chill</span></p>
+              <p className='text-2xl font-thin text-white text-opacity' >do you want {category} take an order and <span className='text-red-500'>chill</span></p>
               <motion.button
                 initial={{ rotate: 0 }}
                 whileHover={{ rotate: 90 }}
@@ -129,8 +92,8 @@ const handleCart = async (productId) => {
               </motion.button>
             </div>
             <div className="flex p-8 flex-wrap justify-start gap-6">
-            {filteredProducts.map((value,index) => (
-            <div key={index} className='h-56 w-72 flex   flex-col rounded-lg justify-center gap-2 items-start overflow-hidden'
+            {filteredProducts.map((value) => (
+            <div className='h-56 w-72 flex   flex-col rounded-lg justify-center gap-2 items-start overflow-hidden'
             >
              <motion.div
              initial={{scale:1,opacity:0.8}}
@@ -155,22 +118,13 @@ const handleCart = async (productId) => {
      
            </motion.div>
                    <div className='font-thin text-yellow-600 w-full p-4 bg-stone-800 text-opacity-60 flex justify-center items-start gap-4 overflow-hidden'><span className='text-2xl flex items-center justify-around '></span >  {value.title}  <FaHeart className='text-xl text-white text-opacity-60'  />
-                   <motion.button  
-                   initial={{scale:1}}
-                    whileHover={{scale:1.2}}
-                   onClick={()=>handleAddToCart(value._id)}
-                    
-                    >
                    <FaCartPlus/>
-
-                   </motion.button>
-
                    </div></div>
             ))}
             </div>
           </motion.div>
         </motion.div>
-       
+      
     </>
   )
 }

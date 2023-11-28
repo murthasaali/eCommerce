@@ -1,8 +1,7 @@
 import React from 'react'
 import {  useSelector } from 'react-redux'
 import {  selectIscart, } from '../redux/authSlice'
-import box from '../offerbox.png'
-import delivery from "../delvery.png"
+
 import { motion } from 'framer-motion'
 import { FaHeart } from 'react-icons/fa'
 import { BiSolidOffer } from 'react-icons/bi'
@@ -46,9 +45,9 @@ function Cart() {
       >
         <div className='bg-black w-full h-1/2'>
 
-          <div className=' w-full flex gap-10 items-center justify-around mt-8'>
+          <div className=' w-full flex gap-56 items-center justify-around m-4'>
 
-            <div className='font-thin '><span className='text-6xl  font-thin' style={{
+            <div className='font-thin '><span className='text-6xl font-thin' style={{
               fontFamily:"'Arista Pro Alternate Fat', sans-serif"
             }}> YOUR CART DETAILS</span></div>
             <div className='flex items-center gap-10'>
@@ -69,32 +68,12 @@ function Cart() {
 
           >
             {/* */}
-            <div className='w-3/6 h-full  bg-opacity-90 p-4 flex flex-col '>
+            <div className='w-3/6 h-full  bg-opacity-90 p-4 flex flex-col gap-4'>
 
-              <div className='lg:flex sm:hidden items-center justify-between  w-full lg:text-lg sm:text-xs  rounded-lg h-auto '> check delivery time and services  <button className='btn  border'> check now </button>
-              <motion.img
-        src={delivery}
-        height={"75px"}
-        width={"75px"}
-        // Set the easing function for smooth animation
-      /> </div>
+              <div className='flex items-center p-3 w-full border rounded-lg file: border-red-600 h-10 '> check delivery time and services   </div>
 
-              <div className='flex items-center'>   <BiSolidOffer className='text-sky-800' />  &nbsp; available offers
-                7.5% instant Discount on every spends with ck sons Kotak credit Card.TCA
-                <motion.img
-        src={box}
-        height={"100px"}
-        width={"100px"}
-        alt=""
-        animate={{
-          y: [0, 10, 0], // Move the image up and down in a loop
-        }}
-        transition={{
-          duration: 4, // Set the duration of each cycle (in seconds)
-          repeat: Infinity, // Repeat the animation infinitely
-          ease: "linear", // Set the easing function for smooth animation
-        }}
-      />
+              <div className='flex flex-col border pl-3 pt-3 w-full rounded-lg items-start '><p className='flex items-center'>   <BiSolidOffer className='text-sky-800' />  &nbsp; available offers</p>
+                <p   >7.5% instant Discount on every spends with ck sons Kotak credit Card.TCA</p>
 
               </div>
 
@@ -107,7 +86,12 @@ function Cart() {
             <div className='w-3/6 bg-black h-full mr-14  flex flex-col gap-4 item-start' >
 
               <p className='text-2xl font-thin text-left' >Total Price</p>
-            
+              <div className='flex items-center p-3 w-3/4    border-gray-700 rounded-lg file:  bg-stone-300  h-10 flex-col'>
+
+                <p></p>
+
+              </div>
+
 
 
 

@@ -4,8 +4,6 @@ import Mainbar from './mainbar'
 import { motion } from 'framer-motion';
 import Carousal from '../components/carousal';
 import { useNavigate } from 'react-router-dom';
-import box from "../offerbox.png"
-
 import BasicCard from '../components/card';
 import { FaFacebook, FaInstagram, FaMailBulk, FaPhone, FaWhatsapp } from 'react-icons/fa';
 
@@ -54,24 +52,9 @@ function Home() {
    <div className='w-full h-auto  flex flex-col relative  '>
     <Mainbar/>
     <div className='crme'>
-      <div className='w-full  sm:w-4/6 rounded-lg bg-opacity-30 overflow-hidden flex flex-col justify-center items-center lg:p-10 sm:p-8 '>
-      <p className='flex justify-center items-end gap-4 w-3/4 text-start px-4'>
-      Enjoy exclusive discounts and irresistible deals on your favorite fast-food orders with our app's special offers!
-      <motion.img
-        src={box}
-        height={"100px"}
-        width={"100px"}
-        alt=""
-        animate={{
-          y: [0, 10, 0], // Move the image up and down in a loop
-        }}
-        transition={{
-          duration: 4, // Set the duration of each cycle (in seconds)
-          repeat: Infinity, // Repeat the animation infinitely
-          ease: "linear", // Set the easing function for smooth animation
-        }}
-      />
-    </p>    <Carousal />
+      <div className='w-full  sm:w-4/6 rounded-lg bg-opacity-30 overflow-hidden flex flex-col justify-center items-center lg:p-20 sm:p-8 '>
+        <p> The best offers  </p>
+    <Carousal />
   </div>
       <div className=' p-4 font-thin h-1/2 lg:h-full'> <p>choose by menu</p><motion.ul
     className="w-full h-full sm:h-1/2 lg:h-full p-2 grid grid-cols-4 gap-4 grid-rows-2 gap-15 p-15 overflow-hidden bg-opacity-20 rounded-lg"

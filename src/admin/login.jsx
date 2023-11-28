@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setToken ,setSignIn, setUserid, setUserToken, selectUserid, selectUserToken} from "../redux/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+
 import { useSelector } from "react-redux";
 import { selectToken } from "../redux/authSlice";
 import Registration from "./registration";
@@ -31,7 +32,7 @@ const container = {
 };
 
 function Login() {
-
+  const[isload,setIsLoad]=useState(false)
   
   const isSignIn = useSelector((state) => state.auth.isSignIn);
 
@@ -62,6 +63,7 @@ function Login() {
   
   
   const handleLogin = async (event) => {
+    setIsLoad(true)
     event.preventDefault();
     const email = event.target.email.value;
     console.log(email);
@@ -83,6 +85,7 @@ function Login() {
       if (status === "success") {
         const token = data.token;
         console.log("Login successful. Token:", token);
+        setIsLoad(false)
         dispatch(setToken(token)); // Dispatch the token to the Redux store
         navigation("/admin");
       } else {
@@ -96,6 +99,7 @@ function Login() {
 
   
   const loginUser = async (event) => {
+    setIslogin(true)
     event.preventDefault()
     const email = event.target.email.value;
     const password=event.target.password.value;// /  const apiKey=""
@@ -119,7 +123,9 @@ function Login() {
         setName(data.username)
         dispatch(setUserid(id))
         dispatch(setIslogin(true))
+        setIsLoad(false)
         toast.success("loggined succussfully")
+
        
      
 
@@ -137,6 +143,7 @@ function Login() {
     <>
  
  <motion.div
+ className="border"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
@@ -157,8 +164,10 @@ function Login() {
     }}
     onClick={() =>dispatch(setIslogin(false))}
   >
-    <p className="qoute"><span className="text-blue-200 text-6xl">welcome to  </span><br/>
-    <span className="text-3xl text-orange-600">CRUNCHICK</span></p>
+    <p className="qoute" ><span className="text-blue-200 text-6xl text-center">welcome to  </span><br/>
+    <span className="qoute1"  style={{
+      fontSize:"60px"
+    }}>CRUNCHICK</span></p>
     <motion.div
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -238,7 +247,7 @@ function Login() {
  
   </motion.div>
 
- 
+ {isload&&<span className="loading loading-spinner loading-lg"></span>}
 
 </>
     // <div>
