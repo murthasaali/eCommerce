@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import axios from "axios";
-
+import Login from '../admin/login';
 import { motion } from 'framer-motion';
 import { FaHeart, FaSearch, FaSignOutAlt, FaUser, FaUserPlus } from 'react-icons/fa';
 import { Modal } from '@mui/material';
@@ -10,12 +10,10 @@ import About from './about';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsabout, selectIscollection, setProducts, setIscart, clearUserToken, selectIslogin, clearIslogin, clearUserId, selectToken, selectProducts } from '../redux/authSlice';
 import { setIsabout } from '../redux/authSlice';
-import Garage from './garage';
-import Login from '../admin/login';
 import Offer from './offer';
 import { Avatar } from '@mui/material';
 import toast from 'react-hot-toast';
-
+import axiosInsatnce from '../axiosInstance/instance';
 const scaleVariants = {
   initial: { scale: 1 },
   hover: { scale: 1.1, transition: { duration: 0.3 } },
@@ -33,9 +31,11 @@ function Mainbar() {
   const isCollection = useSelector(selectIscollection);
   const products=useSelector(selectProducts)
   const [searchdata, setSearchdata] = useState([]);
-    const getAllProducts = async (token) => {
+  const apiKey=process.env.REACT_APP_API_KEY
+  const getAllProducts = async (token) => {
     try {
-      const response = await axios.get('https://ecommerce-api.bridgeon.in/products?accessKey=55eebc5550c70b2b7736', {
+      const response = await axiosInsatnce.get(`/products?accessKey=${apiKey}`, {
+       
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -44,7 +44,6 @@ function Mainbar() {
       if (status === 'success') {
         // Successfully fetched products.
         dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
-        
         console.log('Fetched products:', data);
       } else {
         console.error('Product retrieval failed. Message:', message);
@@ -53,7 +52,6 @@ function Mainbar() {
       console.error('Error:', error.message);
     }
   };
-
   const handleLogout = () => {
     dispatch(clearUserToken());
     dispatch(clearIslogin());
@@ -184,7 +182,7 @@ const handleSearch = (e) => {
       )}
 
       {isAbout && <About />}
-      {isCollection && isLogin && <Garage />}
+   
       {!isLogin && <Offer />}
 
       {modal && (

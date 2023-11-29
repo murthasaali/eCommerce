@@ -16,6 +16,7 @@ import Registration from './admin/registration';
 import ViewAproduct from './user/viewAproduct';
 import Cart from './user/cart';
 import Kitchen from './user/kitchen';
+import Wishlist from './user/wishlist';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
       <Route path='/admin'  element={<Admin/>}/>
       <Route path='/cart'  element={<Cart/>}/>
       <Route path='/kitchen/:category'  element={<Kitchen/>}/>
+      <Route path='/wishlist'  element={<Wishlist/>}/>
       <Route path='/about'  element={<About/>}/>
       <Route path='/admin/user' element={<Admin />} />
             <Route path='/admin/sales' element={<Admin />} />

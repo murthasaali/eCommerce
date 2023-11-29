@@ -41,7 +41,7 @@ const responsive = {
     slidesToSlide: 1, // optional, default to 1.
   },
 };
-const Slider = () => {
+const Whislistslider = () => {
 
   
   
@@ -64,9 +64,9 @@ const Slider = () => {
       setSelectedProducts([...selectedProducts, productId]);
     }
   }
-  const viewCart = async (userId, token) => {
+  const veiwWishlist = async (userId, token) => {
     try {
-      const response = await axios.get(`https://ecommerce-api.bridgeon.in/users/${userId}/cart`, {
+      const response = await axios.get(`https://ecommerce-api.bridgeon.in/users/${userId}/whishlist`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -74,7 +74,7 @@ const Slider = () => {
       const { status, message, data } = response.data;
       if (status === 'success') {
         // Successfully fetched cart items.
-       const products=data.products[0].cart
+       const products=data.products[0].whishlist
         console.log('Cart items:',products );
         setCartItem(products)
       } else {
@@ -85,14 +85,14 @@ const Slider = () => {
     }
   };
   useEffect(() => {
-    viewCart(userId,userToken)
+    veiwWishlist(userId,userToken)
   }, [])
   const remove = async (productId, userToken, userId) => {
     console.log(productId);
     console.log(userToken);
     console.log(userId);
     try {
-      const response = await axiosInsatnce.delete(`/users/${userId}/cart/${productId}`, {
+      const response = await axiosInsatnce.delete(`/users/${userId}/whislist/${productId}`, {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
@@ -101,7 +101,7 @@ const Slider = () => {
       if (status === 'success') {
         // Product removed from cart successfully.
         toast.error('Product removed successfully');
-        viewCart(userId, userToken);
+        veiwWishlist(userId, userToken);
         toggleModal();
       } else {
         console.error('Product removal from cart failed. Message:', message);
@@ -121,8 +121,10 @@ const Slider = () => {
   
   return (
 <>
+
+
 <div className="w-full h-auto flex justify-between ">
-<p>Please select what you want in yours cart and oreder now</p>
+<p className="text-xs md:text-2xl font -thin">Please select what you want in yours cart and oreder now</p>
 <div className="dropdown dropdown-end">
   <div tabIndex={0} role="button" className="btn m-1">Sort by :--</div>
   <ul className="dropdown-content z-[1] menu p-2 shadow gap-2  border rounded-box w-52">
@@ -234,11 +236,11 @@ const Slider = () => {
             width={"200px"}
             alt=""
           />
-          <p>Your cart is empty</p>
+          <p>Your whishlist is empty</p>
         </div>
       )}
     </>
   );
 };
 
-export default Slider;
+export default Whislistslider;

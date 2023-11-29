@@ -8,6 +8,7 @@ import { useParams ,useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
 import toast from "react-hot-toast"
+import axiosInsatnce from '../axiosInstance/instance';
 
 
 
@@ -30,17 +31,18 @@ function Kitchen() {
   const { category } = useParams();
   useEffect(() => {
     const getAllProducts = async (token) => {
-      console.log("getting all products");
       try {
-        const response = await axios.get('https://ecommerce-api.bridgeon.in/products?accessKey=55eebc5550c70b2b7736', {
+        const response = await axiosInsatnce.get(`/products/accessKey=${process.env.REACT_APP_API_KEY}`, {
+         
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         const { status, message, data } = response.data;
         if (status === 'success') {
-          dispatch(setProducts(data));
-          console.log(data);
+          // Successfully fetched products.
+          dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
+          console.log('Fetched products:', data);
         } else {
           console.error('Product retrieval failed. Message:', message);
         }

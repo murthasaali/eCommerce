@@ -5,7 +5,14 @@ import { motion } from 'framer-motion';
 import Carousal from '../components/carousal';
 import { useNavigate } from 'react-router-dom';
 import box from "../offerbox.png"
-
+import shrimp from "../delicious-shelled-cooked-shrimp-with-green-leaves-white_1284-45639-removebg-preview.png"
+import rice from "../large-bowl-food-with-fish-vegetables_197463-2405-removebg-preview.png"
+import burger from '../2150914687-removebg-preview.png'
+import beverages from '../3d-rendering-brazil-icon_23-2150579996-removebg-preview.png'
+import tika from '../this-3d-rendered-kebab-skewer-260nw-2177290863-removebg-preview.png'
+import broast from '../arrangement-with-chicken-food-white-background_807701-4730__2_-removebg-preview.png'
+import pizza from '../italian-pizza-fast-food-icon-isolated-3d-render-illustration_439185-12977-removebg-preview.png'
+import shavaya from '../realistic-illustration-roasted-turkey-grilled-chicken-with-slices-spices-vegetable_1441-1865-removebg-preview.png'
 import BasicCard from '../components/card';
 import { FaFacebook, FaInstagram, FaMailBulk, FaPhone, FaWhatsapp } from 'react-icons/fa';
 
@@ -32,14 +39,14 @@ function Home() {
 
   const nav = useNavigate()
   const menucard=[
-    {title:"pizza",src:"https://img.freepik.com/free-photo/tasty-top-view-sliced-pizza-italian-traditional-round-pizza_90220-1353.jpg?t=st=1700636370~exp=1700639970~hmac=1d0e013f7ebb7fa981268ae1f99e3d2cbd2abff28f89010d184a6c13a2a3bc65&w=740",nav:'/kitchen/pizza'},
-    {title:"broast",src:"https://img.freepik.com/free-photo/french-fries-fried-chicken-wooden-plate_1203-7692.jpg?w=1060&t=st=1700645777~exp=1700646377~hmac=733248048845d5896fd5049434863a9c4324f981989a89a281b6bce8c9db8b1c",nav:'/kitchen/broast'},
-    {title:"shavaya",src:"https://img.freepik.com/free-photo/roasted-chicken-with-spices-gray_23-2147765470.jpg?w=1060&t=st=1700646150~exp=1700646750~hmac=619113f5742de3bc95e6dfd58a3feec9e4fb034fc426e10867951fc631051fdb",nav:'/kitchen/shavaya'},
-    {title:"prawns",src:"https://image.shutterstock.com/image-photo/jumbo-prawns-grilled-squids-black-260nw-129756848.jpg",nav:"/kitchen/prawn"},
-    {title:"alfahm",src:"",},
-    {title:"mandi",src:"",nav:'/kitchen/rice'},
-    {title:"drinks",src:"https://img.freepik.com/free-photo/fresh-cola-drink-with-green-lime_144627-12395.jpg?size=626&ext=jpg&uid=R105963240&ga=GA1.1.922335369.1686896801&semt=ais",nav:"/kitchen/drinks"},
-    {title:"mandi",src:"",},
+    {title:"pizza",src:`${pizza}`,nav:'/kitchen/pizza'},
+    {title:"burger",src:`${burger}`,nav:'/kitchen/burger'},
+    {title:"broast",src:`${broast}`,nav:'/kitchen/broast'},
+    {title:"shavaya",src:`${shavaya}`,nav:'/kitchen/shavaya'},
+    {title:"tika",src:`${tika}`,nav:'/kitchen/tika'},
+    {title:"beverages",src:`${beverages}`,nav:'/kitchen/beverages'},
+    {title:"rice",src:`${rice}`,nav:'/kitchen/rice'},
+    {title:"shrimp",src:`${shrimp}`,nav:'/kitchen/shrimp'},
    
 ]
 
@@ -55,23 +62,24 @@ function Home() {
     <Mainbar/>
     <div className='crme'>
       <div className='w-full  sm:w-4/6 rounded-lg bg-opacity-30 overflow-hidden flex flex-col justify-center items-center lg:p-10 sm:p-8 '>
-      <p className='flex justify-center items-end gap-4 w-3/4 text-start px-4'>
-      Enjoy exclusive discounts and irresistible deals on your favorite fast-food orders with our app's special offers!
-      <motion.img
-        src={box}
-        height={"100px"}
-        width={"100px"}
-        alt=""
-        animate={{
-          y: [0, 10, 0], // Move the image up and down in a loop
-        }}
-        transition={{
-          duration: 4, // Set the duration of each cycle (in seconds)
-          repeat: Infinity, // Repeat the animation infinitely
-          ease: "linear", // Set the easing function for smooth animation
-        }}
-      />
-    </p>    <Carousal />
+      
+      <p class=' flex  justify-center items-center  xs:flex-col xs:flex w-full h-auto xs:justify-center xs:items-center  md:text-xl  text-xs px-3 '>    Enjoy exclusive discounts and irresistible deals on your favorite fast-food orders with our app's special offers!
+    <motion.img
+      src={box}
+      height={"100px"}
+      width={"100px"}
+      alt=""
+      animate={{
+        y: [0, 10, 0], // Move the image up and down in a loop
+      }}
+      transition={{
+        duration: 4, // Set the duration of each cycle (in seconds)
+        repeat: Infinity, // Repeat the animation infinitely
+        ease: "linear", // Set the easing function for smooth animation
+      }}
+    />
+  </p>
+<Carousal />
   </div>
       <div className=' p-4 font-thin h-1/2 lg:h-full'> <p>choose by menu</p><motion.ul
     className="w-full h-full sm:h-1/2 lg:h-full p-2 grid grid-cols-4 gap-4 grid-rows-2 gap-15 p-15 overflow-hidden bg-opacity-20 rounded-lg"
@@ -83,12 +91,9 @@ function Home() {
 {menucard.map((item, index) => (
   <motion.div className='flex justify-center h-auto gap-1 items-center flex-col w-auto' key={index}  onClick={() => nav(item.nav)}  variants={items}>
     <motion.div
-      className="rounded-full lg:h-24 lg:w-24 sm:h-5 sm:w-5 sm:hidden lg:flex overflow-hidden"
+      className=" lg:h-24 lg:w-24 sm:h-5 sm:w-5 sm:hidden lg:flex overflow-hidden"
        
-      style={{
-        boxShadow: '0 0 5px white', // Initial white box shadow
-        transition: 'box-shadow 0.3s ease-in-out', // Transition for box shadow
-      }}
+    
       // You might need to adjust this part according to your animation
   
      // Remove box shadow on hover

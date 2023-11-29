@@ -4,7 +4,7 @@ import { MDBCarousel, MDBCarouselItem } from 'mdb-react-ui-kit';
 export default function Carousal() {
   return (
     <div className='w-full h-full flex justify-center items-center rounded-lg' style={{ zIndex: 1 }}>
-      <MDBCarousel fade style={{ filter: 'blur(0.2px)', opacity: 0.8, width: '100%' ,overflow:"hidden",zIndex:1}} className='rounded-lg   '>
+      <MDBCarousel fade style={{ filter: 'blur(0.2px)', opacity: 0.8, width: '100%' ,overflow:"hidden",zIndex:1}} className='rounded-lg   ' showControls>
         <MDBCarouselItem itemId={1} interval={1000} className="rounded-lg">
           <img
             src='https://img.freepik.com/free-photo/freshly-baked-pizza-rustic-wooden-table-generated-by-ai_24640-89802.jpg?t=st=1700640507~exp=1700644107~hmac=c06f3b18ca22b61b421ce007690af42460969effb3e3a59fb6a91000f8348bfa&w=1380'
@@ -58,14 +58,9 @@ export default function Carousal() {
           </div>
         </div>
         </MDBCarouselItem>
+       
         
-        {/* <MDBCarouselItem itemId={5}>
-          <img
-            src=''
-            className='d-block w-100'
-            alt='...'
-          />
-        </MDBCarouselItem> */}
+    
       </MDBCarousel>
     </div>
   );
