@@ -136,7 +136,7 @@ const handleSearch = (e) => {
           </motion.button>
         )}
         <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover">
-          <FaHeart className="text-pink-500" />
+          <FaHeart className="text-pink-500"  onClick={()=>nav('/wishlist')}/>
         </motion.button>
         <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={() => dispatch(setIscart(true))}>
           <DotBadge />

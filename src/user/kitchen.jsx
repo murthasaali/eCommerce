@@ -137,6 +137,7 @@ const handleCart = async (productId) => {
              <motion.div
              initial={{scale:1,opacity:0.8}}
              whileHover={{scale:1.1,opacity:1}}
+             onClick={()=>nav(`/viewproduct/${value._id}`)}
             
              className="h-5/6 w-full "   style={{
               backgroundImage: `url("${value.image}")`,

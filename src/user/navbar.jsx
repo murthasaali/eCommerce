@@ -142,13 +142,14 @@ function Navber() {
          stiffness: 260,
          damping: 20
        }}
-      className="icon-container" >
+      className="icon-container" 
+      onClick={()=>nav('/')} >
      
     </motion.button>
 
     <button className="button" >
     
-      <LuHeartHandshake className='text-main'/>
+      <LuHeartHandshake className='text-main' onClick={()=>nav('/wishlist')}/>
       
     </button>
     <button className="button" >
