@@ -25,7 +25,7 @@ function Cart() {
 
   return (
     <div className='flex-col w-full h-auto  bg-black '>
-        <div className=' w-full flex gap-10 items-center h-auto   justify-around p-4 '>
+        <div className=' w-full flex gap-10 items-center h-auto  md:hidden justify-around p-4 '>
 
 <div className='font-thin '><span className='text-6xl  font-thin' style={{
   fontFamily:"'Arista Pro Alternate Fat', sans-serif"

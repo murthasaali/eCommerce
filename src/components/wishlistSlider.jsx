@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import {  useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import burger from '../2150914687-removebg-preview.png'
 
 import axios from "axios";
@@ -18,9 +18,9 @@ import {
   MDBCardTitle,
   
 } from "mdb-react-ui-kit";
-import { selectIslogin, selectToken, selectUserToken } from "../redux/authSlice";
+import { selectIsLoading, selectIslogin, selectToken, selectUserToken, selectWishlist, setIsLoading, setWishlist } from "../redux/authSlice";
 import { selectUserid } from "../redux/authSlice";
-import {  FaDropbox, FaSearch } from "react-icons/fa";
+import {  FaDropbox, FaRemoveFormat, FaSearch } from "react-icons/fa";
 // import { selectUserid } from "../redux/authSlice";
 
 import { MdDelete } from "react-icons/md";
@@ -49,15 +49,17 @@ const Whislistslider = () => {
   
 
   const userId = useSelector(selectUserid);
-  const token = useSelector(selectToken);
+  const token = useSelector(selectUserToken);
   const isLogin=useSelector(selectIslogin)
-  const [loading , setLoading]=useState(true)
-
+  const isLoading=useSelector(selectIsLoading)
+  const [wishlist,setWishlist]=useState([])
   const [modal,setModal]=useState(false)
-  const [wishlist, setWishlist] = useState([]);
-
+  const dispatch=useDispatch()
   const yourWishlist = async (userId, token) => {
     try {
+      console.log("getting all pro")
+      console.log(token)
+      console.log(userId)
       const response = await axios.get(`https://ecommerce-api.bridgeon.in/users/${userId}/wishlist`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -69,8 +71,8 @@ const Whislistslider = () => {
       if (status === 'success') {
         const products = data.products[0].wishlist;
         console.log(products);
-        setWishlist(products);
-        setLoading(true)
+        dispatch(setIsLoading(false))
+        setWishlist(products)
       } else {
         console.log('Failed to fetch wishlist. Message:', message);
       }
@@ -81,7 +83,6 @@ const Whislistslider = () => {
 
   
   useEffect(()=>{
-    setLoading(true)
     yourWishlist(userId,token)
   },[userId,token])
   const toggleModal = () => {
@@ -91,20 +92,30 @@ const Whislistslider = () => {
   return (
 <>
 {
-  loading&&(<Modal open={loading}  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundImage: "url('cicon.png')", backgroundRepeat: "repeat", border:"none" }}>
-  <div className="p-8  rounded-xl flex flex-col justify-center items-center">
-  <div className='w-20 h-20 ' style={{
-        backgroundImage:`url(${burger})`,
-        backgroundSize:'cover'
-    }}></div>
-    <p className="flex justify-center items-center gap-10">Do you want to remove this product  </p>
+  isLoading&&(<Modal open={isLoading} className="w-full h-screen"  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundImage: "url('cicon.png')", backgroundRepeat: "repeat", border:"none" }}>
+  <div className=" w-full h-full flex-col bg-black  gap-4  flex justify-center items-center">
+
+  <motion.div className='w-16 h-16 ' style={{
+    backgroundImage:`url(${burger})`,
+        backgroundSize:'cover'}}
+        animate={{
+          y: [0, 13, 0], // Move the image up and down in a loop
+        }}
+        transition={{
+          duration: 4, // Set the duration of each cycle (in seconds)
+          repeat: Infinity, // Repeat the animation infinitely
+          ease: "linear", // Set the easing function for smooth animation
+        }}
+    ></motion.div>
     {/* Additional modal content */}
-  </div>
+    <p className="text-xs text-orange-600 ml-5 bg-opacity-50 font-thin" >please wait a moment ...</p>
+    </div>
+  
 </Modal>)
 }
 
 <div className="w-full h-auto flex justify-between ">
-<p className="text-xs md:text-2xl font -thin">Please select what you want in yours cart and oreder now</p>
+<p className="text-xs md:text-2xl font-thin lg:px-10 md:px-1">Please select what you want in yours cart and oreder now</p>
 <div className="dropdown dropdown-end">
   <div tabIndex={0} role="button" className="btn m-1">Sort by :--</div>
   <ul className="dropdown-content z-[1] menu p-2 shadow gap-2  border rounded-box w-52">
@@ -134,7 +145,7 @@ const Whislistslider = () => {
   className="maincard"
 >
 {wishlist.map((product) => (
-            <div className="" key={product._id}>
+            <div className=" flex w-full px-4 justify-center items-center flex-col" key={product._id}>
               {modal && (
                 <Modal open={modal} onClose={toggleModal} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundImage: "url('cicon.png')", backgroundRepeat: "repeat" }}>
                   <div className="p-8 bg-white rounded-xl">
@@ -150,9 +161,13 @@ const Whislistslider = () => {
     <h3>{product.title}</h3>
     <p>{product.price}</p>
 
-    <button>Add to Cart</button>
+    <div className="flex justify-center items-center gap-5  ">
+       <button className="p-2 text-xs border rounded-lg "> Add to Cart</button>
+       <button className="p-2  "> <FaRemoveFormat className=""/></button>
+    </div>
   </div>
 
+<p className="text-xs w-3/4  text-start  md:text-lg">{product.description}</p>
 </div>
 
 

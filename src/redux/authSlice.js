@@ -12,6 +12,8 @@ export const authSlice = createSlice({
     isCollection:false,
     isCart:false,
     userId:localStorage.getItem('userId')||null,
+    isLoading:true,
+    wishlist:localStorage.getItem('wishlist')||[],
   },
   reducers: {
     setToken: (state, action) => {
@@ -25,6 +27,14 @@ export const authSlice = createSlice({
     },
     setProducts: (state, action) => {
       state.products = action.payload;
+      
+    },
+    setWishlist: (state, action) => {
+      state.wishlist = action.payload;
+      
+    },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
       
     },
     setUserid: (state, action) => {
@@ -62,15 +72,17 @@ export const authSlice = createSlice({
   }
 });
 
-export const {setIscollection, setToken, setUserToken, setProducts, setSignIn ,setIsabout,setIslogin,setIscart,setUserid,clearUserToken,clearIslogin ,clearUserId} = authSlice.actions;
+export const {setIscollection, setToken, setUserToken, setProducts, setSignIn ,setIsabout,setIslogin,setIscart,setUserid,clearUserToken,clearIslogin ,clearUserId ,setIsLoading,setWishlist} = authSlice.actions;
 
 export const selectToken = (state) => state.auth.token;
 export const selectUserToken = (state) => state.auth.userToken;
 export const selectProducts = (state) => state.auth.products;
+export const selectWishlist = (state) => state.auth.wishlist;
 export const selectIsabout = (state) => state.auth.isAbout;
 export const selectIslogin = (state) => state.auth.isLogin;
 export const selectIscollection = (state) => state.auth.isCollection;
 export const selectIscart = (state) => state.auth.isCart;
+export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectUserid = (state) => state.auth.userId;
 
 export default authSlice.reducer;

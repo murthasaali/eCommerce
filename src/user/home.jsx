@@ -2,6 +2,7 @@ import React from 'react'
 import Navber from './navbar'
 import Mainbar from './mainbar'
 import { motion } from 'framer-motion';
+import {useDispatch, useSelector} from 'react-redux'
 import Carousal from '../components/carousal';
 import { useNavigate } from 'react-router-dom';
 import box from "../offerbox.png"
@@ -15,6 +16,8 @@ import pizza from '../italian-pizza-fast-food-icon-isolated-3d-render-illustrati
 import shavaya from '../realistic-illustration-roasted-turkey-grilled-chicken-with-slices-spices-vegetable_1441-1865-removebg-preview.png'
 import BasicCard from '../components/card';
 import { FaFacebook, FaInstagram, FaMailBulk, FaPhone, FaWhatsapp } from 'react-icons/fa';
+import { selectIsLoading, setIsLoading } from '../redux/authSlice';
+import Loading from '../components/loading';
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -36,7 +39,12 @@ const items = {
   }
 };
 function Home() {
-
+  const dispatch=useDispatch()
+  console.log("loadingggg")
+  const isLoading= useSelector(selectIsLoading)
+  setTimeout(() => {
+    dispatch(setIsLoading(false))
+  }, 3000);
   const nav = useNavigate()
   const menucard=[
     {title:"pizza",src:`${pizza}`,nav:'/kitchen/pizza'},
@@ -55,7 +63,9 @@ function Home() {
     <div className='home_main'
  
     >
-  
+      {
+        isLoading&&(<Loading/>)
+      }
   
     
    <div className='w-full h-auto  flex flex-col relative  '>
