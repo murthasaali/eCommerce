@@ -56,7 +56,7 @@ function Navber() {
 
   const getAllProducts = async (token) => {
     try {
-      const response = await axiosInsatnce.get(`/products/accessKey=${process.env.REACT_APP_API_KEY}`, {
+      const response = await axiosInsatnce.get(`/products?accessKey=55eebc5550c70b2b7736`, {
        
         headers: {
           Authorization: `Bearer ${token}`,
@@ -160,7 +160,7 @@ function Navber() {
     </button>
     <button className="button" >
     
-      <BiMessageDetail className='text-main'/>
+      <BiMessageDetail className='text-main'  onClick={()=>nav('/cart')}/>
       
     </button>
     

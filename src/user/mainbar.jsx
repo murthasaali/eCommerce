@@ -31,10 +31,10 @@ function Mainbar() {
   const isCollection = useSelector(selectIscollection);
   const products=useSelector(selectProducts)
   const [searchdata, setSearchdata] = useState([]);
-  const apiKey=process.env.REACT_APP_API_KEY
+  const apiKey="55eebc5550c70b2b7736"
   const getAllProducts = async (token) => {
     try {
-      const response = await axiosInsatnce.get(`/products?accessKey=${apiKey}`, {
+      const response = await axiosInsatnce.get(`/products?accessKey=55eebc5550c70b2b7736`, {
        
         headers: {
           Authorization: `Bearer ${token}`,

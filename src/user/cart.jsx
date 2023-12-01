@@ -34,6 +34,9 @@ function Cart() {
     <>
       
     <div className='bg-black flex-col flex w-full overflow-auto p-1 lg:p-10 justify-start items-center'
+    style={{
+      height:"100vh"
+    }}
     
     // display: flex;
     // flex-direction: column;
