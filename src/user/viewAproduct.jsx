@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
-import {  selectToken, selectUserToken, selectUserid } from '../redux/authSlice'
+import {  selectIsLoading, selectToken, selectUserToken, selectUserid, setIsLoading } from '../redux/authSlice'
 import toast from 'react-hot-toast'
 import { FaCartPlus, FaHeart } from 'react-icons/fa';
 import Review from '../components/review';
-import Swal from 'sweetalert2'
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import axiosInsatnce from '../axiosInstance/instance';
 import Navber from './navbar';
+import Loading from '../components/loading';
 function ViewAproduct() {
   const token=useSelector(selectToken)
   const { productId } = useParams();
@@ -19,8 +19,10 @@ function ViewAproduct() {
   const nav=useNavigate()
   const userId= useSelector(selectUserid)
   const userToken= useSelector(selectUserToken)
-  
+  const isLoading=useSelector(selectIsLoading)
+  const dispatch=useDispatch()
   const getProductById = async (productId, token) => {
+    dispatch(setIsLoading(true))
     console.log("getting a product");
     console.log("productId", productId);
     console.log("token", token);
@@ -40,17 +42,21 @@ function ViewAproduct() {
         // Successfully fetched the product.
         console.log('Fetched product details:', data);
         setProduct(data);
+        setTimeout(() => {
+          dispatch(setIsLoading(false))
+        }, 2000);
+        
       } else {
         console.error('Product retrieval failed. Message:', message);
       }
     } catch (error) {
       console.error('Error:', error.message);
-      toast.error("product already in wishlist")
     }
   };
   
 useEffect(()=>{
   getProductById(productId,token)
+ 
 },[token,productId])
   
 const handleCart = async (productId) => {
@@ -80,22 +86,7 @@ const handleCart = async (productId) => {
     }
   } catch (error) {
     console.error('Error:', error.message);
-    await Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      background:'black',
-      opacity:'0.5px',
-                text: 'Product addition to cart failed',
-      customClass: {
-        title: 'text-3xl font-bold text-red-500', // Example Tailwind classes for title
-        content: 'text-lg text-gray-700', // Example Tailwind classes for content text
-        confirmButton: 'bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline', // Example Tailwind classes for confirm button
-        cancelButton: 'bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline', // Example Tailwind classes for cancel button
-        // Add more custom classes as needed
-      },
-      // You can also add HTML classes to the container using className:
-      className: 'bg-black bg-opa  flex flex-row border ', // Example Tailwind classes for the modal container
-    });
+   toast.error('already in cart')
   }
 };
   
@@ -126,6 +117,7 @@ const handleWishlist = async (productId) => {
     }
   } catch (error) {
     console.error('Error:', error.message);
+    toast.error("already in wishlist")
    
   }
 };
@@ -134,7 +126,12 @@ const handleWishlist = async (productId) => {
 
 
   return (
-    <div className='home_main'>
+    <div className='bg-black flex-col flex w-full   lg:p-10 justify-start items-center' 
+    
+    style={{
+      height:"100vh"
+    }}
+    >
            <div className=' w-full flex gap-10 items-center h-auto   justify-around p-4 '>
             <p className='text-5xl text-orange-500 text-opacity-60' 
             style={{
@@ -156,8 +153,21 @@ const handleWishlist = async (productId) => {
       fontFamily:" 'Arista Pro Alternate Fat', sans-serif "
     }}>{product.title}</p>
     <p>{product.category}</p>
-    <p>{product.description}</p> <span className='text-xl text-red-700'> ₹ {product.price} /-</span>
-    <div className='flex justify-center items-center gap-5 '><FaHeart  className='text-2xl' onClick={()=>handleWishlist(product._id)}/> <button className=' border p-2 rounded-lg  text-xs ' onClick={()=>{handleCart(product._id)}}> <FaCartPlus/></button> <Stack className='bg-stone-600 bg-opacity-40 rounded-lg p-2' spacing={1}>
+    
+      <p>{product.description}</p> <span className='text-xl text-red-700'> ₹ {product.price} /-</span>
+      <hr className="border border-white w-full my-4" />
+    <div className='flex justify-center items-center gap-5 '>
+      <button>
+
+      <FaHeart  className='text-2xl hover:text-red-500'  onClick={()=>handleWishlist(product._id)}/>
+      </button>
+    
+    
+     <button onClick={()=>{handleCart(product._id)}}>
+      
+       <FaCartPlus  className='text-2xl hover:text-orange-500'/></button> 
+       
+       <Stack className='bg-stone-600 bg-opacity-40 rounded-lg p-2' spacing={1}>
       <Rating name="size-small"  defaultValue={2} size="small" />
     </Stack></div>
    
@@ -166,6 +176,14 @@ const handleWishlist = async (productId) => {
 </div>
   <Review/>
   <Navber/>
+  {
+    isLoading&&(
+      <>
+      <Loading/>
+      
+      </>
+    )
+  }
     </div>
   );
 }

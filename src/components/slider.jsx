@@ -120,23 +120,36 @@ const Slider = () => {
   };
   
   return (
-<>
-  <div className="w-full h-auto flex justify-between ">
-    <p>Please select what you want in your cart and order now</p>
-    {/* ... (your sorting dropdown) */}
-  </div>
+<div className="w-full h-full flex flex-col justify-center items-center gap-6 ">
+ 
+  {cartItem.length>0&&(
+    <>
+    <div className=" flex  justify-start items-center   w-full h-auto   gap-5 md:text-xl  text-xs px-3 "><span>
+      
+{cartItem.length} products are selected 
+      </span> <button className=" px-2 rounded-lg bg-orange-500 hover:text-white hover:text-opacity-50">oreder now </button></div>
+    </>
+  )}
   {cartItem.length > 0 ? (
-    <div className="flex flex-wrap justify-start items-center">
+    <div className="flex flex-wrap justify-center items-center">
+
       {cartItem.map((product) => (
                  
                  <div className="product-card">
                    <div  alt="Product Name" style={{backgroundImage:`url('${product.image}')`}} className="cardimg"> </div>
-                   <p>{product.title}</p>
-                   <p>{product.price}</p>
+                   <div className="w-full h-auto gap-2 flex flex-col items-start px-3">
+
+                   <span className="flex w-full justify-start  items-center">{product.title}</span>
+                   <div className="flex justify-center gap-4 items-center "> <span>{product.price} </span> 
+                   <div className="flex justify-center items-center  gap-3 text-sm" > <button>+</button>  <span>1</span> <button>-</button> </div>
+
+                  
+                   </div >
                
-                   <div className="flex justify-center items-center gap-5  ">
-                      <button className="p-2 text-xs border rounded-lg "> Add to Cart</button>
-                      <button className="p-2  "> <FaRemoveFormat/></button>
+                   <div className="flex justify-evenly items-center gap-5 w-full ">
+                      <button className="p-2  " onClick={()=>removeFromCart(product._id)}> <MdDelete /></button>
+                      <input type="checkbox" className="checkbox border rounded-lg" />
+                   </div>
                    </div>
                  </div>
                
@@ -149,7 +162,7 @@ const Slider = () => {
       {/* ... (empty cart message or image) */}
     </div>
   )}
-</>
+</div>
   );
 };
 

@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 
 import {  motion } from 'framer-motion'; // Import useAnimation from framer-motion
-import { selectProducts, selectToken, selectUserToken, selectUserid, setProducts } from '../redux/authSlice';
+import { selectIsLoading, selectProducts, selectToken, selectUserToken, selectUserid, setIsLoading, setProducts } from '../redux/authSlice';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FaCartPlus, FaHeart } from 'react-icons/fa';
 import { useParams ,useNavigate} from 'react-router-dom';
@@ -9,22 +9,23 @@ import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
 import toast from "react-hot-toast"
 import axiosInsatnce from '../axiosInstance/instance';
-
-
+import { MdDelete } from 'react-icons/md';
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
+import Loading from '../components/loading';
 
 function Kitchen() {
   const token=useSelector(selectToken)
   const userToken=useSelector(selectUserToken)
   const userId=useSelector(selectUserid)
   const products=useSelector(selectProducts)
+  const isLoading=useSelector(selectIsLoading)
 // const products=useSelector(selectProducts)
   const dispatch=useDispatch()
   
   const nav=useNavigate()
 
-  const handleAddToCart = (productId) => {
-    handleCart(productId)
-  };
+ 
 
 
 
@@ -32,7 +33,7 @@ function Kitchen() {
   useEffect(() => {
     const getAllProducts = async (token) => {
       try {
-        const response = await axiosInsatnce.get(`/products/accessKey=${process.env.REACT_APP_API_KEY}`, {
+        const response = await axiosInsatnce.get(`/products?accessKey=55eebc5550c70b2b7736`, {
          
           headers: {
             Authorization: `Bearer ${token}`,
@@ -57,8 +58,7 @@ function Kitchen() {
   }, [token]);
   const filteredProducts = products.filter(product => product.category === category);
 
-  
-
+    
 const handleCart = async (productId) => {
   try {
     console.log("Adding product to cart...");
@@ -86,8 +86,47 @@ const handleCart = async (productId) => {
     }
   } catch (error) {
     console.error('Error:', error.message);
+   toast.error('already in cart')
   }
 };
+
+const handleWishlist = async (productId) => {
+  try {
+    console.log("Adding product to wishlist...");
+    console.log("Product ID:", productId);
+    console.log("User ID:", userId);
+    console.log("User Token:", userToken);
+
+    const response = await axios.post(
+      `https://ecommerce-api.bridgeon.in/users/${userId}/wishlist/${productId}`,
+      null, // Assuming no data payload, pass null if not needed
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      }
+    );
+
+// Log the response from the server
+
+    if (response.data.status === 'success') {
+      console.log('Product added to wishlist.');
+      toast.success("product added to wishlist  succussfully")
+    } else {
+      console.error('Product addition to wishlist failed. Message:', response.data.message);
+    }
+  } catch (error) {
+    console.error('Error:', error.message);
+    toast.error("already in wishlist")
+   
+  }
+};
+
+const Loadings=(id)=>{
+  setTimeout(() => {
+    dispatch(setIsLoading(false))
+  }, 3000);
+}
 
   return(
     <>
@@ -107,6 +146,7 @@ const handleCart = async (productId) => {
             alignItems: 'center',
             backgroundColor:"black",
             zIndex:800,
+            overflow:"auto"
             
           }}
           
@@ -132,48 +172,38 @@ const handleCart = async (productId) => {
             </div>
             <div className="flex p-8 flex-wrap justify-start gap-6">
             {filteredProducts.map((value,index) => (
-            <div key={index} className='h-56 w-72 flex   flex-col rounded-lg justify-center gap-2 items-start overflow-hidden'
-            >
-             <motion.div
-             initial={{scale:1,opacity:0.8}}
-             whileHover={{scale:1.1,opacity:1}}
-             onClick={()=>nav(`/viewproduct/${value._id}`)}
-            
-             className="h-5/6 w-full "   style={{
-              backgroundImage: `url("${value.image}")`,
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              overflow:"hidden",
-              borderTopRightRadius:"8px",
-              borderTopLeftRadius:"8px",
-              backgroundPosition: 'center',
-              // Transition for box shadow
-            }}
-            
+                <div className="product-card" key={index}>
+   
+                <div onDoubleClick={()=> nav(`/viewproduct/${value._id}`)} alt="Product Name" style={{backgroundImage:`url('${value.image}')`,
+              opacity:0.5}} className="cardimg" > </div>
+                <div className='w-full  h-auto flex flex-col items-start gap-0 text-xs  text-start'>
+    <p className='text-xl  text-opacity-30' style={{
+      fontFamily:" 'Arista Pro Alternate Fat', sans-serif "
+    }}>{value.title}</p>
+   
+    
+      <p>{value.description}</p> <div className='text-xl w-full  flex justify-evenly items-center'><span>₹ {value.price} /- </span>  <button>
+
+<FaHeart  className='text-2xl hover:text-red-500' onClick={()=>handleWishlist(value._id)} />
+</button>
 
 
+<button >
 
-            >
-             
+ <FaCartPlus  className='text-2xl hover:text-orange-500'  onClick={()=>handleCart(value._id)}/></button> </div>
+    <div className='flex justify-center items-center gap-5 '>
      
-           </motion.div>
-                   <div className='font-thin text-yellow-600 w-full p-4 bg-stone-800 text-opacity-60 flex justify-center items-start gap-4 overflow-hidden'><span className='text-2xl flex items-center justify-around '></span >  {value.title}  <FaHeart className='text-xl text-white text-opacity-60'  />
-                   <motion.button  
-                   initial={{scale:1}}
-                    whileHover={{scale:1.2}}
-                   onClick={()=>handleAddToCart(value._id)}
-                    
-                    >
-                   <FaCartPlus/>
+       
+      </div>
+   
 
-                   </motion.button>
-
-                   </div></div>
+  </div>
+              </div>
             ))}
             </div>
           </motion.div>
         </motion.div>
-       
+     
     </>
   )
 }

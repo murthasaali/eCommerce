@@ -71,7 +71,10 @@ const Whislistslider = () => {
       if (status === 'success') {
         const products = data.products[0].wishlist;
         console.log(products);
-        dispatch(setIsLoading(false))
+        setTimeout(() => {
+          dispatch(setIsLoading(false))
+          
+        }, 5000);
         setWishlist(products)
       } else {
         console.log('Failed to fetch wishlist. Message:', message);
@@ -83,6 +86,7 @@ const Whislistslider = () => {
 
   
   useEffect(()=>{
+    
     yourWishlist(userId,token)
   },[userId,token])
   const toggleModal = () => {
@@ -150,7 +154,7 @@ const Whislistslider = () => {
                 <Modal open={modal} onClose={toggleModal} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundImage: "url('cicon.png')", backgroundRepeat: "repeat" }}>
                   <div className="p-8 bg-white rounded-xl">
                     <h2 className="text-2xl mb-4">hi</h2>
-                    <p className="flex justify-center items-center gap-10">Do you want to remove this product <button className="btn" >Yes</button></p>
+                    <p className="flex justify-center items-center gap-10 text-xs">Do you want to remove this product <button className="btn" >Yes</button></p>
                     {/* Additional modal content */}
                   </div>
                 </Modal>

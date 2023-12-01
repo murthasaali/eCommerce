@@ -42,6 +42,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setProducts } from '../redux/authSlice';
 import axiosInsatnce from '../axiosInstance/instance';
 import { selectToken, selectProducts } from '../redux/authSlice';
+import { MdKeyboardVoice } from 'react-icons/md';
+import VoiceSearchExample from '../components/voiceSearch';
 
 function Navber() {
   const [modal, setModal] = useState(false);
@@ -109,6 +111,7 @@ function Navber() {
               placeholder="Search products..."
             />
              <div className="bg-orange-400 opacity-75 h-auto w-3/4 rounded-lg">
+              
               <ul >
              
   {searchQuery.length>0?
@@ -123,6 +126,9 @@ function Navber() {
   }
               </ul>
             </div>
+              <div>
+                <VoiceSearchExample/>
+              </div>
           </div>
         </Modal>
       )}

@@ -2,7 +2,9 @@ import React from 'react'
 
 function Review() {
   return (
-    <div className='p-4 lg:w-1/2 md:w-full flex h-auto flex-col  justify-center  '><div className="chat chat-start">
+    <div className='w-full h-full bg-black'>
+
+    <div className='p-4 lg:w-1/2 md:w-full flex h-auto flex-col  justify-center bg-black '><div className="chat chat-start">
     <div className="chat-image avatar">
       <div className="w-10 rounded-full">
         <img alt="Tailwind CSS chat bubble component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
@@ -32,6 +34,7 @@ function Review() {
       Seen at 12:46
     </div>
   </div></div>
+    </div>
   )
 }
 
