@@ -161,7 +161,7 @@ function Navber() {
     </button>
     <button className="button" >
     
-      <IoCartOutline className='text-main'  onClick={()=>nav('/cart')}/>
+      <IoCartOutline className='text-white'  onClick={()=>nav('/cart')}/>
       
     </button>
     
