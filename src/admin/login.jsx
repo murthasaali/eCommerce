@@ -158,16 +158,20 @@ function Login() {
       flexDirection:"column",
       justifyContent: 'center',
       alignItems: 'center',
-      
+      backgroundColor:"black",
       overflow:"auto",
       zIndex: 999,
     }}
     onClick={() =>dispatch(setIslogin(false))}
   >
-    <p className="qoute" ><span className="text-blue-200 text-6xl text-center">welcome to  </span><br/>
-    <span className="qoute1"  style={{
-      fontSize:"60px"
-    }}>CRUNCHICK</span></p>
+    <p className="font-thin" ><span className="text-blue-200 text-2xl text-center">welcome to  </span><br/>
+    <span className="text-4xl"  
+    style={{
+  fontFamily:" 'Arista Pro Alternate Fat', sans-serif" 
+
+    }}
+    
+    >CRUNCHICK</span></p>
     <motion.div
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}

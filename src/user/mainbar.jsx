@@ -26,6 +26,7 @@ function Mainbar() {
   const token = useSelector(selectToken);
   const isAbout = useSelector(selectIsabout);
   const isLogin = useSelector(selectIslogin);
+  console.log(isLogin)
   const nav = useNavigate();
   const dispatch = useDispatch();
   const isCollection = useSelector(selectIscollection);
@@ -70,6 +71,9 @@ function Mainbar() {
 useEffect(() => {
   
 getAllProducts(token)
+if(!isLogin){
+  nav('/login')
+}
 }, [token])
 const handleSearch = (e) => {
   e.preventDefault()
@@ -78,6 +82,7 @@ const handleSearch = (e) => {
   const results = products.filter((product) => product.title.toLowerCase().includes(text1));
   console.log(results);
   setSearchdata(results);
+  
 };
   return (
     <div className="main-bar">

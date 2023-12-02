@@ -44,6 +44,8 @@ function Registration() {
       const { status, message, data } = response.data;
       if (status === 'success') {
         console.log('Registration successful. Token:', data.token);
+    dispatch(setSignIn(true))
+
       } else {
         console.error('Registration failed. Message:', message);
       }
@@ -56,7 +58,6 @@ function Registration() {
   
   const handleRegistration = (event) => {
     event.preventDefault();
-    dispatch(setSignIn(true))
     // Access the form data and call the registerUser function with the appropriate values
   // const apiKey = apikeys; // Replace with your actual API key
     const username = event.target.username.value;
@@ -87,7 +88,7 @@ function Registration() {
             <motion.label htmlFor="password" variants={item}>Password</motion.label>
             <input type="password" name="password" id="password" placeholder="" />
             <div className="forgot">
-              <p rel="noopener noreferrer">Forgot Password?</p>
+              <p rel="noopener noreferrer" onClick={()=>dispatch(setSignIn(true))}>already have an account?</p>
             </div>
           </div>
           {/* Add additional input fields for registration, if necessary */}
