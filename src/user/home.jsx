@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navber from './navbar'
 import Mainbar from './mainbar'
 import { motion } from 'framer-motion';
@@ -18,8 +18,7 @@ import BasicCard from '../components/card';
 import { FaFacebook, FaInstagram, FaMailBulk, FaPhone, FaWhatsapp } from 'react-icons/fa';
 import { selectIsLoading, setIsLoading } from '../redux/authSlice';
 import Loading from '../components/loading';
-import About from './about';
-
+import { Modal } from '@mui/material';
 const container = {
   hidden: { opacity: 1, scale: 0 },
   visible: {
@@ -42,6 +41,7 @@ const items = {
 function Home() {
   const dispatch=useDispatch()
   console.log("loadingggg")
+  const [offerModal,setOfferModal]=useState(false)
   const isLoading= useSelector(selectIsLoading)
   setTimeout(() => {
     dispatch(setIsLoading(false))
@@ -67,15 +67,36 @@ function Home() {
       {
         isLoading&&(<Loading/>)
       }
-  
+  {
+    offerModal&&
+    <>
+        {offerModal && (
+        <Modal open={offerModal} onClose={()=>setOfferModal(false)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="p-8 bg-stone-300 rounded-xl">
+            <div className="flex flex-col justify-center items-center gap-2 text-blue-600">
+              <span>Apply your coupen code</span>
+              <input type="text"  className='w-48 h-10 rounded-lg bg-black bg-opacity-70 px-2' placeholder='coupen code'/>
+              <button className="btn bg-black"  onClick={()=>setOfferModal(false)}>yes</button>
+            </div>
+          </div>
+        </Modal>
+      )}
+    </>
+  }
     
+
    <div className='w-full h-auto  flex flex-col relative  '>
     <Mainbar/>
     <div className='crme'>
       <div className='w-full  sm:w-4/6 rounded-lg bg-opacity-30 overflow-hidden flex flex-col justify-center items-center lg:p-10 sm:p-8 '>
       
-      <p className=' flex  justify-center items-center text-start xs:flex-col xs:flex w-full h-auto xs:justify-center xs:items-center  md:text-xl  text-xs px-3 text-orange-400 text-opacity-60'>    Enjoy exclusive discounts and irresistible deals on your favorite fast-food orders with our app's special offers!
+      <p className=' flex  justify-center items-center font-thin text-start xs:flex-col xs:flex w-full h-auto xs:justify-center xs:items-center  md:text-xl  text-xs px-3 text-stone-400 text-opacity-60'>    Enjoy exclusive discounts and irresistible deals on your favorite fast-food orders with our app's special offers!
+    <button>
+
+    
+    
     <motion.img
+      onClick={()=>setOfferModal(true)}
       src={box}
       height={"100px"}
       width={"100px"}
@@ -88,7 +109,8 @@ function Home() {
         repeat: Infinity, // Repeat the animation infinitely
         ease: "linear", // Set the easing function for smooth animation
       }}
-    />
+      />
+      </button>
   </p>
 <Carousal />
   </div>
