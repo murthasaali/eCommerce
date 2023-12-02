@@ -62,9 +62,7 @@ function Registration() {
     const username = event.target.username.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
-   if (username===""){
-    setAlert(true)
-   }
+  
 
     registerUser("55eebc5550c70b2b7736", username, email, password);
 

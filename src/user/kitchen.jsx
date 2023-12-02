@@ -3,7 +3,7 @@ import React,{useEffect} from 'react';
 import {  motion } from 'framer-motion'; // Import useAnimation from framer-motion
 import { selectIsLoading, selectProducts, selectToken, selectUserToken, selectUserid, setIsLoading, setProducts } from '../redux/authSlice';
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { FaCartPlus, FaHeart } from 'react-icons/fa';
+import { FaCartPlus, FaHeart, FaLocationArrow } from 'react-icons/fa';
 import { useParams ,useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
@@ -13,7 +13,7 @@ import { MdDelete } from 'react-icons/md';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import Loading from '../components/loading';
-
+import deliveryboy from '../delivery-guy-yellow-uniform-stands-with-fastfood-white-phone-screen-3d-illustration-cartoon-character-express-online-delivery-concept_827810-270-removebg-preview.png'
 function Kitchen() {
   const token=useSelector(selectToken)
   const userToken=useSelector(selectUserToken)
@@ -155,11 +155,11 @@ const Loadings=(id)=>{
             initial={{x: -50, opacity: 1 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ type: 'tween', stiffness: 260, damping: 20 }}
-            className="w-full h-full bg-no-repeat bg-conatin bg-center  flex-col rounded-lg flex justify-start items-start gap-4"
+            className="w-full h-full bg-no-repeat bg-conatin bg-center  flex-col rounded-lg flex justify-start items-start gap-"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-full h-40 bg-black flex justify-start rounded-lg p-8">
-              <p className='text-2xl font-thin text-white text-opacity' >do you want {category} take an order and <span className='text-red-500'  >chill</span></p>
+              <p className=' flex  justify-start items-center  xs:flex-col xs:flex w-full h-auto xs:justify-center xs:items-center  md:text-xl  text-xs px-3 ' >do you want {category} take an order and <span className='text-red-500'  >chill</span></p>
               <motion.button
                 initial={{ rotate: 0 }}
                 whileHover={{ rotate: 90 }}
@@ -170,6 +170,19 @@ const Loadings=(id)=>{
                 <IoIosCloseCircleOutline className='text-white text-5xl'  onClick={()=>nav('/')}/>
               </motion.button>
             </div>
+
+            <div className='flex flex-wrap justify-between md:px-4 px-1 items-center w-full'>
+              <div className='flex justify-center items-center'>
+
+            <motion.img
+            className='h-16 w-16 md:h-24 md:w-24'
+      src={deliveryboy}
+     
+      />
+      <span className='flex items-center gap-6 md:text-xl  text-xs'><FaLocationArrow/>  ordering for collection  from claicut -Fathima tower</span>
+      </div>
+      <span className='flex items-center gap-6 md:text-xl  text-xs'><FaLocationArrow/>  ordering for collection  from claicut -Fathima tower</span>
+      </div>
             <div className="flex p-8 flex-wrap justify-start gap-6">
             {filteredProducts.map((value,index) => (
                 <div className="product-card" key={index}>

@@ -73,7 +73,7 @@ function Home() {
     <div className='crme'>
       <div className='w-full  sm:w-4/6 rounded-lg bg-opacity-30 overflow-hidden flex flex-col justify-center items-center lg:p-10 sm:p-8 '>
       
-      <p class=' flex  justify-center items-center  xs:flex-col xs:flex w-full h-auto xs:justify-center xs:items-center  md:text-xl  text-xs px-3 '>    Enjoy exclusive discounts and irresistible deals on your favorite fast-food orders with our app's special offers!
+      <p className=' flex  justify-center items-center  xs:flex-col xs:flex w-full h-auto xs:justify-center xs:items-center  md:text-xl  text-xs px-3 '>    Enjoy exclusive discounts and irresistible deals on your favorite fast-food orders with our app's special offers!
     <motion.img
       src={box}
       height={"100px"}

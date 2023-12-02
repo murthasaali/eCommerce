@@ -127,7 +127,7 @@ const Slider = () => {
     <div className=" flex  justify-start items-center   w-full h-auto   gap-5 md:text-xl  text-xs px-3 "><span>
       
 {cartItem.length} products are selected 
-      </span> <button className=" px-2 rounded-lg bg-orange-500 hover:text-white hover:text-opacity-50">oreder now </button></div>
+      </span> <button className=" px-2 rounded-lg bg-orange-500 bg-opacity-70 text-white  font-thin hover:text-white hover:text-opacity-50 hover:bg-opacity-50">oreder now </button></div>
     </>
   )}
   {cartItem.length > 0 ? (

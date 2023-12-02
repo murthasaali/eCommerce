@@ -57,7 +57,7 @@ function ViewAproduct() {
 useEffect(()=>{
   getProductById(productId,token)
  
-},[token,productId])
+},[productId])
   
 const handleCart = async (productId) => {
   try {
