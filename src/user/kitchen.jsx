@@ -9,7 +9,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
 import toast from "react-hot-toast"
 import axiosInsatnce from '../axiosInstance/instance';
-import { MdDelete } from 'react-icons/md';
+import coupen from '../hang-tag-isometric-3d-render-icon_47987-9076-removebg-preview.png'
+import { MdLocationOn } from 'react-icons/md';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import Loading from '../components/loading';
@@ -158,8 +159,8 @@ const Loadings=(id)=>{
             className="w-full h-full bg-no-repeat bg-conatin bg-center  flex-col rounded-lg flex justify-start items-start gap-"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-full h-40 bg-black flex justify-start rounded-lg p-8">
-              <p className=' flex  justify-start items-center  xs:flex-col xs:flex w-full h-auto xs:justify-center xs:items-center  md:text-xl  text-xs px-3 ' >do you want {category} take an order and <span className='text-red-500'  >chill</span></p>
+            <div className="w-full h-40 bg-black flex justify-start rounded-lg p-4">
+              <p className=' flex  justify-start items-center  xs:flex-col xs:flex w-full h-auto xs:justify-center xs:items-center  md:text-xl  text-xs px-3 ' >Do you want {category} take an order and <span className='text-red-500'  >chill</span></p>
               <motion.button
                 initial={{ rotate: 0 }}
                 whileHover={{ rotate: 90 }}
@@ -167,11 +168,10 @@ const Loadings=(id)=>{
                 className="absolute top-0 right-0 m-4 cursor-pointer"
              
               >
-                <IoIosCloseCircleOutline className='text-white text-5xl'  onClick={()=>nav('/')}/>
+                <IoIosCloseCircleOutline className='text-white text-xl md:text-4xl'  onClick={()=>nav('/')}/>
               </motion.button>
             </div>
-
-            <div className='flex flex-wrap justify-between md:px-4 px-1 items-center w-full'>
+            <div className='flex flex-wrap justify-evenly md:px-10 px-1 items-center w-full font-thin '>
               <div className='flex justify-center items-center'>
 
             <motion.img
@@ -179,9 +179,25 @@ const Loadings=(id)=>{
       src={deliveryboy}
      
       />
-      <span className='flex items-center gap-6 md:text-xl  text-xs'><FaLocationArrow/>  ordering for collection  from claicut -Fathima tower</span>
+      <span className='flex items-center gap-2 md:text-xl border p-2 rounded-md text-xs'><MdLocationOn/>  ordering for collection  from claicut -Fathima tower</span>
       </div>
-      <span className='flex items-center gap-6 md:text-xl  text-xs'><FaLocationArrow/>  ordering for collection  from claicut -Fathima tower</span>
+      <span className='flex items-center justify-center gap-6 md:text-xl  text-xs'>  
+      <img src={coupen} alt="" className='h-16 w-16 md:h-24 md:w-24' />
+       <span className='border rounded-md p-2'> 
+         apply for coupen now 
+        
+        </span>
+      </span>
+      <div className='flex items-center justify-center w-auto gap-6 md:text-xl font  text-xs'> 
+
+
+        <span className='text-xs md:text-xl'>
+            vagetarain 
+          
+          </span>
+          <input type="checkbox" className="toggle-xs toggle  toggle-success"  />
+      
+      </div>
       </div>
             <div className="flex p-8 flex-wrap justify-start gap-6">
             {filteredProducts.map((value,index) => (

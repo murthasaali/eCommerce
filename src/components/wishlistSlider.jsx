@@ -131,6 +131,10 @@ const Whislistslider = () => {
   </ul>
 </div>
 </div>
+<div className="w-full h-auto flex justify-start md:px-10 text-orange-600 opacity-80  items-center  text-xs md:text-2xl font-thin ">
+        {wishlist.length} products are in your favorites list 😍   do you wanna move to cart?
+</div>
+
 {wishlist.length>0?
 
 (<div>

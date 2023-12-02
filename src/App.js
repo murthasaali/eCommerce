@@ -3,7 +3,6 @@ import './App.css';
 import { Route, Routes} from 'react-router-dom'
 import { BrowserRouter } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-
 import Login from './admin/login';
 import Addproduct from './admin/addproduct';
 import GetAllproduct from './admin/getAllproduct';
@@ -25,7 +24,7 @@ function App() {
    
      <BrowserRouter>
     <Toaster position="left-center"/>  
-    
+
      <Routes>
       <Route path='/'  element={<Home/>}/>
    <Route path='/login'  element={<Login/>}/> 

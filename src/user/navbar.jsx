@@ -44,6 +44,7 @@ import axiosInsatnce from '../axiosInstance/instance';
 import { selectToken, selectProducts } from '../redux/authSlice';
 import { MdKeyboardVoice } from 'react-icons/md';
 import VoiceSearchExample from '../components/voiceSearch';
+import { IoCartOutline, IoCartSharp } from 'react-icons/io5';
 
 function Navber() {
   const [modal, setModal] = useState(false);
@@ -160,7 +161,7 @@ function Navber() {
     </button>
     <button className="button" >
     
-      <BiMessageDetail className='text-main'  onClick={()=>nav('/cart')}/>
+      <IoCartOutline className='text-main'  onClick={()=>nav('/cart')}/>
       
     </button>
     

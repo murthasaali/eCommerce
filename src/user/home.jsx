@@ -18,6 +18,7 @@ import BasicCard from '../components/card';
 import { FaFacebook, FaInstagram, FaMailBulk, FaPhone, FaWhatsapp } from 'react-icons/fa';
 import { selectIsLoading, setIsLoading } from '../redux/authSlice';
 import Loading from '../components/loading';
+import About from './about';
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -73,7 +74,7 @@ function Home() {
     <div className='crme'>
       <div className='w-full  sm:w-4/6 rounded-lg bg-opacity-30 overflow-hidden flex flex-col justify-center items-center lg:p-10 sm:p-8 '>
       
-      <p className=' flex  justify-center items-center  xs:flex-col xs:flex w-full h-auto xs:justify-center xs:items-center  md:text-xl  text-xs px-3 '>    Enjoy exclusive discounts and irresistible deals on your favorite fast-food orders with our app's special offers!
+      <p className=' flex  justify-center items-center text-start xs:flex-col xs:flex w-full h-auto xs:justify-center xs:items-center  md:text-xl  text-xs px-3 text-orange-400 text-opacity-60'>    Enjoy exclusive discounts and irresistible deals on your favorite fast-food orders with our app's special offers!
     <motion.img
       src={box}
       height={"100px"}
@@ -146,11 +147,11 @@ function Home() {
   <p>contact us</p>
   <div className='w-full flex justify-between items-center p-4 h-40 '>
 
-    <FaWhatsapp  className='text-2xl '/>
-    <FaInstagram  className='text-2xl '/>
-    <FaPhone  className='text-2xl '/>
-    <FaMailBulk  className='text-2xl'/>
-    <FaFacebook  className='text-2xl'/>
+    <FaWhatsapp  className='text-2xl hover:text-green-600 opacity-50'/>
+    <FaInstagram  className='text-2xl hover:text-pink-700 opacity-40'/>
+    <FaPhone  className='text-2xl  hover:text-blue-700 opacity-50'/>
+    <FaMailBulk  className='text-2xl hover:text-red-600 opacity-50'/>
+    <FaFacebook  className='text-2xl   hover:text-blue-700 opacity-50'/>
 
       </div></div>
     </div>
@@ -179,6 +180,18 @@ function Home() {
     <BasicCard/>
 
    </div>
+   <section className='w-full h-auto bg-black flex flex-col justify-center mb-36 items-center'>
+    <div className='flex justify-center w-full  '>
+    <span  
+    style={{
+      fontFamily:""
+    }}
+    >CRUNCHICK </span>
+
+
+    </div>
+    
+   </section>
    
    <Navber/>
     </div>

@@ -1,10 +1,12 @@
 import React from 'react'
 import {  useDispatch, useSelector } from 'react-redux'
-import {  selectIsLoading, selectIscart, setIsLoading, } from '../redux/authSlice'
+import {  selectIsLoading, selectIscart, selectIslogin, setIsLoading, } from '../redux/authSlice'
 import box from '../offerbox.png'
 import delivery from "../delvery.png"
+import emptyCart from '../3d-hand-hold-smartphone-with-authentication-form-removebg-preview.png'
+
 import { motion } from 'framer-motion'
-import { FaClosedCaptioning, FaHeart } from 'react-icons/fa'
+import { FaBackward, FaHome } from 'react-icons/fa'
 import { BiSolidOffer } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../components/loading';
@@ -22,6 +24,7 @@ function Cart() {
 
   const nav = useNavigate()
   const isLoading=useSelector(selectIsLoading)
+  const isLogin=useSelector(selectIslogin)
   const dispatch=useDispatch()
   setTimeout(() => {
     dispatch(setIsLoading(false))
@@ -46,7 +49,11 @@ function Cart() {
     // height:100%;
     // background-color: #000000;
     >
-       <p className="lg:text-6xl text-4xl w-full  font-thin flex justify-evenly items-end">cart  <span><FaHeart className='text-2xl' onClick={()=>nav('/')}/></span></p>
+       <div className="lg:text-6xl text-4xl w-full  text-orange-500 text-opacity-60 font-thin flex justify-evenly items-center"
+       style={{
+        fontFamily:" 'Arista Pro Alternate Fat', sans-serif "
+       }}
+       > <span> CART</span><FaHome className='text-2xl' onClick={()=>nav('/')}/></div>
        <div className='flex flex-col w-full justify-center items-center'>
        <p class=' flex  justify-center items-center  xs:flex-col xs:flex w-full h-auto xs:justify-center xs:items-center  md:text-xl  text-xs px-3 '>  <p className='text-start'>Enjoy exclusive discounts and irresistible deals on your favorite fast-food orders with our app's special offers!</p>  
     <motion.img
@@ -64,8 +71,24 @@ function Cart() {
       }}
     />
   </p>
+  {
+    isLogin?<>
+    <Slider/>
+    
+    </>:
+    <div className="text-white flex w-full h-full flex-col font-thin justify-center items-center">
+    <motion.img
+      src={emptyCart}
+      height={"200px"}
+      width={"200px"}
+      alt=""
+    />
+    <p className='text-orange-600'>Please Login  and explore 😉</p>
+  </div>
 
-       <Slider/>
+  }
+
+
        </div>
 
       <Navber/>

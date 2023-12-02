@@ -5,7 +5,6 @@ import {  useSelector } from "react-redux";
 import {toast} from 'react-hot-toast'
 import axios from "axios";
 import { Modal } from "@mui/material";
-import emptyCart from '../emptycart.png'
 
 import {motion} from 'framer-motion'
 import {

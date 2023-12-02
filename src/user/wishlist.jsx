@@ -18,7 +18,12 @@ function Wishlist() {
     // height:100%;
     // background-color: #000000;
     >
-      <p className="lg:text-6xl text-4xl font-thin">Wishlist</p>
+      <p className="lg:text-6xl text-4xl font-thin"  
+     style={{
+      fontFamily:" 'Arista Pro Alternate Fat', sans-serif "
+     }} 
+      
+      >WISHLIST</p>
       <div className='w-full md:3/4 h-auto  '>
 
 <Whislistslider/>
