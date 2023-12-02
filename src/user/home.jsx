@@ -102,7 +102,7 @@ function Home() {
 {menucard.map((item, index) => (
   <motion.div className='flex justify-center h-auto gap-1 items-center flex-col w-auto' key={index}  onClick={() => nav(item.nav)}  variants={items}>
     <motion.div
-      className=" md:h-24 md:w-24 h-8 w-8  md:flex overflow-hidden"
+      className=" md:h-24 md:w-24 h-10 w-10  md:flex overflow-hidden"
        
     
       // You might need to adjust this part according to your animation
