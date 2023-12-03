@@ -16,7 +16,7 @@ import pizza from '../italian-pizza-fast-food-icon-isolated-3d-render-illustrati
 import shavaya from '../realistic-illustration-roasted-turkey-grilled-chicken-with-slices-spices-vegetable_1441-1865-removebg-preview.png'
 import BasicCard from '../components/card';
 import { FaFacebook, FaInstagram, FaMailBulk, FaPhone, FaWhatsapp } from 'react-icons/fa';
-import { selectIsLoading, setIsLoading } from '../redux/authSlice';
+import { selectIsLoading, selectIslogin, setIsLoading } from '../redux/authSlice';
 import Loading from '../components/loading';
 import { Modal } from '@mui/material';
 const container = {
@@ -43,6 +43,8 @@ function Home() {
   console.log("loadingggg")
   const [offerModal,setOfferModal]=useState(false)
   const isLoading= useSelector(selectIsLoading)
+  const isLogin= useSelector(selectIslogin)
+  console.log(isLogin)
   setTimeout(() => {
     dispatch(setIsLoading(false))
   }, 3000);
@@ -66,6 +68,15 @@ function Home() {
     >
       {
         isLoading&&(<Loading/>)
+      }
+      {
+        !isLogin&&(
+          <>
+         
+          
+          
+          </>
+        )
       }
   {
     offerModal&&

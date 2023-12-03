@@ -8,15 +8,30 @@ import DotBadge from '../components/badge';
 import { useNavigate } from 'react-router-dom';
 import About from './about';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsabout, selectIscollection, setProducts, setIscart, clearUserToken, selectIslogin, clearIslogin, clearUserId, selectToken, selectProducts } from '../redux/authSlice';
+import { selectIsabout, selectIscollection, setProducts, setIscart, clearUserToken, selectIslogin, clearIslogin, clearUserId, selectToken, selectProducts, setIslogin } from '../redux/authSlice';
 import { setIsabout } from '../redux/authSlice';
 import Offer from './offer';
 import { Avatar } from '@mui/material';
 import toast from 'react-hot-toast';
 import axiosInsatnce from '../axiosInstance/instance';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import loginpic from '../3d-hand-hold-smartphone-with-authentication-form-removebg-preview.png'
+import Typography from '@mui/material/Typography';
 const scaleVariants = {
   initial: { scale: 1 },
   hover: { scale: 1.1, transition: { duration: 0.3 } },
+};
+const style = {
+  position: 'absolute' ,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
 };
 
 function Mainbar() {
@@ -71,9 +86,7 @@ function Mainbar() {
 useEffect(() => {
   
 getAllProducts(token)
-if(!isLogin){
-  nav('/login')
-}
+
 }, [token])
 const handleSearch = (e) => {
   e.preventDefault()
@@ -111,18 +124,7 @@ const handleSearch = (e) => {
           </motion.button>
         </ul>
       </div>
-      {loginModal && (
-        <Modal open={loginModal} className='bg-black bg-opacity-60' onClose={toggllogin} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div className="p-8  h-full w-full rounded-xl ">
-         <Login />
-
-          </div>
-        </Modal>
-          // <Modal open={loginModal}  onClose={toggllogin} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        
-           
-        // </Modal>
-      )}
+     
       {/* User-related Elements */}
       <div className="flex gap-4 justify-center items-center text-stone-300">
         <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={() => setIsSearch(true)}>
@@ -133,7 +135,7 @@ const handleSearch = (e) => {
         </motion.button>
         {!isLogin ? (
           <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover">
-            <FaUserPlus title="login" onClick={() => setloginModal(true)} />
+            <FaUserPlus title="login" onClick={()=>setloginModal(true)} />
           </motion.button>
         ) : (
           <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover">
@@ -186,9 +188,6 @@ const handleSearch = (e) => {
         </Modal>
       )}
 
-      {isAbout && <About />}
-   
-      {!isLogin && <Offer />}
 
       {modal && (
         <Modal open={modal} onClose={toggleModal} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -198,6 +197,25 @@ const handleSearch = (e) => {
             </p>
           </div>
         </Modal>
+      )}
+      {loginModal && (
+         <div>
+        
+         <Modal
+           open={()=>setloginModal(true)}
+           onClose={()=>setloginModal(false)}
+           aria-labelledby="modal-modal-title"
+           aria-describedby="modal-modal-description"
+         >
+           <Box sx={style}>
+             <img src={loginpic} alt="" className='w-24 h-24' />
+             <Typography id="modal-modal-title" variant="h6" component="h2">
+               Text in a modal
+             </Typography>
+           </Box>
+         </Modal>
+       </div>
+       
       )}
 
   
