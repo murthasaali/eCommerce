@@ -60,9 +60,9 @@ function Registration() {
     event.preventDefault();
     // Access the form data and call the registerUser function with the appropriate values
   // const apiKey = apikeys; // Replace with your actual API key
-    const username = event.target.username.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+    const username = event.target.username.name;
+    const email = event.target.email.name;
+    const password = event.target.password.name;
   
 
     registerUser("55eebc5550c70b2b7736", username, email, password);
@@ -82,7 +82,8 @@ function Registration() {
           </div>
           <div className="flex flex-col items-start ">
             <motion.label className='font-thin' variants={item}>Username</motion.label>
-            <input type="email" name="email" id="email" placeholder="email "  className='bg-black px-2  rounded-lg w-full h-10'/>
+<input type="email" name="email" id="email" placeholder="email "  className='bg-black px-2  rounded-lg w-full h-10'/>
+
           </div>
           <div className="flex flex-col items-start ">
             <motion.label className='font-thin' variants={item}>password</motion.label>
