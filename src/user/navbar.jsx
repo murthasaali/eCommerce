@@ -36,7 +36,7 @@ import { motion } from 'framer-motion';
 import { BiBriefcaseAlt2, BiMessageDetail } from 'react-icons/bi';
 import { AiOutlineUser } from 'react-icons/ai';
 import { Modal } from '@mui/material';
-import { LuHeartHandshake } from 'react-icons/lu';
+import { LuHeart, LuHeartHandshake } from 'react-icons/lu';
 import { FaSearch } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProducts } from '../redux/authSlice';
@@ -137,12 +137,13 @@ function Navber() {
       <FaSearch onClick={()=>setModal(true)} className='text-main'/>
     </button>
     <button className="button" >
-      
-     <AiOutlineUser className='text-main'/>
-    </button>
+    
+    <LuHeart className='text-main' onClick={()=>nav('/wishlist')}/>
+    
+  </button>
     <motion.button
        initial={{ scale: 0 }}
-       whileHover={{ rotate: 160 }}
+       whileHover={{ scale: 1.1 }}
        animate={{ rotate: 360, scale: 1 }}
        transition={{
          type: "spring",
@@ -155,10 +156,10 @@ function Navber() {
     </motion.button>
 
     <button className="button" >
-    
-      <LuHeartHandshake className='text-main' onClick={()=>nav('/wishlist')}/>
       
-    </button>
+      <AiOutlineUser className='text-main'/>
+     </button>
+   
     <button className="button" >
     
       <IoCartOutline className='text-white'  onClick={()=>nav('/cart')}/>

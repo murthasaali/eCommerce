@@ -200,7 +200,7 @@
 
 .button-container {
   display: flex;
-  background-color: white;
+  background-color: rgb(0, 0, 0);
   width: 320px;
   height: 60px;
   align-items: center;
