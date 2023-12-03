@@ -27,13 +27,30 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+const textVariants = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: {
+      delay: 0.2,
+      staggerChildren: 0.1, // Stagger each letter
+    },
+  },
+};
+
+const letterVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+};
+
+const text = "Order Processing....";
 
 const Slider = () => {
 
   
   
   const [isOrder,setOrder]=useState(false)
-
+  const [tick,setTick]=useState(false)
   const userId = useSelector(selectUserid);
   const userToken = useSelector(selectUserToken);
   const isLogin=useSelector(selectIslogin)
@@ -106,6 +123,21 @@ const Slider = () => {
   const toggleModal = () => {
     setModal(!modal);
   };
+  const [orderText, setOrderText] = useState('Order Processing....');
+
+  const handleOrder = () => {
+    setOrder(true);
+    setTimeout(() => {
+      setOrderText("order placed")
+      setTimeout(() => {
+        
+        setOrder(false)
+        setOrderText("order processing....")
+      }, 2000);
+    }, 5000);
+    
+  };
+
   
   return (
 <div className="w-full h-full overflow-y-auto flex flex-col justify-center items-center gap-6 ">
@@ -115,7 +147,7 @@ const Slider = () => {
     <div className=" flex  justify-start items-center   w-full h-auto   gap-5 md:text-xl  text-xs px-3 "><span>
       
 {cartItem.length} products are selected 
-      </span> <button onClick={()=>setOrder(true)} className=" px-2 rounded-lg bg-orange-500 bg-opacity-70 text-white  font-thin hover:text-white hover:text-opacity-50 hover:bg-opacity-50">oreder now </button></div>
+      </span> <button onClick={handleOrder} className=" px-2 rounded-lg bg-orange-500 bg-opacity-70 text-white  font-thin hover:text-white hover:text-opacity-50 hover:bg-opacity-50">oreder now </button></div>
     </>
   )}
   {cartItem.length > 0 ? (
@@ -175,9 +207,29 @@ const Slider = () => {
               }}
              />
              <Typography id="modal-modal-title" variant="h6" component="h2">
-               <p className="flex justify-center items-center gap-10 text-red-600">
-          <span  className="  bg-black btn   " >order processing....</span >
-            </p>
+               <div className=" flex flex-col justify-center items-center gap-1 w-full">
+               <motion.div
+      className="bg-black btn"
+      variants={textVariants}
+      initial="initial"
+      animate="animate"
+    >
+      {
+      orderText.endsWith(".")?
+     ( orderText.split('').map((letter, index) => (
+        <motion.span key={index} variants={letterVariants}>
+          {letter}
+        </motion.span>
+      ))
+      ):
+      (
+        <span className="text-green-500">{orderText}</span>
+      )
+      
+      }
+    </motion.div>
+   
+           </div>
              </Typography>
            </Box>
 
