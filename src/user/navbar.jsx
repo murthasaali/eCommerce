@@ -33,20 +33,22 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router-dom'
 import { motion } from 'framer-motion';
-import { BiBriefcaseAlt2, BiMessageDetail } from 'react-icons/bi';
+import { BiBriefcaseAlt2, BiMessage, BiMessageDetail } from 'react-icons/bi';
 import { AiOutlineUser } from 'react-icons/ai';
 import { Modal } from '@mui/material';
-import { LuHeart, LuHeartHandshake } from 'react-icons/lu';
+import { LuHeart, LuHeartHandshake, LuLogOut } from 'react-icons/lu';
 import { FaSearch } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProducts } from '../redux/authSlice';
+import { selectIslogin, setProducts } from '../redux/authSlice';
 import axiosInsatnce from '../axiosInstance/instance';
 import { selectToken, selectProducts } from '../redux/authSlice';
-import { MdKeyboardVoice } from 'react-icons/md';
+import { MdKeyboardVoice, MdLogin } from 'react-icons/md';
 import VoiceSearchExample from '../components/voiceSearch';
 import { IoCartOutline, IoCartSharp } from 'react-icons/io5';
+import { SiMessenger } from 'react-icons/si';
 
 function Navber() {
+  const isLogin=useSelector(selectIslogin)
   const [modal, setModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState([]);
   const token = useSelector(selectToken);
@@ -134,7 +136,7 @@ function Navber() {
         </Modal>
       )}
     <button className="button"  >
-      <FaSearch onClick={()=>setModal(true)} className='text-main'/>
+      <BiMessage  className='text-main'/>
     </button>
     <button className="button" >
     
@@ -155,10 +157,21 @@ function Navber() {
      
     </motion.button>
 
+
+{
+  isLogin?
+
+
     <button className="button" >
       
-      <AiOutlineUser className='text-main'/>
+      <AiOutlineUser className='text-main' />
+     </button>:
+      <button className="button" >
+      
+      <MdLogin className='text-main'  onClick={nav('/login')} title='login'/>
      </button>
+
+}
    
     <button className="button" >
     
