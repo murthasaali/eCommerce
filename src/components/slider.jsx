@@ -4,46 +4,35 @@ import "react-multi-carousel/lib/styles.css";
 import {  useSelector } from "react-redux";
 import {toast} from 'react-hot-toast'
 import axios from "axios";
-import { Modal } from "@mui/material";
 import emptyCart from '../emptycart.png'
 import {motion} from 'framer-motion'
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  
-} from "mdb-react-ui-kit";
+import { Modal,Box,Typography} from '@mui/material';
+import loginpic from '../delivering.png'
+
 import { selectIslogin, selectToken, selectUserToken } from "../redux/authSlice";
 import { selectUserid } from "../redux/authSlice";
 import {  FaDropbox, FaRemoveFormat, FaSearch } from "react-icons/fa";
 // import { selectUserid } from "../redux/authSlice";
-
 import { MdDelete } from "react-icons/md";
 import axiosInsatnce from "../axiosInstance/instance";
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-    slidesToSlide: 1, // optional, default to 1.
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 768 },
-    items: 3,
-    slidesToSlide: 1, // optional, default to 1.
-  },
-  mobile: {
-    breakpoint: { max: 767, min: 464 },
-    items: 2,
-    slidesToSlide: 1, // optional, default to 1.
-  },
+
+const style = {
+  position: 'absolute' ,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 200,
+  bgcolor: 'black',
+  boxShadow: '2px 5px 10px 5px white',
+  boxShadow: 24,
+  p: 4,
 };
+
 const Slider = () => {
 
   
   
+  const [isOrder,setOrder]=useState(false)
 
   const userId = useSelector(selectUserid);
   const userToken = useSelector(selectUserToken);
@@ -126,7 +115,7 @@ const Slider = () => {
     <div className=" flex  justify-start items-center   w-full h-auto   gap-5 md:text-xl  text-xs px-3 "><span>
       
 {cartItem.length} products are selected 
-      </span> <button className=" px-2 rounded-lg bg-orange-500 bg-opacity-70 text-white  font-thin hover:text-white hover:text-opacity-50 hover:bg-opacity-50">oreder now </button></div>
+      </span> <button onClick={()=>setOrder(true)} className=" px-2 rounded-lg bg-orange-500 bg-opacity-70 text-white  font-thin hover:text-white hover:text-opacity-50 hover:bg-opacity-50">oreder now </button></div>
     </>
   )}
   {cartItem.length > 0 ? (
@@ -169,6 +158,31 @@ const Slider = () => {
         </div>
     </div>
   )}
+  {
+    isOrder&&
+    <Modal open={isOrder} onClose={()=>setOrder(false)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Box sx={style}
+           className="shadow-md rounded-lg flex flex-col justify-center items-center shadow-md-top shadow-md-right shadow-md-bottom shadow-md-left"
+           >
+             <motion.img src={loginpic} alt="" className='w-32 h-20' 
+               animate={{
+                x: [0, 6, 0], // Move the image up and down in a loop
+              }}
+              transition={{
+                duration: 4, // Set the duration of each cycle (in seconds)
+                repeat: Infinity, // Repeat the animation infinitely
+                ease: "linear", // Set the easing function for smooth animation
+              }}
+             />
+             <Typography id="modal-modal-title" variant="h6" component="h2">
+               <p className="flex justify-center items-center gap-10 text-red-600">
+          <span  className="  bg-black btn   " >order processing....</span >
+            </p>
+             </Typography>
+           </Box>
+
+  </Modal>
+  }
 </div>
   );
 };
