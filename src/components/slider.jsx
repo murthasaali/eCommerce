@@ -5,7 +5,7 @@ import {  useSelector } from "react-redux";
 import {toast} from 'react-hot-toast'
 import axios from "axios";
 import { Modal } from "@mui/material";
-
+import emptyCart from '../emptycart.png'
 import {motion} from 'framer-motion'
 import {
   MDBContainer,
@@ -119,7 +119,7 @@ const Slider = () => {
   };
   
   return (
-<div className="w-full h-full flex flex-col justify-center items-center gap-6 ">
+<div className="w-full h-full overflow-y-auto flex flex-col justify-center items-center gap-6 ">
  
   {cartItem.length>0&&(
     <>
@@ -158,7 +158,15 @@ const Slider = () => {
     </div>
   ) : (
     <div className="text-white flex w-full h-full flex-col font-thin justify-center items-center">
-      {/* ... (empty cart message or image) */}
+       <div className="text-white flex w-full h-full flex-col font-thin justify-center items-center">
+          <motion.img
+            src={emptyCart}
+            height={"200px"}
+            width={"200px"}
+            alt=""
+          />
+          <p>Your whishlist is empty</p>
+        </div>
     </div>
   )}
 </div>

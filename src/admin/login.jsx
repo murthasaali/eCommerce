@@ -33,7 +33,7 @@ const container = {
 
 function Login() {
   const[isload,setIsLoad]=useState(false)
-  
+    const  nav=useNavigate()  
   const isSignIn = useSelector((state) => state.auth.isSignIn);
 
   const userId=useSelector(selectUserid)
@@ -165,13 +165,14 @@ function Login() {
     onClick={() =>dispatch(setIslogin(false))}
   >
     <p className="font-thin" ><span className="text-blue-200 text-2xl text-center">welcome to  </span><br/>
-    <span className="text-4xl"  
+    <button className="text-4xl"  
     style={{
   fontFamily:" 'Arista Pro Alternate Fat', sans-serif" 
 
     }}
+    onClick={()=>nav('/')}
     
-    >CRUNCHICK</span></p>
+    >CRUNCHICK</button></p>
     <motion.div
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}

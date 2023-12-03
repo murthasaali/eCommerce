@@ -28,8 +28,8 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: 'black',
+  boxShadow: '2px 5px 10px 5px white',
   boxShadow: 24,
   p: 4,
 };
@@ -207,10 +207,23 @@ const handleSearch = (e) => {
            aria-labelledby="modal-modal-title"
            aria-describedby="modal-modal-description"
          >
-           <Box sx={style}>
-             <img src={loginpic} alt="" className='w-24 h-24' />
+           <Box sx={style}
+           className="shadow-md rounded-lg flex flex-col justify-center items-center shadow-md-top shadow-md-right shadow-md-bottom shadow-md-left"
+           >
+             <motion.img src={loginpic} alt="" className='w-24 h-24' 
+               animate={{
+                y: [0, 10, 0], // Move the image up and down in a loop
+              }}
+              transition={{
+                duration: 4, // Set the duration of each cycle (in seconds)
+                repeat: Infinity, // Repeat the animation infinitely
+                ease: "linear", // Set the easing function for smooth animation
+              }}
+             />
              <Typography id="modal-modal-title" variant="h6" component="h2">
-               Text in a modal
+               <p className="flex justify-center items-center gap-10 text-red-600">
+          <button className="border  bg-black btn   " onClick={()=>nav("/login")}>Login</button>
+            </p>
              </Typography>
            </Box>
          </Modal>

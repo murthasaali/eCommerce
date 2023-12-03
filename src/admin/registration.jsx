@@ -75,22 +75,24 @@ function Registration() {
 
         <motion.p variants={container} className="title">Registration</motion.p>
 
-        <form className="form" onSubmit={handleRegistration}>
-          <div className="input-group">
-            <motion.label htmlFor="username" variants={item}>Username</motion.label>
-            <input type="text" name="username" id="username" placeholder="" />
+        <form className="h-auto flex justify-center flex-col p-2 font-thin" onSubmit={handleRegistration}>
+          <div className="flex flex-col items-start ">
+            <motion.label className='font-thin' variants={item}>Username</motion.label>
+            <input type="text" name="username" id="username" placeholder="name "  className='bg-black px-2  rounded-lg w-full h-10'/>
           </div>
-          <div className="input-group">
-            <motion.label htmlFor="email" variants={item}>Email</motion.label>
-            <input type="email" name="email" id="email" placeholder="" />
+          <div className="flex flex-col items-start ">
+            <motion.label className='font-thin' variants={item}>Username</motion.label>
+            <input type="email" name="email" id="email" placeholder="email "  className='bg-black px-2  rounded-lg w-full h-10'/>
           </div>
-          <div className="input-group">
-            <motion.label htmlFor="password" variants={item}>Password</motion.label>
-            <input type="password" name="password" id="password" placeholder="" />
-            <div className="forgot">
+          <div className="flex flex-col items-start ">
+            <motion.label className='font-thin' variants={item}>password</motion.label>
+            <input type="password" name="password" id="password" placeholder="password "  className='bg-black px-2  rounded-lg w-full h-10'/>
+
+            <button className="forgot">
               <p rel="noopener noreferrer" onClick={()=>dispatch(setSignIn(true))}>already have an account?</p>
-            </div>
-          </div>
+            </button>
+</div>
+        
           {/* Add additional input fields for registration, if necessary */}
           <button className="sign" type="submit">Register</button>
           {alert&&
