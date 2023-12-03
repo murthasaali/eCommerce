@@ -43,8 +43,6 @@ function Home() {
   console.log("loadingggg")
   const [offerModal,setOfferModal]=useState(false)
   const isLoading= useSelector(selectIsLoading)
-  const isLogin= useSelector(selectIslogin)
-  console.log(isLogin)
   setTimeout(() => {
     dispatch(setIsLoading(false))
   }, 3000);
@@ -69,15 +67,7 @@ function Home() {
       {
         isLoading&&(<Loading/>)
       }
-      {
-        !isLogin&&(
-          <>
-         
-          
-          
-          </>
-        )
-      }
+ 
   {
     offerModal&&
     <>

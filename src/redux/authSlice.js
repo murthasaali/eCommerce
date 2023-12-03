@@ -8,12 +8,13 @@ export const authSlice = createSlice({
     userToken:localStorage.getItem('usertoken')|| null,
     isSignIn: true,
     isAbout:false,
-    isLogin:localStorage.getItem('login')|| false,
     isCollection:false,
     isCart:false,
     userId:localStorage.getItem('userId')||null,
     isLoading:true,
     wishlist:localStorage.getItem('wishlist')||[],
+    isLogin: localStorage.getItem('isLogin') === 'true', // Retrieve boolean value from localStorage
+
   },
   reducers: {
     setToken: (state, action) => {
@@ -47,10 +48,8 @@ export const authSlice = createSlice({
     setIsabout: (state, action) => {
       state.isAbout = action.payload;
     },
-    setIslogin: (state, action) => {
-      state.isLogin = action.payload;
-      localStorage.setItem('login',action.payload)
-    },
+   
+  
     setIscollection: (state, action) => {
       state.isCollection = action.payload;
     },
@@ -65,10 +64,15 @@ export const authSlice = createSlice({
       state.userToken = null;
       localStorage.removeItem('userId'); // Remove the user token from local storage
     },
-    clearIslogin:(state) => {
-      state.isLogin = false;
-      localStorage.removeItem('login'); // Remove the user token from local storage
+    setIslogin: (state, action) => {
+      state.isLogin = action.payload;
+      localStorage.setItem('isLogin', action.payload.toString()); // Store as a string in localStorage
     },
+    clearIslogin: (state) => {
+      state.isLogin = false;
+      localStorage.removeItem('isLogin');
+    },
+  
   }
 });
 
