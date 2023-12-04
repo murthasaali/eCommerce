@@ -17,9 +17,14 @@ import Cart from './user/cart';
 import Kitchen from './user/kitchen';
 import Wishlist from './user/wishlist';
 import Account from './user/account';
+import { selectIsAdmin, selectToken } from './redux/authSlice';
+import {useSelector} from 'react-redux'
+import Basic from './user/fromik';
 
 
 function App() {
+  const isAdmin=useSelector(selectIsAdmin)
+  
   return (
     <div className="App">
    
@@ -27,25 +32,38 @@ function App() {
     <Toaster position="top-center"/>  
 
      <Routes>
+
+   
+      
       <Route path='/'  element={<Home/>}/>
    <Route path='/login'  element={<Login/>}/> 
    <Route path='/reg'  element={<Registration/>}/> 
-      <Route path='/admin'  element={<Admin/>}/>
       <Route path='/cart'  element={<Cart/>}/>
       <Route path='/kitchen/:category'  element={<Kitchen/>}/>
       <Route path='/wishlist'  element={<Wishlist/>}/>
       <Route path='/account'  element={<Account/>}/>
       <Route path='/about'  element={<About/>}/>
-      <Route path='/admin/user' element={<Admin />} />
-            <Route path='/admin/sales' element={<Admin />} />
-            <Route path='/admin/prosec' element={<Admin />} />
-            <Route path='/admin/add' element={<Admin />} />
+      <Route path='/form'  element={<Basic/>}/>
+     
       <Route path='/addproduct'  element={<Addproduct/>}/>
       <Route path='/getallpro'  element={<GetAllproduct/>}/>
       <Route path='/getapro'  element={<GetaProduct/>}/>
       <Route path='/getallusers'  element={<GetAllUsers/>}/>
       <Route path='/viewproduct/:productId' element={<ViewAproduct />} />
 
+      {
+        isAdmin?<>
+      <Route path='/admin'  element={<Admin/>}/>
+      <Route path='/admin/user' element={<Admin />} />
+            <Route path='/admin/sales' element={<Admin />} />
+            <Route path='/admin/prosec' element={<Admin />} />
+            <Route path='/admin/add' element={<Admin />} />
+        
+        
+        </>:
+        ""
+        
+      }
       
            </Routes>
      

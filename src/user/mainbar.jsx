@@ -18,6 +18,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import loginpic from '../3d-hand-hold-smartphone-with-authentication-form-removebg-preview.png'
 import Typography from '@mui/material/Typography';
+import shakehand from '../two-doctors-handshake-3d-hands-icon_107791-16601__1_-removebg-preview.png'
 const scaleVariants = {
   initial: { scale: 1 },
   hover: { scale: 1.1, transition: { duration: 0.3 } },
@@ -43,6 +44,7 @@ function Mainbar() {
   const token = useSelector(selectToken);
   const isAbout = useSelector(selectIsabout);
   const isLogin = useSelector(selectIslogin);
+  
   console.log(isLogin)
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -156,7 +158,7 @@ const toLogin=()=>{
           <DotBadge />
         </motion.button>
         {isLogin && (
-          <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover">
+          <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={()=>nav("/account")}>
             <Avatar>
               <FaUser />
             </Avatar>
@@ -198,10 +200,17 @@ const toLogin=()=>{
 
       {modal && (
         <Modal open={modal} onClose={toggleModal} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div className="p-8 bg-stone-300 rounded-xl">
+          <div className="p-8 bg-stone-800 opacity-95 rounded-xl">
+           
             <p className="flex justify-center items-center gap-10 text-red-600">
               do you want to logout <button className="btn" onClick={handleLogout}>yes</button>
             </p>
+            <img src={shakehand} alt="" style={
+              {
+                width:"150px",
+                height:"80px",
+              }
+            }/>
           </div>
         </Modal>
       )}

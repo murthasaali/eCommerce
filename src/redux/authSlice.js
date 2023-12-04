@@ -14,6 +14,7 @@ export const authSlice = createSlice({
     isLoading:true,
     wishlist:localStorage.getItem('wishlist')||[],
     isLogin: localStorage.getItem('isLogin') === 'true', // Retrieve boolean value from localStorage
+    isAdmin: localStorage.getItem('isAdmin') === 'true', // Retrieve boolean value from localStorage
 
   },
   reducers: {
@@ -68,15 +69,23 @@ export const authSlice = createSlice({
       state.isLogin = action.payload;
       localStorage.setItem('isLogin', action.payload.toString()); // Store as a string in localStorage
     },
+    setIsAdmin: (state, action) => {
+      state.isAdmin = action.payload;
+      localStorage.setItem('isAdmin', action.payload.toString()); // Store as a string in localStorage
+    },
     clearIslogin: (state) => {
       state.isLogin = false;
       localStorage.removeItem('isLogin');
+    },
+    clearIsAdmin: (state,action) => {
+      state.isAdmin = action.payload;
+      localStorage.setItem('isAdmin',action.payload.toString());
     },
   
   }
 });
 
-export const {setIscollection, setToken, setUserToken, setProducts, setSignIn ,setIsabout,setIslogin,setIscart,setUserid,clearUserToken,clearIslogin ,clearUserId ,setIsLoading,setWishlist} = authSlice.actions;
+export const {setIsAdmin,clearIsAdmin,collection, setToken, setUserToken, setProducts, setSignIn ,setIsabout,setIslogin,setIscart,setUserid,clearUserToken,clearIslogin ,clearUserId ,setIsLoading,setWishlist} = authSlice.actions;
 
 export const selectToken = (state) => state.auth.token;
 export const selectUserToken = (state) => state.auth.userToken;
@@ -88,5 +97,6 @@ export const selectIscollection = (state) => state.auth.isCollection;
 export const selectIscart = (state) => state.auth.isCart;
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectUserid = (state) => state.auth.userId;
+export const selectIsAdmin = (state) => state.auth.isAdmin;
 
 export default authSlice.reducer;

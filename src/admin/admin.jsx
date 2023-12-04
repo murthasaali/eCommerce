@@ -12,6 +12,9 @@ import Sales from './sales';
 import GetAllUsers from './getAllusers';
   import Addproduct from './addproduct';
 import Navber from '../user/navbar';
+import { LuLogOut } from 'react-icons/lu';
+import {useDispatch, useSelector} from 'react-redux'
+import { clearIsAdmin, selectIsAdmin, setIsAdmin } from '../redux/authSlice';
   const container = {
     hidden: { opacity: 0.8, scale: 0.8 },
     visible: {
@@ -44,6 +47,13 @@ function Admin() {
   const isdash=location.pathname.endsWith('/admin')
   const isprosec=location.pathname.endsWith('/admin/prosec')
   const isadd=location.pathname.endsWith('/admin/add')
+  const dispatch=useDispatch()
+  const isAdmin=useSelector(selectIsAdmin)
+  console.log(isAdmin)
+  const logout=()=>{
+    dispatch(clearIsAdmin(false))
+    nav('/')
+  }
   return (
     <div className='bg-stone-200  h-screen w-full  flex  ' >
       <Navber/>
@@ -63,6 +73,7 @@ function Admin() {
             <motion.button  variants={item} whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><BiUser className='text-3xl  text-blue-400'/>  <p onClick={()=>nav('/admin/user')}>USE DETAIL</p></motion.button>
             <motion.button  variants={item} whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><FaOpencart className='text-3xl  text-blue-400'/>  <p onClick={()=>nav('/admin/prosec')}>PRODUCT DETAILS</p></motion.button>
             <motion.button  variants={item}   whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><BiCartAdd className='text-3xl  text-blue-400'/> <p onClick={()=>nav('/admin/add')}>ADD PRODUCT</p></motion.button>
+            <motion.button  variants={item}   whileHover={item.hover} className='flex  ml-10  justify-start items-center gap-1 ' ><LuLogOut className='text-3xl  text-blue-400' onClick={logout}/> <p onClick={()=>nav('/admin/add')}>logout</p></motion.button>
            
         </motion.div >
         <motion.div 

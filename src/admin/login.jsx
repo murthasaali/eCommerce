@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setToken ,setSignIn, setUserid, setUserToken, selectUserid, selectUserToken} from "../redux/authSlice";
+import { setToken ,setSignIn, setUserid, setUserToken, selectUserid, selectUserToken, setIsAdmin} from "../redux/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -86,7 +86,8 @@ function Login() {
         const token = data.token;
         console.log("Login successful. Token:", token);
         setIsLoad(false)
-        dispatch(setToken(token)); // Dispatch the token to the Redux store
+        dispatch(setToken(token));
+        dispatch(setIsAdmin(true)) // Dispatch the token to the Redux store
         navigation("/admin");
       } else {
         console.error("Login failed. Message:", message);
@@ -195,8 +196,7 @@ function Login() {
         animate="visible" variants={container} className="form-container">
         <motion.p variants={container}
           className="text-3xl font-thin">Login</motion.p>
-
-        <motion.form className="h-full w-full justify-center items-center gap-4 flex flex-col " onSubmit={tologin}>
+          <motion.form className="h-full w-full justify-center items-center gap-4 flex flex-col " onSubmit={tologin}>
           <div className="w-full">
         
             <input type="text" name="email" autoComplete="true" id="email" placeholder="email" className="w-full h-16 bg-black rounded-lg px-2"/>
@@ -209,7 +209,17 @@ function Login() {
             </div>
           </div>
           <button className="btn border w-1/2 text-black" type="submit">Sign in</button>
-        </motion.form>
+        </motion.form> 
+
+
+
+
+
+
+
+
+
+
         <div className="social-message">
           <div className="line"></div>
           <p className="font-thin text-black ">Login with social accounts</p>
