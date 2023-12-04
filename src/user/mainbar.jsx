@@ -100,7 +100,10 @@ const handleSearch = (e) => {
   setSearchdata(results);
   
 };
-
+const toLogin=()=>{
+  setloginModal(false)
+  nav('/login')
+}
   return (
     <div className="main-bar">
       {/* Company Name */}
@@ -226,7 +229,7 @@ const handleSearch = (e) => {
              />
              <Typography id="modal-modal-title" variant="h6" component="h2">
                <p className="flex justify-center items-center gap-10 text-red-600">
-          <button className="border  bg-black btn   " onClick={()=>nav("/login")}>Login</button>
+          <button className="border  bg-black btn   " onClick={toLogin}>Login</button>
             </p>
              </Typography>
            </Box>

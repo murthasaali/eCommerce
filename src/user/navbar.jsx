@@ -46,9 +46,26 @@ import { MdKeyboardVoice, MdLogin } from 'react-icons/md';
 import VoiceSearchExample from '../components/voiceSearch';
 import { IoCartOutline, IoCartSharp } from 'react-icons/io5';
 import { SiMessenger } from 'react-icons/si';
+import loginpic from '../3d-hand-hold-smartphone-with-authentication-form-removebg-preview.png'
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+
+const style = {
+  position: 'absolute' ,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'black',
+  boxShadow: '2px 5px 10px 5px white',
+  boxShadow: 24,
+  p: 4,
+};
 
 function Navber() {
   const isLogin=useSelector(selectIslogin)
+  const [loginModal, setloginModal] = useState(false);
+
   const [modal, setModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState([]);
   const token = useSelector(selectToken);
@@ -88,7 +105,10 @@ function Navber() {
     console.log(results);
     setSearchQuery(results);
   };
-  
+  const toLogin=()=>{
+    setloginModal(false)
+    nav('/login')
+  }
  
 
   return (
@@ -159,18 +179,18 @@ function Navber() {
 
 
 {
-  !isLogin?
+  isLogin?
 
 
     <button className="button" >
       
-      <AiOutlineUser className='text-main' />
+      <AiOutlineUser className='text-main' onClick={()=>nav('/account')}/>
      </button>:
 
      
       <button className="button" >
       
-      <MdLogin className='text-main'  onClick={nav('/login')} title='login'/>
+      <MdLogin className='text-main' onClick={()=>setloginModal(true)} title='login'/>
      </button>
 
 }
@@ -180,7 +200,39 @@ function Navber() {
       <IoCartOutline className='text-white'  onClick={()=>nav('/cart')}/>
       
     </button>
-    
+
+    {loginModal && (
+         <div>
+        
+         <Modal
+           open={()=>setloginModal(true)}
+           onClose={()=>setloginModal(false)}
+           aria-labelledby="modal-modal-title"
+           aria-describedby="modal-modal-description"
+         >
+           <Box sx={style}
+           className="shadow-md rounded-lg flex flex-col justify-center items-center shadow-md-top shadow-md-right shadow-md-bottom shadow-md-left"
+           >
+             <motion.img src={loginpic} alt="" className='w-24 h-24' 
+               animate={{
+                y: [0, 10, 0], // Move the image up and down in a loop
+              }}
+              transition={{
+                duration: 4, // Set the duration of each cycle (in seconds)
+                repeat: Infinity, // Repeat the animation infinitely
+                ease: "linear", // Set the easing function for smooth animation
+              }}
+             />
+             <Typography id="modal-modal-title" variant="h6" component="h2">
+               <p className="flex justify-center items-center gap-10 text-red-600">
+          <button className="border  bg-black btn   " onClick={toLogin}>Login</button>
+            </p>
+             </Typography>
+           </Box>
+         </Modal>
+       </div>
+       
+      )}
   </div>
 
     

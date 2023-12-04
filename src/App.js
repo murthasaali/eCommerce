@@ -16,6 +16,7 @@ import ViewAproduct from './user/viewAproduct';
 import Cart from './user/cart';
 import Kitchen from './user/kitchen';
 import Wishlist from './user/wishlist';
+import Account from './user/account';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
       <Route path='/cart'  element={<Cart/>}/>
       <Route path='/kitchen/:category'  element={<Kitchen/>}/>
       <Route path='/wishlist'  element={<Wishlist/>}/>
+      <Route path='/account'  element={<Account/>}/>
       <Route path='/about'  element={<About/>}/>
       <Route path='/admin/user' element={<Admin />} />
             <Route path='/admin/sales' element={<Admin />} />
