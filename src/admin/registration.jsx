@@ -179,17 +179,17 @@ function Registration() {
   return (
     <motion.div initial="hidden" animate="visible" variants={container} className="form-container">
       <motion.p variants={container} className="font-thin text-3xl">Registration</motion.p>
-      <form className="h-auto flex justify-center gap-4 w-full  flex-col p-2 font-thin" onSubmit={handleRegistration}>
+      <form className="h-auto flex justify-center items-center   gap-2 w-full  flex-col  font-thin" onSubmit={handleRegistration}>
         {/* Input fields */}
         {/* ... */}
-<div className="flex flex-col items-start ">
+<div className="flex flex-col items-start w-full ">
   <input type="text" name="username" id="username" placeholder="name "  className='bg-black px-2  rounded-lg w-full h-14'/>
 </div>
-<div className="flex flex-col items-start ">
+<div className="flex flex-col items-start w-full ">
 <input type="email" name="email" id="email" placeholder="email "  className='bg-black px-2  rounded-lg w-full h-14'/>
 
 </div>
-<div className="flex flex-col items-start ">
+<div className="flex flex-col items-start w-full     ">
   <input type="password" name="password" id="password" placeholder="password "  className='bg-black px-2  rounded-lg w-full h-14'/>
 
   <button className="forgot">
@@ -198,10 +198,9 @@ function Registration() {
 </div>
 
 {/* Add additional input fields for registration, if necessary */}
-{alert&&
-<p>please fill in the blank</p>}
-        <button className="btn border" type="submit">Register</button>
-        {alert && <p>Please fill in all the fields correctly.</p>}
+
+        {alert && <p className='text-xs text-red-600 '>Please fill in all the fields correctly.</p>}
+        <button className="btn border text-black w-1/2" type="submit">Register</button>
       </form>
       {/* Rest of the code remains unchanged */}
     </motion.div>
