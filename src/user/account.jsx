@@ -54,18 +54,18 @@ function Account() {
     <div className='bg-black w-full flow flex-col justify-start items-center h-screen'>
         <div className=' flex w-full h-auto justify-between  md:justify-evenly items-center ' >
         <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={()=>nav("/account")}>
-           <div className='h-auto w-auto flex flex-row p-2 md:flex-col justify-center items-center gap-2'>
+           <div className=' p-3 w-auto flex md:flex-row  flex-col justify-center items-center gap-2'>
 
             <Avatar src={img} className='w-24 h-24'/>
-            <div className='font-thin text-white opacity-70 text-xs md:text-xl'>shamil </div>
+            <div className='font-thin text-white opacity-70 text-xs md:text-xl'>Murthaza </div>
             
            </div>
           </motion.button>
-      <h1 className='text-3xl md:text-5xl text-orange-500 text-opacity-75  font-thin p-2'
+      <div className='text-3xl md:text-5xl text-orange-500 text-opacity-75  font-thin p-2'
         style={{
             fontFamily:" 'Arista Pro Alternate Fat', sans-serif "
            }}
-      >ACCOUNT</h1>
+      >ACCOUNT</div>
       <button onClick={()=>nav('/')}>
         
         <BiArrowBack className='text-white text-xl md:2xl hover:text-orange-600  '/>
