@@ -8,7 +8,7 @@ import emptyCart from '../emptycart.png'
 import {motion} from 'framer-motion'
 import { Modal,Box,Typography} from '@mui/material';
 import loginpic from '../delivering.png'
-
+import {useNavigate} from 'react-router-dom'
 import { selectIslogin, selectToken, selectUserToken } from "../redux/authSlice";
 import { selectUserid } from "../redux/authSlice";
 import {  FaDropbox, FaRemoveFormat, FaSearch } from "react-icons/fa";
@@ -57,7 +57,7 @@ const Slider = () => {
   console.log(userId)
   const [modal,setModal]=useState(false)
   const [cartItem, setCartItem] = useState([]);
-
+  const nav=useNavigate()
   const [selectedProducts, setSelectedProducts] = useState([]);
 
   const handleProductSelection = (productId) => {
@@ -156,7 +156,7 @@ const Slider = () => {
       {cartItem.map((product) => (
                  
                  <div className="product-card">
-                   <div  alt="Product Name" style={{backgroundImage:`url('${product.image}')`}} className="cardimg"> </div>
+                   <div  alt="Product Name" style={{backgroundImage:`url('${product.image}')`}} className="cardimg" onClick={()=>nav(`/viewproduct/${product._id}`)}> </div>
                    <div className="w-full h-auto gap-2 flex flex-col items-start px-3">
 
                    <span className="flex w-full justify-start  items-center">{product.title}</span>
@@ -223,7 +223,7 @@ const Slider = () => {
       ))
       ):
       (
-        <span className="text-green-500">{orderText}</span>
+        <span className="text-stone-200  font-thin">{orderText}👍</span>
       )
       
       }

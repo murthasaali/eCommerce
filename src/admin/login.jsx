@@ -194,25 +194,25 @@ function Login() {
   <motion.div initial="hidden"
         animate="visible" variants={container} className="form-container">
         <motion.p variants={container}
-          className="title">Login</motion.p>
+          className="text-3xl font-thin">Login</motion.p>
 
-        <motion.form className="form" onSubmit={tologin}>
-          <div className="input-group">
+        <motion.form className="h-full w-full justify-center items-center gap-4 flex flex-col " onSubmit={tologin}>
+          <div className="w-full">
         
-            <input type="text" name="email" autoComplete="true" id="email" placeholder="email" />
+            <input type="text" name="email" autoComplete="true" id="email" placeholder="email" className="w-full h-16 bg-black rounded-lg px-2"/>
           </div>
-          <div className="input-group">
+          <div className=" w-full ">
             
-            <input type="password" name="password" id="password" placeholder="password" />
+            <input type="password" name="password" id="password" placeholder="password" className="w-full h-16 bg-black rounded-lg px-2" />
             <div className="forgot">
               <p rel="noopener noreferrer" >Forgot Password ?</p>
             </div>
           </div>
-          <button className="sign" type="submit">Sign in</button>
+          <button className="btn border w-1/2 text-black" type="submit">Sign in</button>
         </motion.form>
         <div className="social-message">
           <div className="line"></div>
-          <p className="message">Login with social accounts</p>
+          <p className="font-thin text-black ">Login with social accounts</p>
           <div className="line"></div>
         </div>
         <div className="social-icons">
@@ -233,7 +233,7 @@ function Login() {
           </button>
         </div>
         
-    <p className="signup" onClick={() => dispatch(setSignIn(false))}>
+    <p className="font-thin text-orange-400 text-xs text-opacity-50" onClick={() => dispatch(setSignIn(false))}>
       Don't have an account?
       <a rel="noopener noreferrer" href="#" className="">
         Sign up

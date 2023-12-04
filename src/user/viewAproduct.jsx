@@ -12,6 +12,7 @@ import Stack from '@mui/material/Stack';
 import axiosInsatnce from '../axiosInstance/instance';
 import Navber from './navbar';
 import Loading from '../components/loading';
+import { BiArrowBack } from 'react-icons/bi';
 function ViewAproduct() {
   const token=useSelector(selectToken)
   const { productId } = useParams();
@@ -133,11 +134,13 @@ const handleWishlist = async (productId) => {
     }}
     >
            <div className=' w-full flex gap-10 items-center h-auto   justify-around p-4 '>
-            <p className='text-5xl text-orange-500 text-opacity-60' 
+            <h1 className='text-5xl text-orange-500 text-opacity-60' 
             style={{
               fontFamily:" 'Arista Pro Alternate Fat', sans-serif ",
 
-                        }}>CRUNCHICK</p>
+                        }}>CRUNCHICK</h1>
+
+                        <BiArrowBack className='text-3xl text-white'  onClick={()=>nav(`/kitchen/${product.category}`)}/>
 
 
 </div>
