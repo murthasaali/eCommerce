@@ -51,12 +51,12 @@ function Account() {
   }, []);
 
   return (
-    <div className='bg-black w-full flow flex-col justify-start items-center h-screen'>
+    <div className='bg-black w-full flow flex-col justify-start items-center h-screen p-4'>
         <div className=' flex w-full h-auto justify-between  md:justify-evenly items-center ' >
         <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={()=>nav("/account")}>
            <div className=' p-3 w-auto flex md:flex-row  flex-col justify-center items-center gap-2'>
 
-            <Avatar src={img} className='w-24 h-24'/>
+            <Avatar src={img} className='w-28 h-28'/>
             <div className='font-thin text-white opacity-70 text-xs md:text-xl'>Murthaza </div>
             
            </div>
