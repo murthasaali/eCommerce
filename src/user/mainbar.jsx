@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useRef } from 'react';
 import axios from "axios";
 import Login from '../admin/login';
 import { motion } from 'framer-motion';
@@ -37,6 +37,8 @@ const style = {
 function Mainbar() {
   const [isSearch, setIsSearch] = useState(false);
   const [modal, setModal] = useState(false);
+  const reff=useRef()
+  
   const [loginModal, setloginModal] = useState(false);
   const token = useSelector(selectToken);
   const isAbout = useSelector(selectIsabout);
@@ -61,6 +63,7 @@ function Mainbar() {
         // Successfully fetched products.
         dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
         console.log('Fetched products:', data);
+
       } else {
         console.error('Product retrieval failed. Message:', message);
       }
@@ -97,6 +100,7 @@ const handleSearch = (e) => {
   setSearchdata(results);
   
 };
+
   return (
     <div className="main-bar">
       {/* Company Name */}

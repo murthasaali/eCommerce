@@ -23,7 +23,7 @@ function App() {
     <div className="App">
    
      <BrowserRouter>
-    <Toaster position="left-center"/>  
+    <Toaster position="top-center"/>  
 
      <Routes>
       <Route path='/'  element={<Home/>}/>

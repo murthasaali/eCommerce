@@ -132,7 +132,9 @@ const Slider = () => {
       setTimeout(() => {
         
         setOrder(false)
+        nav("/")
         setOrderText("order processing....")
+
       }, 2000);
     }, 5000);
     
