@@ -52,7 +52,7 @@ function Account() {
 
   return (
     <div className='bg-black w-full flow flex-col justify-start items-center h-screen'>
-        <div className=' flex w-full h-auto justify-evenly items-center ' >
+        <div className=' flex w-full h-auto justify-between  md:justify-evenly items-center ' >
         <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={()=>nav("/account")}>
            <div className='h-auto w-auto flex flex-row p-2 md:flex-col justify-center items-center gap-2'>
 

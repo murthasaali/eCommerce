@@ -8,7 +8,7 @@ import DotBadge from '../components/badge';
 import { useNavigate } from 'react-router-dom';
 import About from './about';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsabout, selectIscollection, setProducts, setIscart, clearUserToken, selectIslogin, clearIslogin, clearUserId, selectToken, selectProducts, setIslogin } from '../redux/authSlice';
+import { selectIsabout, selectIscollection, setProducts, setIscart, clearUserToken, selectIslogin, clearIslogin, clearUserId, selectToken, selectProducts, setIslogin, seleectImg } from '../redux/authSlice';
 import { setIsabout } from '../redux/authSlice';
 import Offer from './offer';
 import { Avatar } from '@mui/material';
@@ -19,6 +19,7 @@ import Button from '@mui/material/Button';
 import loginpic from '../3d-hand-hold-smartphone-with-authentication-form-removebg-preview.png'
 import Typography from '@mui/material/Typography';
 import shakehand from '../two-doctors-handshake-3d-hands-icon_107791-16601__1_-removebg-preview.png'
+
 const scaleVariants = {
   initial: { scale: 1 },
   hover: { scale: 1.1, transition: { duration: 0.3 } },
@@ -39,7 +40,7 @@ function Mainbar() {
   const [isSearch, setIsSearch] = useState(false);
   const [modal, setModal] = useState(false);
   const reff=useRef()
-  
+  const img =useSelector(seleectImg)
   const [loginModal, setloginModal] = useState(false);
   const token = useSelector(selectToken);
   const isAbout = useSelector(selectIsabout);
@@ -159,8 +160,8 @@ const toLogin=()=>{
         </motion.button>
         {isLogin && (
           <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={()=>nav("/account")}>
-            <Avatar>
-              <FaUser />
+            <Avatar src={img}>
+         
             </Avatar>
           </motion.button>
         )}
