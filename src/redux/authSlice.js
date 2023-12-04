@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import avatar from "../shamil.jpg"
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -15,12 +15,22 @@ export const authSlice = createSlice({
     wishlist:localStorage.getItem('wishlist')||[],
     isLogin: localStorage.getItem('isLogin') === 'true', // Retrieve boolean value from localStorage
     isAdmin: localStorage.getItem('isAdmin') === 'true', // Retrieve boolean value from localStorage
+    img: localStorage.getItem('img') ||`${avatar}`// Retrieve boolean value from localStorage
 
   },
   reducers: {
     setToken: (state, action) => {
       state.token = action.payload;
       localStorage.setItem('token', action.payload); // Save the token to local storage
+    },
+    setImg: (state, action) => {
+      state.img = action.payload;
+      localStorage.setItem('img', action.payload); // Save the token to local storage
+    },
+    
+    clearImg: (state) => {
+      state.img = "../shamil.jpg";
+      localStorage.setItem('img'); // Save the token to local storage
     },
     
     setUserToken: (state, action) => {
@@ -85,7 +95,7 @@ export const authSlice = createSlice({
   }
 });
 
-export const {setIsAdmin,clearIsAdmin,collection, setToken, setUserToken, setProducts, setSignIn ,setIsabout,setIslogin,setIscart,setUserid,clearUserToken,clearIslogin ,clearUserId ,setIsLoading,setWishlist} = authSlice.actions;
+export const {setImg,clearImg,setIsAdmin,clearIsAdmin,collection, setToken, setUserToken, setProducts, setSignIn ,setIsabout,setIslogin,setIscart,setUserid,clearUserToken,clearIslogin ,clearUserId ,setIsLoading,setWishlist} = authSlice.actions;
 
 export const selectToken = (state) => state.auth.token;
 export const selectUserToken = (state) => state.auth.userToken;
@@ -98,5 +108,6 @@ export const selectIscart = (state) => state.auth.isCart;
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectUserid = (state) => state.auth.userId;
 export const selectIsAdmin = (state) => state.auth.isAdmin;
+export const seleectImg = (state) => state.auth.img;
 
 export default authSlice.reducer;

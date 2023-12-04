@@ -5,14 +5,20 @@ import {useNavigate} from 'react-router-dom'
 import { Avatar } from '@mui/material';
 import { motion } from 'framer-motion';
 import { FaUser } from 'react-icons/fa';
-import shamil from '../shamil.jpg'
+import { seleectImg } from '../redux/authSlice';
+import {useSelector}  from 'react-redux'
+import ImageUploadComponent from '../components/setUserImage';
+// import shamil from '../shamil.jpg'
+
+
 const scaleVariants = {
     initial: { scale: 1 },
     hover: { scale: 1.1, transition: { duration: 0.3 } },
   };
 function Account() {
   const [userLocation, setUserLocation] = useState(null);
-    const nav=useNavigate()
+  const img = useSelector(seleectImg)
+      const nav=useNavigate()
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,7 +56,7 @@ function Account() {
         <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={()=>nav("/account")}>
            <div className='h-auto w-auto flex flex-row p-2 md:flex-col justify-center items-center gap-2'>
 
-            <Avatar src={shamil} className='w-24 h-24'/>
+            <Avatar src={img} className='w-24 h-24'/>
             <div className='font-thin text-white opacity-70 text-xs md:text-xl'>shamil </div>
             
            </div>
@@ -71,6 +77,10 @@ function Account() {
         <div className='text-xs font-thin'>
           {userLocation ? userLocation : 'Loading...'}
         </div>
+      </div>
+
+      <div>
+        <ImageUploadComponent/>
       </div>
     </div>
   );

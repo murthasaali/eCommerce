@@ -194,7 +194,7 @@ const Slider = () => {
   )}
   {
     isOrder&&
-    <Modal open={isOrder} onClose={()=>setOrder(false)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Modal open={isOrder}  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
     <Box sx={style}
            className="shadow-md rounded-lg flex flex-col justify-center items-center shadow-md-top shadow-md-right shadow-md-bottom shadow-md-left"
            >
