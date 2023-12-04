@@ -16,7 +16,7 @@ export default function Carousal() {
               <div className='text-white text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
                 <h2 className='qoute1'>CRUNCHICK</h2>
                 <p className='font-thin'>"eat well"</p>
-                <button className=" btn  border  "   style={{
+                <button className=" btn   bg-black  "   style={{
                   borderRadius:"25px",
                 
                 }}> button</button>
@@ -34,7 +34,7 @@ export default function Carousal() {
           <div className='text-white text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
             <div className='qoute1'>CRUNCHICK</div>
             <p className='font-thin'>"eat well"</p>
-            <button className=' btn  border  ' style={{
+            <button className=' btn   bg-black ' style={{
               borderRadius:"25px"
             }} > order now</button>
 
@@ -46,12 +46,12 @@ export default function Carousal() {
             src='https://img.freepik.com/free-photo/freshly-italian-pizza-with-mozzarella-cheese-slice-generative-ai_188544-12347.jpg?w=1380&t=st=1700684073~exp=1700684673~hmac=f005d40b0414ad4ff4433483781d8fa4e4b0a8df58eb0e95240a2563fb364724'
             className='d-block w-100'
             alt='...'
-          />  <div className='w-full h-full bg-black'>
+          />  <div className='w-full h-full  bg-black'>
           {/* Text overlay for company name and offer details */}
           <div className='text-white text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
             <h2 className='qoute1'>CRUNCHICK</h2>
             <p className='font-thin'>"eat well"</p>
-            <button className=' btn  border  ' style={{
+            <button className=' btn    bg-black' style={{
               borderRadius:"25px"
             }}suu  > order now</button>
 
