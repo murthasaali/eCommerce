@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setToken ,setSignIn, setUserid, setUserToken, selectUserid, selectUserToken, setIsAdmin} from "../redux/authSlice";
+import { setToken ,setSignIn, setUserid, setUserToken, selectUserid, selectUserToken, setIsAdmin, setUsername} from "../redux/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -102,10 +102,12 @@ function Login() {
   const loginUser = async (event) => {
     setIslogin(true)
     event.preventDefault()
+    const name=event.target.name.value;
+    dispatch(setUsername(name))
     const email = event.target.email.value;
     const password=event.target.password.value;// /  const apiKey=""
-    const accessKey="55eebc5550c70b2b7736"
-  
+    const accessKey=process.env.REACT_APP_API_KEY
+    
 
     try {
       const response = await axios.post('https://ecommerce-api.bridgeon.in/users/login', {
@@ -199,16 +201,20 @@ function Login() {
           <motion.form className="h-full w-full justify-center items-center gap-4 flex flex-col " onSubmit={tologin}>
           <div className="w-full">
         
-            <input type="text" name="email" autoComplete="true" id="email" placeholder="email" className="w-full h-16 bg-black rounded-lg px-2"/>
+            <input type="text" name="name" autoComplete="true" id="name" placeholder="name" className="w-full h-10 bg-black rounded-lg px-2"/>
+          </div>
+          <div className="w-full">
+        
+            <input type="text" name="email" autoComplete="true" id="email" placeholder="email" className="w-full h-10 bg-black rounded-lg px-2"/>
           </div>
           <div className=" w-full ">
             
-            <input type="password" name="password" id="password" placeholder="password" className="w-full h-16 bg-black rounded-lg px-2" />
+            <input type="password" name="password" id="password" placeholder="password" className="w-full h-10 bg-black rounded-lg px-2" />
             <div className="forgot">
-              <p rel="noopener noreferrer" >Forgot Password ?</p>
+              <div rel="noopener noreferrer" >Forgot Password ?</div>
             </div>
           </div>
-          <button className="btn border w-1/2 text-black" type="submit">Sign in</button>
+          <button className="p-1 rounded-lg border w-1/2 text-black" type="submit">Sign in</button>
         </motion.form> 
 
 

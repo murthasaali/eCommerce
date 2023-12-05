@@ -8,7 +8,7 @@ import DotBadge from '../components/badge';
 import { useNavigate } from 'react-router-dom';
 import About from './about';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsabout, selectIscollection, setProducts, setIscart, clearUserToken, selectIslogin, clearIslogin, clearUserId, selectToken, selectProducts, setIslogin, seleectImg } from '../redux/authSlice';
+import { selectIsabout, selectIscollection, setProducts, setIscart, clearUserToken, selectIslogin, clearIslogin, clearUserId, selectToken, selectProducts, setIslogin, seleectImg, clearuserName, selectUsername } from '../redux/authSlice';
 import { setIsabout } from '../redux/authSlice';
 import Offer from './offer';
 import { Avatar } from '@mui/material';
@@ -43,7 +43,7 @@ function Mainbar() {
   const img =useSelector(seleectImg)
   const [loginModal, setloginModal] = useState(false);
   const token = useSelector(selectToken);
-  const isAbout = useSelector(selectIsabout);
+  const name = useSelector(selectUsername);
   const isLogin = useSelector(selectIslogin);
   
   console.log(isLogin)
@@ -78,6 +78,7 @@ function Mainbar() {
     dispatch(clearUserToken());
     dispatch(clearIslogin());
     dispatch(clearUserId());
+    dispatch(clearuserName())
     toast.error('logout');
     toggleModal();
   };
@@ -141,8 +142,7 @@ const toLogin=()=>{
           <FaSearch />
         </motion.button>
         <motion.button className="username" variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover">
-          Username
-        </motion.button>
+      {name}        </motion.button>
         {!isLogin ? (
           <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover">
             <FaUserPlus title="login" onClick={()=>setloginModal(true)} />

@@ -11,6 +11,7 @@ export const authSlice = createSlice({
     isCollection:false,
     isCart:false,
     userId:localStorage.getItem('userId')||null,
+    userName:localStorage.getItem('userName')||"",
     isLoading:true,
     wishlist:localStorage.getItem('wishlist')||[],
     isLogin: localStorage.getItem('isLogin') === 'true', // Retrieve boolean value from localStorage
@@ -23,6 +24,10 @@ export const authSlice = createSlice({
       state.token = action.payload;
       localStorage.setItem('token', action.payload); // Save the token to local storage
     },
+    setUsername: (state, action) => {
+      state.userName = action.payload;
+      localStorage.setItem('userName', action.payload); // Save the token to local storage
+    },
     setImg: (state, action) => {
       state.img = action.payload;
       localStorage.setItem('img', action.payload); // Save the token to local storage
@@ -32,6 +37,11 @@ export const authSlice = createSlice({
       state.img = "../shamil.jpg";
       localStorage.setItem('img'); // Save the token to local storage
     },
+    clearuserName: (state) => {
+      state.userName = "";
+      localStorage.setItem('userName'); // Save the token to local storage
+    },
+    
     
     setUserToken: (state, action) => {
       state.userToken = action.payload;
@@ -95,7 +105,7 @@ export const authSlice = createSlice({
   }
 });
 
-export const {setImg,clearImg,setIsAdmin,clearIsAdmin,collection, setToken, setUserToken, setProducts, setSignIn ,setIsabout,setIslogin,setIscart,setUserid,clearUserToken,clearIslogin ,clearUserId ,setIsLoading,setWishlist} = authSlice.actions;
+export const {setImg,setUsername,clearuserName,clearImg,setIsAdmin,clearIsAdmin,collection, setToken, setUserToken, setProducts, setSignIn ,setIsabout,setIslogin,setIscart,setUserid,clearUserToken,clearIslogin ,clearUserId ,setIsLoading,setWishlist} = authSlice.actions;
 
 export const selectToken = (state) => state.auth.token;
 export const selectUserToken = (state) => state.auth.userToken;
@@ -109,5 +119,6 @@ export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectUserid = (state) => state.auth.userId;
 export const selectIsAdmin = (state) => state.auth.isAdmin;
 export const seleectImg = (state) => state.auth.img;
+export const selectUsername = (state) => state.auth.userName;
 
 export default authSlice.reducer;

@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import { Avatar } from '@mui/material';
 import { motion } from 'framer-motion';
 import { FaUser } from 'react-icons/fa';
-import { seleectImg } from '../redux/authSlice';
+import { selectUsername, seleectImg } from '../redux/authSlice';
 import {useSelector}  from 'react-redux'
 import ImageUploadComponent from '../components/setUserImage';
 // import shamil from '../shamil.jpg'
@@ -19,6 +19,7 @@ function Account() {
   const [userLocation, setUserLocation] = useState(null);
   const [setting,setSetting]=useState(false)
   const img = useSelector(seleectImg)
+  const name=useSelector(selectUsername)
       const nav=useNavigate()
   useEffect(() => {
     const fetchData = async () => {
@@ -58,7 +59,7 @@ function Account() {
            <div className=' p-3 w-auto flex md:flex-row  flex-col justify-center items-center gap-2'>
 
             <Avatar src={img} className='w-28 h-28'/>
-            <div className='font-thin text-white opacity-70 text-xs md:text-xl'>Murthaza </div>
+            <div className='font-thin text-white opacity-70 text-xs md:text-xl'>{name} </div>
             
            </div>
           </motion.button>
