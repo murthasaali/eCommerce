@@ -52,10 +52,10 @@ function Mainbar() {
   const isCollection = useSelector(selectIscollection);
   const products=useSelector(selectProducts)
   const [searchdata, setSearchdata] = useState([]);
-  const apiKey="55eebc5550c70b2b7736"
-  const getAllProducts = async (token) => {
+  const apiKey=process.env.REACT_APP_API_KEY
+  const getAllProducts = async (token,apiKey) => {
     try {
-      const response = await axiosInsatnce.get(`/products?accessKey=55eebc5550c70b2b7736`, {
+      const response = await axiosInsatnce.get(`/products?accessKey=${apiKey}`, {
        
         headers: {
           Authorization: `Bearer ${token}`,
@@ -65,7 +65,7 @@ function Mainbar() {
       if (status === 'success') {
         // Successfully fetched products.
         dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
-        console.log('Fetched products:', data);
+        console.log('Fetched products:axios instance', data);
 
       } else {
         console.error('Product retrieval failed. Message:', message);
@@ -91,7 +91,7 @@ function Mainbar() {
   };
 useEffect(() => {
   
-getAllProducts(token)
+getAllProducts(token,apiKey)
 
 }, [token])
 const handleSearch = (e) => {

@@ -73,10 +73,10 @@ function Navber() {
   const dispatch = useDispatch();
   const nav=useNavigate()
   // Function to filter products based on search query
-
-  const getAllProducts = async (token) => {
+const apiKey=process.env.REACT_APP_API_KEY
+  const getAllProducts = async (token,apiKey) => {
     try {
-      const response = await axiosInsatnce.get(`/products?accessKey=55eebc5550c70b2b7736`, {
+      const response = await axiosInsatnce.get(`/products?accessKey=${apiKey}`, {
        
         headers: {
           Authorization: `Bearer ${token}`,
@@ -86,7 +86,7 @@ function Navber() {
       if (status === 'success') {
         // Successfully fetched products.
         dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
-        console.log('Fetched products:', data);
+        console.log('navbar:', data);
       } else {
         console.error('Product retrieval failed. Message:', message);
       }
@@ -95,7 +95,7 @@ function Navber() {
     }
   };
   useEffect(() => {
-    getAllProducts(token);
+    getAllProducts(token,apiKey);
   }, [token]);
 
   const handleInputChange = (e) => {

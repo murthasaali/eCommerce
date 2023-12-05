@@ -21,9 +21,16 @@ function ImageUploadComponent() {
   };
 
   return (
-    <div>
-      <input type="file" onChange={handleImageUpload} />
-      <p>Upload an image</p>
+    <div className="mt-4">
+      <label htmlFor="file-upload" className="cursor-pointer bg-black   text-white  py-2 px-4 font-thin rounded">
+        update dp
+      </label>
+      <input
+        id="file-upload"
+        type="file"
+        className="hidden"
+        onChange={handleImageUpload}
+      />
     </div>
   );
 }

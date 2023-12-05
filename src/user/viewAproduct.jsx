@@ -41,7 +41,7 @@ function ViewAproduct() {
       const { status, message, data } = response.data;
       if (status === 'success') {
         // Successfully fetched the product.
-        console.log('Fetched product details:', data);
+        console.log('Fetched product details:axiosinstance', data);
         setProduct(data);
         setTimeout(() => {
           dispatch(setIsLoading(false))

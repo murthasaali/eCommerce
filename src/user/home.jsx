@@ -19,6 +19,7 @@ import { FaFacebook, FaInstagram, FaMailBulk, FaPhone, FaWhatsapp } from 'react-
 import { selectIsLoading, selectIslogin, setIsLoading } from '../redux/authSlice';
 import Loading from '../components/loading';
 import { Modal } from '@mui/material';
+import Location from '../components/location';
 const container = {
   hidden: { opacity: 1, scale: 0 },
   visible: {
@@ -167,6 +168,8 @@ function Home() {
   
     
   </motion.ul>
+  <Location/>
+  
   <p>contact us</p>
   <div className='w-full flex justify-between items-center p-4 h-40 '>
 

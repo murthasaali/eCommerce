@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BiArrowBack } from 'react-icons/bi';
-import { IoLocation } from 'react-icons/io5';
+import { IoLocation, IoSettings } from 'react-icons/io5';
 import {useNavigate} from 'react-router-dom'
 import { Avatar } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -9,7 +9,7 @@ import { seleectImg } from '../redux/authSlice';
 import {useSelector}  from 'react-redux'
 import ImageUploadComponent from '../components/setUserImage';
 // import shamil from '../shamil.jpg'
-
+import { Modal } from '@mui/material';
 
 const scaleVariants = {
     initial: { scale: 1 },
@@ -17,6 +17,7 @@ const scaleVariants = {
   };
 function Account() {
   const [userLocation, setUserLocation] = useState(null);
+  const [setting,setSetting]=useState(false)
   const img = useSelector(seleectImg)
       const nav=useNavigate()
   useEffect(() => {
@@ -70,6 +71,10 @@ function Account() {
         
         <BiArrowBack className='text-white text-xl md:2xl hover:text-orange-600  '/>
       </button>
+      <button onClick={()=>setSetting(true)}>
+        
+        <IoSettings className='text-white text-xl md:2xl hover:text-orange-600  '/>
+      </button>
      
         </div>
       <div className='text-xs gap-2 w-full text-blue-300 flex md:justify-end justify-center px-3 items-center'>
@@ -80,8 +85,22 @@ function Account() {
       </div>
 
       <div>
-        <ImageUploadComponent/>
       </div>
+      {
+        setting&&
+
+        <Modal open={setting} onClose={()=>setSetting(false)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="p-8 bg-white bg-opacity-50  opacity-95 rounded-xl">
+        <ImageUploadComponent/>
+
+           
+            <p className="flex justify-center items-center gap-10 text-red-600">
+              do you want to logout <button className="btn" onClick={()=>setSetting(false)}>yes</button>
+            </p>
+          
+          </div>
+        </Modal>
+          }
     </div>
   );
 }

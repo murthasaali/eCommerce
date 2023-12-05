@@ -26,6 +26,7 @@ import {  FaDropbox, FaRemoveFormat, FaSearch } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import axiosInsatnce from "../axiosInstance/instance";
 import Loading from "./loading";
+import { LuDelete } from "react-icons/lu";
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
@@ -171,7 +172,7 @@ const Whislistslider = () => {
 
     <div className="flex justify-center items-center gap-5  ">
        <button className="p-2 text-xs border rounded-lg "> Add to Cart</button>
-       <button className="p-2  "> <FaRemoveFormat className=""/></button>
+       <button className="p-2  "> <LuDelete className=""/></button>
     </div>
   </div>
 
