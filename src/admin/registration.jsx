@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { setSignIn } from '../redux/authSlice';
 import {motion} from 'framer-motion'
+import { act } from '@testing-library/react';
 const initialValues = {
   name: '',
   email: '',
@@ -18,9 +19,9 @@ function Registration() {
   const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
     initialValues: initialValues,
     validationSchema: signUpvalidation,
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values, { setSubmitting },action) => {
       const { name, email, password } = values;
-      const accessKey = '55eebc5550c70b2b7736';
+      const accessKey =process.env.REACT_APP_API_KEY;
 
       try {
         const response = await axios.post('https://ecommerce-api.bridgeon.in/users/register', {
@@ -36,6 +37,7 @@ function Registration() {
           console.log('Registration successful. Token:', data.token);
           toast.success('User registered successfully');
           dispatch(setSignIn(true));
+          action.resetForm()
         } else {
           console.error('Registration failed. Message:', message);
           toast.error('User already registered');

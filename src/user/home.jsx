@@ -177,7 +177,7 @@ const toLogin=()=>{
     offerModal&&
     <>
         {offerModal && (
-        <Modal open={offerModal} onClose={()=>setOfferModal(false)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Modal open={offerModal} onClose={()=>setOfferModal(false)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' ,border:"none"}}>
           <div className="p-8 bg-stone-300 rounded-xl">
             <div className="flex flex-col justify-center items-center gap-2 text-blue-600">
               <span>Apply your coupen code</span>
