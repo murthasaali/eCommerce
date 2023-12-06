@@ -16,6 +16,7 @@ import { BiArrowBack } from 'react-icons/bi';
 function ViewAproduct() {
   const token=useSelector(selectToken)
   const { productId } = useParams();
+  const [count,setCount]=useState(0)
   const [product,setProduct]=useState({})
   const nav=useNavigate()
   const userId= useSelector(selectUserid)
@@ -157,7 +158,14 @@ const handleWishlist = async (productId) => {
     }}>{product.title}</p>
     <p>{product.category}</p>
     
-      <p>{product.description}</p> <span className='text-xl text-red-700'> ₹ {product.price} /-</span>
+      <p>{product.description}</p> <div className='flex justify-between w-full  items-center'>
+        <span className='text-xl text-red-700'> ₹ {product.price} /-</span>  
+        <div>
+          <button>+</button>
+          <span></span>
+          <button>-</button>
+        </div>
+        </div>
       <hr className="border border-white w-full my-4" />
     <div className='flex justify-center items-center gap-5 '>
       <button>
@@ -168,7 +176,7 @@ const handleWishlist = async (productId) => {
     
      <button onClick={()=>{handleCart(product._id)}}>
       
-       <FaCartPlus  className='text-2xl hover:text-orange-500'/></button> 
+       <FaCartPlus  className='text-2xl hover:text-orange-500'  />  </button> 
        
        <Stack className='bg-stone-600 bg-opacity-40 rounded-lg p-2' spacing={1}>
       <Rating name="size-small"  defaultValue={2} size="small" />

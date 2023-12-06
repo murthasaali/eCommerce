@@ -5,8 +5,8 @@ import {useNavigate} from 'react-router-dom'
 import { Avatar } from '@mui/material';
 import { motion } from 'framer-motion';
 import { FaUser } from 'react-icons/fa';
-import { selectUsername, seleectImg } from '../redux/authSlice';
-import {useSelector}  from 'react-redux'
+import { clearImg, clearIslogin, clearUserId, clearUserToken, clearuserName, selectUsername, seleectImg } from '../redux/authSlice';
+import {useDispatch, useSelector}  from 'react-redux'
 import ImageUploadComponent from '../components/setUserImage';
 // import shamil from '../shamil.jpg'
 import { Modal } from '@mui/material';
@@ -20,6 +20,7 @@ function Account() {
   const [setting,setSetting]=useState(false)
   const img = useSelector(seleectImg)
   const name=useSelector(selectUsername)
+  const dispatch=useDispatch()
       const nav=useNavigate()
   useEffect(() => {
     const fetchData = async () => {
@@ -51,6 +52,19 @@ function Account() {
 
     fetchData();
   }, []);
+  const logout=()=>{
+
+    dispatch(clearuserName())
+    dispatch(clearImg())
+    dispatch(clearIslogin())
+    dispatch(clearUserId())
+    dispatch(clearUserToken())
+setTimeout(() => {
+  setSetting(false)
+  nav('/')
+
+}, 3000);
+  }
 
   return (
     <div className='bg-black w-full flow flex-col justify-start items-center h-screen p-4'>
@@ -96,7 +110,7 @@ function Account() {
 
            
             <p className="flex justify-center items-center gap-10 text-red-600">
-              do you want to logout <button className="btn" onClick={()=>setSetting(false)}>yes</button>
+              do you want to logout <button className="btn" onClick={logout}>yes</button>
             </p>
           
           </div>

@@ -35,13 +35,12 @@ export const authSlice = createSlice({
     
     clearImg: (state) => {
       state.img = "../shamil.jpg";
-      localStorage.setItem('img'); // Save the token to local storage
+      localStorage.removeItem('img'); // Remove the 'img' item from local storage
     },
     clearuserName: (state) => {
       state.userName = "";
-      localStorage.setItem('userName'); // Save the token to local storage
+      localStorage.removeItem('userName'); // Remove the 'userName' item from local storage
     },
-    
     
     setUserToken: (state, action) => {
       state.userToken = action.payload;
@@ -79,11 +78,11 @@ export const authSlice = createSlice({
     },
     clearUserToken: (state) => {
       state.userToken = null;
-      localStorage.removeItem('usertoken'); // Remove the user token from local storage
+      localStorage.removeItem('usertoken'); // Remove the 'usertoken' item from local storage
     },
     clearUserId: (state) => {
-      state.userToken = null;
-      localStorage.removeItem('userId'); // Remove the user token from local storage
+      state.userId = null;
+      localStorage.removeItem('userId'); // Remove the 'userId' item from local storage
     },
     setIslogin: (state, action) => {
       state.isLogin = action.payload;

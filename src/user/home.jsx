@@ -220,7 +220,7 @@ const toLogin=()=>{
   </p>
 <Carousal />
   </div>
-      <div className=' p-4 font-thin h-1/2 lg:h-full flex flex-col gap-4'> <div className='flex justify-center items-center gap-8'>choose by menu <FaSearch className='text-xl  flex md:hidden' onClick={()=>setModal(true)}/> </div > <motion.ul
+      <div className=' p-4 font-thin h-1/2 lg:h-full flex flex-col gap-4'> <div className='flex justify-center items-center text-white gap-8'>choose by menu <FaSearch className='text-xl  flex md:hidden' onClick={()=>setModal(true)}/> </div > <motion.ul
     className="w-full h-full sm:h-1/2 lg:h-full p-2 grid grid-cols-4 gap-4 grid-rows-2 gap-15 p-15 overflow-hidden bg-opacity-20 rounded-lg"
     variants={container}
     initial="hidden"
@@ -274,14 +274,16 @@ const toLogin=()=>{
   </motion.ul>
   <Location/>
   
+  <div className='w-full flex flex-col justify-evenly items-center p-4 h-40 text-white'>
   <p>contact us</p>
-  <div className='w-full flex justify-between items-center p-4 h-40 '>
+<div className='flex w-full justify-evenly  text-white  '>
 
     <FaWhatsapp  className='text-2xl hover:text-green-600 opacity-50'/>
     <FaInstagram  className='text-2xl hover:text-pink-700 opacity-40'/>
     <FaPhone  className='text-2xl  hover:text-blue-700 opacity-50'/>
     <FaMailBulk  className='text-2xl hover:text-red-600 opacity-50'/>
     <FaFacebook  className='text-2xl   hover:text-blue-700 opacity-50'/>
+</div>
 
       </div></div>
     </div>

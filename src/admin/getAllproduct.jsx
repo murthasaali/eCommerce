@@ -37,7 +37,7 @@ function GetAllproduct() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [updatedProductData,setupdatedProductData]=useState(null)
 
-
+  const accessKey=process.env.REACT_APP_API_KEY
 
   // const getAllProducts = async (token) => {
   //   try {
@@ -63,7 +63,7 @@ function GetAllproduct() {
   //   getAllProducts(dealerToken);
   const getAllProducts = async (token) => {
     try {
-      const response = await axios.get(`https://ecommerce-api.bridgeon.in/products?accessKey=${process.env.REACT_APP_API_KEY}`, {
+      const response = await axios.get(`https://ecommerce-api.bridgeon.in/products?accessKey=${accessKey}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
