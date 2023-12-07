@@ -8,7 +8,7 @@ function Loading() {
   const isLoading=useSelector(selectIsLoading)
   return (
  <>
- <Modal open={isLoading} className="w-full h-screen"  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundImage: "url('cicon.png')", backgroundRepeat: "repeat", border:"none" }}>
+ <Modal open={isLoading} className="w-full h-screen"  >
   <div className=" w-full h-full flex-col bg-black  gap-4  flex justify-center items-center">
 
   <motion.div className='w-16 h-16 ' style={{
