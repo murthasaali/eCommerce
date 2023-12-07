@@ -308,10 +308,10 @@ const toLogin=()=>{
     </motion.div> */}
    </div>
     <div className='font-thin flex justify-center ml-5  items-center'>our company provides you a lot of advantages <div className='icon-container'></div></div>
-   <div className='w-full h-auto p-4 flex  justify-center gap-7 flex-wrap   '>
-    <BasicCard/>
+   {/* <div className='w-full h-auto p-4 flex  justify-center gap-7 flex-wrap   '> */}
+    {/* <BasicCard/>
 
-   </div>
+   </div> */}
    <section className='w-full h-auto bg-black flex flex-col justify-center mb-36 items-center'>
     <div className='flex justify-center w-full  '>
     <span  
