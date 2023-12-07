@@ -205,6 +205,7 @@
   height: 60px;
   align-items: center;
   justify-content: space-around;
+  border: 1px solid white;
   border-radius: 25px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px,
         rgba(0, 0, 0, 0.5) 5px 10px 15px;
