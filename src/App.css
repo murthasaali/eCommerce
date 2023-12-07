@@ -336,6 +336,7 @@
 
 
 /* Basic styles for the product card */
+/* Add this to your CSS file */
 .product-card {
   width: 300px;
   border: 1px solid #ccc;
@@ -347,7 +348,14 @@
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  transition: transform 0.3s; /* Transition effect for scaling */
 }
+
+.product-card:hover {
+  transform: scale(1.05); /* Scale the card when hovered */
+  cursor: pointer; /* Change cursor to pointer when hovering */
+}
+
 .cardimg{
   height: 150px;
   width:230px;

@@ -157,19 +157,20 @@ const Slider = () => {
 
       {cartItem.map((product) => (
                  
-                 <div className="product-card">
+                 <div className="product-card" 
+                 style={{ transition: 'transform 0.3s' }}>
                    <div  alt="Product Name" style={{backgroundImage:`url('${product.image}')`}} className="cardimg" onClick={()=>nav(`/viewproduct/${product._id}`)}> </div>
                    <div className="w-full h-auto gap-2 flex flex-col items-start px-3">
 
                    <span className="flex w-full justify-start  items-center">{product.title}</span>
-                   <div className="flex justify-center gap-4 items-center "> <span>{product.price} </span> 
+                   <div className="flex justify-center gap-4 items-center "> <span className="text-red-600">{product.price} </span> 
                    <div className="flex justify-center items-center  gap-3 text-sm" > <button>+</button>  <span>1</span> <button>-</button> </div>
 
                   
                    </div >
                
                    <div className="flex justify-evenly items-center gap-5 w-full ">
-                      <button className="p-2  " onClick={()=>removeFromCart(product._id)}> <MdDelete /></button>
+                      <button className="p-2  " onClick={()=>removeFromCart(product._id)}> <MdDelete  className="text-white text-xl "/></button>
                       <input type="checkbox" className="checkbox border rounded-lg" />
                    </div>
                    </div>
