@@ -152,19 +152,19 @@ function GetAllproduct() {
 
   return (
     <div className=' flex justify- items-center gap-10 flex-col w-full h-full overflow-auto pl-2 '>
-       <div className='h-24 p-4 flex justify-start gap-10 items-center w-full sticky top-0 bg-white bg-opacity-90'>
+       <div className='h-24 p-4 flex justify-start gap-10 items-center w-full sticky top-0 bg-transparent bg-opacity-90'>
       <motion.button
         onClick={handleToggleSearch}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-       <FaSearch className='text-3xl font-thin text-black first-letter  '/>
+       <FaSearch className='text-3xl font-thin text-white first-letter  '/>
       </motion.button>
 
       {isSearchVisible && (
         <motion.input variants={item}
         type="text"
-        className='bg-stone-300  text-white w-3/4 h-14 rounded-3xl pl-4 overflow-hidden shadow-md'
+        className='bg-transparent  text-white w-3/4 h-14 border rounded-3xl pl-4 overflow-hidden shadow-md'
         placeholder="Search..."
         initial={{ opacity: 0, x: '-20%' }}
         animate={{ opacity: 1, x: 0 }}
@@ -173,19 +173,19 @@ function GetAllproduct() {
         )}
         <div className='absolute right-0 mr-20 font-thin  z-20'>sort</div>
     </div>
-    <motion.table className="w-full bg-white text-blue-800 font-sans rounded-xl overflow-hidden shadow-md"
+    <motion.table className="w-full bg-stone-300 bg-opacity-10 text-blue-800 font-sans rounded-xl overflow-hidden shadow-md"
            initial="hidden"
            animate="visible">
           <thead>
-            <tr className="">
-              <th className="py-2 px-4 w-1/12 sm:w-1/6">ID</th>
-              <th className="py-2 px-4 w-1/12 sm:w-1/12">Title</th>
-              <th className="py-2 px-4 w-1/12 sm:w-1/12">Price</th>
-              <th className="py-2 px-4 w-1/6 sm:w-1/6">Category</th>
-              <th className="py-2 px-4 w-1/6 sm:w-1/6">Image</th>
-              <th className="py-2 px-4 w-1/6 sm:w-1/6">Description</th>
-              <th className="py-2 px-4 w-1/6 sm:w-1/6">Edit</th>
-              <th className="py-2 px-4 w-1/6 sm:w-1/6">Delete</th>
+            <tr className=" bg-slate-600 text-white font-thin bg-opacity-25 p-4">
+              <th className="py-4 font-thin px-4 w-1/12 sm:w-1/6">ID</th>
+              <th className="py-4 font-thin px-4 w-1/12 sm:w-1/12">Title</th>
+              <th className="py-4 font-thin px-4 w-1/12 sm:w-1/12">Price</th>
+              <th className="py-4 font-thin px-4 w-1/6 sm:w-1/6">Category</th>
+              <th className="py-4 font-thin px-4 w-1/6 sm:w-1/6">Image</th>
+
+              <th className="py-4 font-thin px-4 w-1/6 sm:w-1/6">Edit</th>
+              <th className="py-4 font-thin px-4 w-1/6 sm:w-1/6">Delete</th>
             </tr>
           </thead>
           <tbody >
@@ -198,7 +198,6 @@ function GetAllproduct() {
                 <motion.td  variants={item} className="py-2 px-4 w-1/6 sm:w-1/3 rounded-lg">
                   <img src={product.image} alt={product.title} className="w-full h-20 overflow-hidden rounded-lg" />
                 </motion.td >
-                <motion.td  variants={item} className="py-2 px-4 w-1/6 sm:w-1/6"></motion.td >
                 <motion.td  variants={item} className="py-2 px-4 w-1/6 sm:w-1/6">
                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={()=>handleEdit(product._id)}>
                     <FaEdit/>

@@ -111,21 +111,22 @@ const GetAllUsers = () => {
   return (
     <div className='p-4 flex justify-center items-center flex-col'>
 
-      <motion.div className='h-20'
+      <motion.div className='h-20 flex justify-between items-center w-full'
       variants={item}
       >
+        <div className='font-bold text-5xl'>User Details</div>
 
      <FaSearch className='text-3xl font-thin text-white first-letter  '
    
      
      />
       </motion.div>
-      <motion.table className="w-full bg-fuchsia-200 bg-opacity-60 text-black font-sans  rounded-xl"
+      <motion.table className="w-full bg-stone-300  bg-opacity-20 mt-4 text-white font-sans  rounded-xl"
            variants={container} 
            initial="hidden"
            animate="visible">
   <thead>
-    <tr>
+    <tr className=''>
       <th className="py-2 font-thin">Name</th>
       <th className="py-2 font-thin">ID</th>
       <th className="py-2 font-thin">Email</th>
@@ -135,7 +136,7 @@ const GetAllUsers = () => {
   </thead>
   <tbody>
     {users.map((user) => (
-      <tr key={user._id} className="bg-gray-900 bg-opacity-90 text-white">
+      <tr key={user._id} className="bg-stone-300 bg-opacity-20 font-thin text-white">
         <td className="py-2 px-4">{user.username}</td>
         <td className="py-2 px-4">{user._id}</td>
         <td className="py-2 px-4">{user.email}</td>
