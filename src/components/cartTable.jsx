@@ -15,8 +15,21 @@ import {  FaDropbox, FaRemoveFormat, FaSearch } from "react-icons/fa";
 // import { selectUserid } from "../redux/authSlice";
 import { MdDelete } from "react-icons/md";
 import axiosInsatnce from "../axiosInstance/instance";
+import Total from "./Total";
+import { seleectImg } from '../redux/authSlice';
+import { FaChevronCircleRight } from 'react-icons/fa';
 
 function CartTable() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
     
   const [isOrder,setOrder]=useState(false)
   const [tick,setTick]=useState(false)
@@ -111,7 +124,23 @@ function CartTable() {
 
   
   return (
-    <div className='w-full h-full overflow-y-auto flex flex-col justify-center items-center  gap-6'><div className="overflow-x-auto">
+    <div className='w-full h-full overflow-y-auto flex text-white gap-10 justify-center items-start  '><div className="overflow-x-auto">
+      <FaChevronCircleRight
+        className='text-white text-3xl absolute left-2 top-1/2 transform -translate-y-1/2 cursor-pointer  z-20'
+        onClick={openModal}
+      />{isModalOpen && (
+          <div className='fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 flex justify-center items-center'>
+            <div className='w-full h-full bg-white rounded-lg p-4'>
+              <button
+                className='mt-4 bg-orange-500 text-white px-4 py-2 rounded-md'
+                onClick={closeModal}
+                >
+                Close Modal
+              </button>
+                <Total/>
+            </div>
+          </div>
+        )}
     <table className="table">
       {/* head */}
       <thead>
@@ -147,7 +176,7 @@ function CartTable() {
         <div>
           <div className="font-bold">{item.category
 }</div>
-          <div className="md:text-sm md:flex hidden text-xs opacity-50">{item.description.slice(0,30)}..</div>
+          <div className="md:text-sm md:flex hidden text-xs opacity-50 text-orange-500 text-opacity-90">{item.description.slice(0,30)}..</div>
         </div>
       </div>
     </td>
@@ -169,7 +198,7 @@ function CartTable() {
     
       
     </table>
-  </div></div>
+  </div>   <Total/></div>
   );
 }
 
