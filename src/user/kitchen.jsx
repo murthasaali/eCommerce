@@ -1,34 +1,24 @@
 import React,{useEffect} from 'react';
 
 import {  motion } from 'framer-motion'; // Import useAnimation from framer-motion
-import { selectIsLoading, selectProducts, selectToken, selectUserToken, selectUserid, setIsLoading, setProducts } from '../redux/authSlice';
+import {  selectProducts, selectToken, selectUserToken, selectUserid, setProducts } from '../redux/authSlice';
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { FaCartPlus, FaHeart, FaLocationArrow } from 'react-icons/fa';
+import { FaCartPlus, FaHeart } from 'react-icons/fa';
 import { useParams ,useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
 import toast from "react-hot-toast"
 import axiosInsatnce from '../axiosInstance/instance';
-import coupen from '../hang-tag-isometric-3d-render-icon_47987-9076-removebg-preview.png'
+import coupen from '../assets/tag.png'
 import { MdLocationOn } from 'react-icons/md';
-import Rating from '@mui/material/Rating';
-import Stack from '@mui/material/Stack';
-import Loading from '../components/loading';
-import deliveryboy from '../delivery-guy-yellow-uniform-stands-with-fastfood-white-phone-screen-3d-illustration-cartoon-character-express-online-delivery-concept_827810-270-removebg-preview.png'
+import deliveryboy from '../assets/delivery.png'
 function Kitchen() {
   const token=useSelector(selectToken)
   const userToken=useSelector(selectUserToken)
   const userId=useSelector(selectUserid)
   const products=useSelector(selectProducts)
-  const isLoading=useSelector(selectIsLoading)
-// const products=useSelector(selectProducts)
   const dispatch=useDispatch()
-  
   const nav=useNavigate()
-
- 
-
-
 
   const { category } = useParams();
   useEffect(() => {
@@ -42,8 +32,7 @@ function Kitchen() {
         });
         const { status, message, data } = response.data;
         if (status === 'success') {
-          // Successfully fetched products.
-          dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
+          dispatch(setProducts(data)); 
           console.log('Fetched products:', data);
         } else {
           console.error('Product retrieval failed. Message:', message);
@@ -69,7 +58,7 @@ const handleCart = async (productId) => {
 
     const response = await axios.post(
       `https://ecommerce-api.bridgeon.in/users/${userId}/cart/${productId}`,
-      null, // Assuming no data payload, pass null if not needed
+      null, 
       {
         headers: {
           Authorization: `Bearer ${userToken}`,
@@ -77,7 +66,6 @@ const handleCart = async (productId) => {
       }
     );
 
-// Log the response from the server
 
     if (response.data.status === 'success') {
       console.log('Product added to cart.');
@@ -100,15 +88,13 @@ const handleWishlist = async (productId) => {
 
     const response = await axios.post(
       `https://ecommerce-api.bridgeon.in/users/${userId}/wishlist/${productId}`,
-      null, // Assuming no data payload, pass null if not needed
+      null, 
       {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
       }
     );
-
-// Log the response from the server
 
     if (response.data.status === 'success') {
       console.log('Product added to wishlist.');
@@ -123,11 +109,6 @@ const handleWishlist = async (productId) => {
   }
 };
 
-const Loadings=(id)=>{
-  setTimeout(() => {
-    dispatch(setIsLoading(false))
-  }, 3000);
-}
 
   return(
     <>

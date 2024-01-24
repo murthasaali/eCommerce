@@ -1,6 +1,6 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
-import burger from'../2150914687-removebg-preview.png'
+import burger from'../assets/burger.png'
 import { Modal } from '@mui/material'
 import {motion} from 'framer-motion'
 import { selectIsLoading } from '../redux/authSlice'

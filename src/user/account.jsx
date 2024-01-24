@@ -4,11 +4,11 @@ import { IoLocation, IoSettings } from 'react-icons/io5';
 import {useNavigate} from 'react-router-dom'
 import { Avatar } from '@mui/material';
 import { motion } from 'framer-motion';
-import { FaUser } from 'react-icons/fa';
+import { FaChevronCircleRight, FaPlusCircle, FaUser } from 'react-icons/fa';
 import { clearImg, clearIslogin, clearUserId, clearUserToken, clearuserName, selectUsername, seleectImg } from '../redux/authSlice';
 import {useDispatch, useSelector}  from 'react-redux'
 import ImageUploadComponent from '../components/setUserImage';
-// import shamil from '../shamil.jpg'
+import chat from '../assets/chat.jpg'
 import { Modal } from '@mui/material';
 
 const scaleVariants = {
@@ -67,7 +67,8 @@ setTimeout(() => {
   }
 
   return (
-    <div className='bg-black w-full flow flex-col justify-start items-center h-screen p-4'>
+    <div className='bg-black w-full flow flex-row justify-center items-center h-screen p-4'>
+       
         <div className=' flex w-full h-auto justify-between  md:justify-evenly items-center ' >
         <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={()=>nav("/account")}>
            <div className=' p-3 w-auto flex md:flex-row  flex-col justify-center items-center gap-2'>
@@ -116,6 +117,34 @@ setTimeout(() => {
           </div>
         </Modal>
           }
+             <div className='w-full mt-3 flex justify-center  items-end h-4/5 rounded-md '>
+              <div className='md:w-1/2 w-full h-full flex flex-col items-end justify-end  rounded-md opacity-40' style={{
+                backgroundImage:`url(${chat})`,
+                backgroundRepeat:'no-repeat',
+                backgroundPosition:"center",
+                backgroundSize: 'cover',
+
+
+
+              }}>
+                <div></div>
+<div className='w-full flex h-4/5 p-4 text-white '>
+  
+
+  
+
+</div>
+<div className='w-full flex h-14 mb-2  justify-between px-6 items-center text-white'>
+  <input type="text" className='w-3/4 h-10 bg-transparent border backdrop-blur-sm rounded-lg p-3' />
+<button><FaChevronCircleRight className='text-3xl hover:text-stone-400  '/>
+</button>
+<button><FaPlusCircle className='text-3xl hover:text-stone-400'/>
+</button>
+
+</div>
+              </div>
+
+</div>
     </div>
   );
 }

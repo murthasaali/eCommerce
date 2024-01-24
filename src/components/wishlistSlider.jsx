@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import {  useDispatch, useSelector } from "react-redux";
-import burger from '../2150914687-removebg-preview.png'
-
+import burger from '../assets/burger.png'
 import axios from "axios";
 import { Modal } from "@mui/material";
-import emptyCart from '../emptycart.png'
-
+import emptyCart from '../assets/emptycart.png'
 import {motion} from 'framer-motion'
 import {
   MDBContainer,

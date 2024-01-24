@@ -1,18 +1,12 @@
 import React, { useState } from 'react'
 import {  useDispatch, useSelector } from 'react-redux'
-import {  selectIsLoading, selectIscart, selectIslogin, setIsLoading, } from '../redux/authSlice'
-import box from '../offerbox.png'
-import delivery from "../delvery.png"
-import emptyCart from '../3d-hand-hold-smartphone-with-authentication-form-removebg-preview.png'
-
+import {  selectIsLoading, selectIslogin, setIsLoading, } from '../redux/authSlice'
+import box from '../assets/offerbox.png'
+import emptyCart from '../assets/login.png'
 import { motion } from 'framer-motion'
-import { FaBackward, FaHome } from 'react-icons/fa'
-import { BiSolidOffer } from 'react-icons/bi'
+import {  FaHome } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../components/loading';
-import { MdDelete } from 'react-icons/md'
-import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { MdOutlineSecurity } from "react-icons/md";
 import Slider from '../components/slider'
 import Navber from './navbar'
 const variants = {

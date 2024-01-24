@@ -151,7 +151,7 @@ function GetAllproduct() {
   };
 
   return (
-    <div className=' flex justify- items-center gap-10 flex-col w-full h-full overflow-auto pl-2 '>
+    <div className=' flex justify- items-center  flex-col w-full h-[600px] p-8 '>
        <div className='h-24 p-4 flex justify-start gap-10 items-center w-full sticky top-0 bg-transparent bg-opacity-90'>
       <motion.button
         onClick={handleToggleSearch}

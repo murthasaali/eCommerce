@@ -4,10 +4,10 @@ import "react-multi-carousel/lib/styles.css";
 import {  useSelector } from "react-redux";
 import {toast} from 'react-hot-toast'
 import axios from "axios";
-import emptyCart from '../emptycart.png'
+import emptyCart from '../assets/emptycart.png'
 import {motion} from 'framer-motion'
 import { Modal,Box,Typography} from '@mui/material';
-import loginpic from '../delivering.png'
+import loginpic from '../assets/delivering.png'
 import {useNavigate} from 'react-router-dom'
 import { selectIslogin, selectToken, selectUserToken } from "../redux/authSlice";
 import { selectUserid } from "../redux/authSlice";

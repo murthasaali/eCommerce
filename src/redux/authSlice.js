@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import avatar from "../shamil.jpg"
+import avatar from "../assets/shamil.jpg"
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -34,7 +34,7 @@ export const authSlice = createSlice({
     },
     
     clearImg: (state) => {
-      state.img = "../shamil.jpg";
+      state.img = "../assets/shamil.jpg";
       localStorage.removeItem('img'); // Remove the 'img' item from local storage
     },
     clearuserName: (state) => {

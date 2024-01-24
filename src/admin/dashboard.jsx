@@ -6,13 +6,16 @@ function Dashboard() {
   const [isModalOpen2, setIsModalOpen2] = useState(false);
 
   return (
-    <div className='p-8 flex flex-col justify-center items-start'>
+    <div className='p-8  h-1/2 flex flex-col justify-center items-center'>
       <h1>Dashboard</h1>
      
-<div className='w-full h-full mt-10 flex flex-col gap-14 items-start'>
+<div className='w-full h-auto flex flex-wrap p-4 gap-14 items-start'>
   
      
-      <div className="stats shadow">
+      <div className="stats shadow "
+      style={{
+        opacity:0.7
+      }}>
   
   <div className="stat">
     <div className="stat-figure text-primary">
@@ -47,7 +50,11 @@ function Dashboard() {
   
   
 </div>
-<div className="stats bg-primary text-primary-content">
+<div className="stats bg-primary text-primary-content"
+ style={{
+  opacity:0.5
+}}
+>
   
   <div className="stat">
     <div className="stat-title">Account balance</div>
@@ -67,7 +74,9 @@ function Dashboard() {
   </div>
   
 </div>
-<div className="stats shadow">
+<div className="stats shadow"   style={{
+        opacity:0.7
+      }}>
   
   <div className="stat">
     <div className="stat-figure text-secondary">
