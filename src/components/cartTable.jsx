@@ -1,6 +1,115 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import {  useSelector } from "react-redux";
+import {toast} from 'react-hot-toast'
+import axios from "axios";
+import emptyCart from '../assets/emptycart.png'
+import {motion} from 'framer-motion'
+import { Modal,Box,Typography} from '@mui/material';
+import loginpic from '../assets/delivering.png'
+import {useNavigate} from 'react-router-dom'
+import { selectIslogin, selectToken, selectUserToken } from "../redux/authSlice";
+import { selectUserid } from "../redux/authSlice";
+import {  FaDropbox, FaRemoveFormat, FaSearch } from "react-icons/fa";
+// import { selectUserid } from "../redux/authSlice";
+import { MdDelete } from "react-icons/md";
+import axiosInsatnce from "../axiosInstance/instance";
 
 function CartTable() {
+    
+  const [isOrder,setOrder]=useState(false)
+  const [tick,setTick]=useState(false)
+  const userId = useSelector(selectUserid);
+  const userToken = useSelector(selectUserToken);
+  const isLogin=useSelector(selectIslogin)
+  console.log(userId)
+  const [modal,setModal]=useState(false)
+  const [cartItem, setCartItem] = useState([]);
+  const nav=useNavigate()
+  const [selectedProducts, setSelectedProducts] = useState([]);
+
+  const handleProductSelection = (productId) => {
+    if (selectedProducts.includes(productId)) {
+      // If product is already selected, remove it from the selection
+      setSelectedProducts(selectedProducts.filter((id) => id !== productId));
+    } else {
+      // If product is not selected, add it to the selection
+      setSelectedProducts([...selectedProducts, productId]);
+    }
+  }
+  const viewCart = async (userId, token) => {
+    try {
+      const response = await axios.get(`https://ecommerce-api.bridgeon.in/users/${userId}/cart`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { status, message, data } = response.data;
+      if (status === 'success') {
+        // Successfully fetched cart items.
+       const products=data.products[0].cart
+        console.log('Cart items:',products );
+        setCartItem(products)
+      } else {
+        console.error('Cart item retrieval failed. Message:', message);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+  useEffect(() => {
+    viewCart(userId,userToken)
+  }, [])
+  const remove = async (productId, userToken, userId) => {
+    console.log(productId);
+    console.log(userToken);
+    console.log(userId);
+    try {
+      const response = await axiosInsatnce.delete(`/users/${userId}/cart/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
+      const { status, message } = response.data;
+      if (status === 'success') {
+        // Product removed from cart successfully.
+        toast.error('Product removed successfully');
+        viewCart(userId, userToken);
+        toggleModal();
+      } else {
+        console.error('Product removal from cart failed. Message:', message);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+  
+  const removeFromCart=(id)=>{
+    remove(id,userToken,userId)
+
+  }
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+  const [orderText, setOrderText] = useState('Order Processing....');
+
+  const handleOrder = () => {
+    setOrder(true);
+    setTimeout(() => {
+      setOrderText("order placed")
+      setTimeout(() => {
+        
+        setOrder(false)
+        nav("/")
+        setOrderText("order processing....")
+
+      }, 2000);
+    }, 5000);
+    
+  };
+
+  
   return (
     <div className='w-full h-full overflow-y-auto flex flex-col justify-center items-center  gap-6'><div className="overflow-x-auto">
     <table className="table">
@@ -13,230 +122,51 @@ function CartTable() {
             </label>
           </th>
           <th>Name</th>
-          <th>Job</th>
-          <th>Favorite Color</th>
+          <th>price</th>
+          <th>quantity</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         {/* row 1 */}
-        <tr>
-          <th>
-            <label>
-              <input type="checkbox" className="checkbox" />
-            </label>
-          </th>
-          <td>
-            <div className="flex items-center gap-3">
-              <div className="avatar">
-                <div className="mask mask-squircle w-12 h-12">
-                  <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
-                </div>
-              </div>
-              <div>
-                <div className="font-bold">Hart Hagerty</div>
-                <div className="text-sm opacity-50">United States</div>
-              </div>
-            </div>
-          </td>
-          <td>
-            Zemlak, Daniel and Leannon
-            <br/>
-            <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-          </td>
-          <td>Purple</td>
-          <th>
-            <button className="btn btn-ghost btn-xs">details</button>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <label>
-              <input type="checkbox" className="checkbox" />
-            </label>
-          </th>
-          <td>
-            <div className="flex items-center gap-3">
-              <div className="avatar">
-                <div className="mask mask-squircle w-12 h-12">
-                  <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
-                </div>
-              </div>
-              <div>
-                <div className="font-bold">Hart Hagerty</div>
-                <div className="text-sm opacity-50">United States</div>
-              </div>
-            </div>
-          </td>
-          <td>
-            Zemlak, Daniel and Leannon
-            <br/>
-            <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-          </td>
-          <td>Purple</td>
-          <th>
-            <button className="btn btn-ghost btn-xs">details</button>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <label>
-              <input type="checkbox" className="checkbox" />
-            </label>
-          </th>
-          <td>
-            <div className="flex items-center gap-3">
-              <div className="avatar">
-                <div className="mask mask-squircle w-12 h-12">
-                  <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
-                </div>
-              </div>
-              <div>
-                <div className="font-bold">Hart Hagerty</div>
-                <div className="text-sm opacity-50">United States</div>
-              </div>
-            </div>
-          </td>
-          <td>
-            Zemlak, Daniel and Leannon
-            <br/>
-            <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-          </td>
-          <td>Purple</td>
-          <th>
-            <button className="btn btn-ghost btn-xs">details</button>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <label>
-              <input type="checkbox" className="checkbox" />
-            </label>
-          </th>
-          <td>
-            <div className="flex items-center gap-3">
-              <div className="avatar">
-                <div className="mask mask-squircle w-12 h-12">
-                  <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
-                </div>
-              </div>
-              <div>
-                <div className="font-bold">Hart Hagerty</div>
-                <div className="text-sm opacity-50">United States</div>
-              </div>
-            </div>
-          </td>
-          <td>
-            Zemlak, Daniel and Leannon
-            <br/>
-            <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-          </td>
-          <td>Purple</td>
-          <th>
-            <button className="btn btn-ghost btn-xs">details</button>
-          </th>
-        </tr>
+        {cartItem.map((item) => (
+  <tr key={item._id}>
+    <th>
+      <label>
+        <input type="checkbox" className="checkbox" />
+      </label>
+    </th>
+    <td>
+      <div className="flex items-center gap-3">
+      <div className="avatar">
+  <div className="w-8 rounded">
+    <img src={item.image} alt="Tailwind-CSS-Avatar-component" />
+  </div>
+</div>
+
+        <div>
+          <div className="font-bold">{item.category
+}</div>
+          <div className="md:text-sm md:flex hidden text-xs opacity-50">{item.description.slice(0,30)}..</div>
+        </div>
+      </div>
+    </td>
+    <td className="text-red-500">{item.price}</td>
+    <td>{item.productColor} ...</td>
+    <td><MdDelete/></td>
+
+  </tr>
+))}
+
+
+      
+    
+      
         {/* row 2 */}
-        <tr>
-          <th>
-            <label>
-              <input type="checkbox" className="checkbox" />
-            </label>
-          </th>
-          <td>
-            <div className="flex items-center gap-3">
-              <div className="avatar">
-                <div className="mask mask-squircle w-12 h-12">
-                  <img src="/tailwind-css-component-profile-3@56w.png" alt="Avatar Tailwind CSS Component" />
-                </div>
-              </div>
-              <div>
-                <div className="font-bold">Brice Swyre</div>
-                <div className="text-sm opacity-50">China</div>
-              </div>
-            </div>
-          </td>
-          <td>
-            Carroll Group
-            <br/>
-            <span className="badge badge-ghost badge-sm">Tax Accountant</span>
-          </td>
-          <td>Red</td>
-          <th>
-            <button className="btn btn-ghost btn-xs">details</button>
-          </th>
-        </tr>
-        {/* row 3 */}
-        <tr>
-          <th>
-            <label>
-              <input type="checkbox" className="checkbox" />
-            </label>
-          </th>
-          <td>
-            <div className="flex items-center gap-3">
-              <div className="avatar">
-                <div className="mask mask-squircle w-12 h-12">
-                  <img src="/tailwind-css-component-profile-4@56w.png" alt="Avatar Tailwind CSS Component" />
-                </div>
-              </div>
-              <div>
-                <div className="font-bold">Marjy Ferencz</div>
-                <div className="text-sm opacity-50">Russia</div>
-              </div>
-            </div>
-          </td>
-          <td>
-            Rowe-Schoen
-            <br/>
-            <span className="badge badge-ghost badge-sm">Office Assistant I</span>
-          </td>
-          <td>Crimson</td>
-          <th>
-            <button className="btn btn-ghost btn-xs">details</button>
-          </th>
-        </tr>
-        {/* row 4 */}
-        <tr>
-          <th>
-            <label>
-              <input type="checkbox" className="checkbox" />
-            </label>
-          </th>
-          <td>
-            <div className="flex items-center gap-3">
-              <div className="avatar">
-                <div className="mask mask-squircle w-12 h-12">
-                  <img src="/tailwind-css-component-profile-5@56w.png" alt="Avatar Tailwind CSS Component" />
-                </div>
-              </div>
-              <div>
-                <div className="font-bold">Yancy Tear</div>
-                <div className="text-sm opacity-50">Brazil</div>
-              </div>
-            </div>
-          </td>
-          <td>
-            Wyman-Ledner
-            <br/>
-            <span className="badge badge-ghost badge-sm">Community Outreach Specialist</span>
-          </td>
-          <td>Indigo</td>
-          <th>
-            <button className="btn btn-ghost btn-xs">details</button>
-          </th>
-        </tr>
+       
       </tbody>
       {/* foot */}
-      <tfoot>
-        <tr>
-          <th></th>
-          <th>Name</th>
-          <th>Job</th>
-          <th>Favorite Color</th>
-          <th></th>
-        </tr>
-      </tfoot>
+    
       
     </table>
   </div></div>
