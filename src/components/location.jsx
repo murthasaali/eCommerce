@@ -20,7 +20,7 @@ function Location() {
             const { latitude, longitude } = position.coords;
             const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
             if (!response.ok) {
-              throw new Error('Error retrieving location data');
+             alert( Error)
             }
             const data = await response.json();
 

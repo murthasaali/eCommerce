@@ -21,8 +21,8 @@ function ImageUploadComponent() {
   };
 
   return (
-    <div className="mt-4">
-      <label htmlFor="file-upload" className="cursor-pointer bg-black   text-white  py-2 px-4 font-thin rounded">
+    <div className="mt-4 border-dotted ">
+      <label htmlFor="file-upload" className="cursor-pointer    text-white  py-2 px-4 font-thin rounded">
         update dp
       </label>
       <input

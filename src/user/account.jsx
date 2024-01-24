@@ -23,36 +23,36 @@ function Account() {
   const name = useSelector(selectUsername)
   const dispatch = useDispatch()
   const nav = useNavigate()
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(async (position) => {
-            const { latitude, longitude } = position.coords;
-            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
-            if (!response.ok) {
-              throw new Error('Error retrieving location data');
-            }
-            const data = await response.json();
-            console.log(data);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       if (navigator.geolocation) {
+  //         navigator.geolocation.getCurrentPosition(async (position) => {
+  //           const { latitude, longitude } = position.coords;
+  //           const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
+  //           if (!response.ok) {
+  //             throw new Error('Error retrieving location data');
+  //           }
+  //           const data = await response.json();
+  //           console.log(data);
 
-            // Access the address components (village and district)
-            const village = data.address.village || 'Unknown Village';
-            const district = data.address.county || 'Unknown District';
+  //           // Access the address components (village and district)
+  //           const village = data.address.village || 'Unknown Village';
+  //           const district = data.address.county || 'Unknown District';
 
-            setUserLocation(`${village}, ${district}`);
-          });
-        } else {
-          setUserLocation('Geolocation is not supported.');
-        }
-      } catch (error) {
-        console.error('Error getting the location:', error);
-        setUserLocation('Location not available');
-      }
-    };
+  //           setUserLocation(`${village}, ${district}`);
+  //         });
+  //       } else {
+  //         setUserLocation('Geolocation is not supported.');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error getting the location:', error);
+  //       setUserLocation('Location not available');
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
   const logout = () => {
 
     dispatch(clearuserName())
@@ -129,12 +129,12 @@ function Account() {
         setting &&
 
         <Modal open={setting} onClose={() => setSetting(false)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div className="p-8 bg-white bg-opacity-50  opacity-95 rounded-xl">
-            <ImageUploadComponent />
+          <div className="p-8 backdrop-blur-sm  border rounded-xl">
+            <ImageUploadComponent  />
 
 
-            <p className="flex justify-center items-center gap-10 text-red-600">
-              do you want to logout <button className="btn" onClick={logout}>yes</button>
+            <p className="flex justify-center items-center gap-10 font-thin text-red-600">
+              Do you want to logout <button className="btn border" onClick={logout}>yes</button>
             </p>
 
           </div>
@@ -154,8 +154,8 @@ function Account() {
           <div className='w-full flex flex-col h-4/5  overflow-y-auto  p-4 text-white '>
 
   {chats.map((message, index) => (
-          <div className="chat chat-end" key={index}>
-    <div  className="chat-bubble mt-3 text-black bg-white">
+          <div className="chat chat-end " key={index}>
+    <div  className="chat-bubble mt-3  w-auto  flex flex-wrap max-w-10 text-black bg-white">
       {message}
     </div>
     

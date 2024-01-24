@@ -236,7 +236,7 @@ function Home() {
                 </motion.div>
               ))}
             </motion.ul>
-              <Location />
+              {/* <Location /> */}
               <div className='w-full flex flex-col justify-evenly items-center p-4 h-40 text-white'>
                 <p>contact us</p>
                 <div className='flex w-full justify-evenly  text-white  '>
