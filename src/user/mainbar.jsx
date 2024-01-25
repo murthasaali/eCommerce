@@ -113,7 +113,7 @@ function Mainbar() {
           <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={() => dispatch(setIsabout(true))}>
             ABOUT
           </motion.button>
-          <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover">
+          <motion.button variants={scaleVariants} initial="initial" whileHover="hover" whileTap="hover" onClick={()=>nav('/account')}>
             CONTACT
           </motion.button>
         </ul>
@@ -153,15 +153,21 @@ function Mainbar() {
         <Modal
           open={isSearch}
           onClose={() => setIsSearch(false)}
-          style={{ display: 'flex', alignItems: 'start', justifyContent: 'center', marginTop: '100px' }}
+          style={{ display: 'flex', alignItems: 'start', justifyContent: 'center', marginTop: '100px',                backdropFilter: 'blur(5px)', // Add this line
+        }}
         >
           <div className="p-8  flex flex-col  justify-center items-center gap-2 w-1/2 rounded-xl">
             <input
               type="text"
-              className="bg-stone-300 text-blue-950 w-3/4 h-14 rounded-3xl pl-4 overflow-hidden shadow-md"
-              style={{ opacity: 1, y: 0 }}
+              className="w-3/4 h-14 rounded-3xl pl-4 backdrop-blur-sm overflow-hidden shadow-md"
+              style={{
+                opacity: 1,
+                y: 0,
+                backdropFilter: 'blur(5px)', // Add this line
+              }}
               onChange={handleSearch}
             />
+
             <div className="bg-orange-400 opacity-75 h-auto w-3/4 rounded-lg">
               <ul >
 
@@ -190,51 +196,51 @@ function Mainbar() {
             <p className="flex justify-center items-center gap-10 text-stone-200">
               do you want to logout <button className="btn" onClick={handleLogout}>yes</button>
             </p>
-          
+
           </div>
         </Modal>
       )}
       {loginModal && (
 
-<Modal
-open={() => setloginModal(true)}
-onClose={() => setloginModal(false)}
-aria-labelledby="modal-modal-title"
-aria-describedby="modal-modal-description"
->
-<Box
-  sx={{
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    backdropFilter:` blur(5px)`,
-    boxShadow: '2px 5px 10px 5px black', // Adjust or remove this line
-    p: 4,
-  }}
-  className="shadow-md rounded-lg flex flex-col justify-center items-center"
->
-  <motion.img
-    src={loginpic}
-    alt=""
-    className='w-24 h-24'
-    animate={{
-      y: [0, 10, 0],
-    }}
-    transition={{
-      duration: 4,
-      repeat: Infinity,
-      ease: "linear",
-    }}
-  />
-  <Typography id="modal-modal-title" variant="h6" component="h2">
-    <p className="flex justify-center items-center gap-10 text-red-600">
-      <button className="border bg-black btn" onClick={toLogin}>Login</button>
-    </p>
-  </Typography>
-</Box>
-</Modal>
+        <Modal
+          open={() => setloginModal(true)}
+          onClose={() => setloginModal(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: 400,
+              backdropFilter: ` blur(5px)`,
+              boxShadow: '2px 5px 10px 5px black', // Adjust or remove this line
+              p: 4,
+            }}
+            className="shadow-md rounded-lg flex flex-col justify-center items-center"
+          >
+            <motion.img
+              src={loginpic}
+              alt=""
+              className='w-24 h-24'
+              animate={{
+                y: [0, 10, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              <p className="flex justify-center items-center gap-10 text-red-600">
+                <button className="border bg-black btn" onClick={toLogin}>Login</button>
+              </p>
+            </Typography>
+          </Box>
+        </Modal>
 
 
       )}

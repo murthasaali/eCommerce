@@ -10,6 +10,7 @@ import Loading from '../components/loading';
 import Slider from '../components/slider'
 import Navber from './navbar'
 import CartTable from '../components/cartTable'
+import Sidenav from '../components/sidenav'
 const variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
@@ -34,14 +35,10 @@ function Cart() {
       <div className='bg-black flex-col flex w-full overflow-auto h-screen p-1 lg:p-10 justify-start items-center'
         
 
-      // display: flex;
-      // flex-direction: column;
-      // align-items: center;
-
-      // width: 100%;
-      // height:100%;
+    
       // background-color: #000000;
       >
+        <Sidenav/>
         <div className="lg:text-6xl text-4xl w-full  text-orange-500 text-opacity-60 font-thin flex justify-evenly items-center"
           style={{
             fontFamily: " 'Arista Pro Alternate Fat', sans-serif "

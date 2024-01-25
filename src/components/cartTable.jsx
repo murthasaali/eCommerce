@@ -11,14 +11,13 @@ import loginpic from '../assets/delivering.png'
 import {useNavigate} from 'react-router-dom'
 import { selectIslogin, selectToken, selectUserToken } from "../redux/authSlice";
 import { selectUserid } from "../redux/authSlice";
-import {  FaDropbox, FaRemoveFormat, FaSearch } from "react-icons/fa";
+import {  FaCross, FaDropbox, FaRemoveFormat, FaSearch, FaXing } from "react-icons/fa";
 // import { selectUserid } from "../redux/authSlice";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdOutlineClose } from "react-icons/md";
 import axiosInsatnce from "../axiosInstance/instance";
 import Total from "./Total";
 import { seleectImg } from '../redux/authSlice';
 import { FaChevronCircleRight } from 'react-icons/fa';
-
 function CartTable() {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -124,18 +123,35 @@ function CartTable() {
 
   
   return (
-    <div className='w-full h-full overflow-y-auto flex text-white gap-10 justify-center items-start  '><div className="overflow-x-auto">
-      <FaChevronCircleRight
-        className='text-white text-3xl absolute left-2 top-1/2 transform -translate-y-1/2 cursor-pointer  z-20'
-        onClick={openModal}
-      />{isModalOpen && (
-          <div className='fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 flex justify-center items-center'>
-            <div className='w-full h-full bg-white rounded-lg p-4'>
+    <div className='w-full h-full  flex text-white gap-10 justify-center items-start  '><div className="">
+    <motion.button  
+            className='text-white bg-black  h-auto w-auto px-3 py-1 rounded-sm  text-3xl absolute left-2 top-1/2 md:hidden items-center gap-3 flex transform -translate-y-1/2 cursor-pointer  z-20'
+            onClick={openModal}
+ 
+              animate={{
+                y: [0, 10, 0], // Move the image up and down in a loop
+              }}
+              transition={{
+                duration: 4, // Set the duration of each cycle (in seconds)
+                repeat: Infinity, // Repeat the animation infinitely
+                ease: "linear", // Set the easing function for smooth animation
+              }}>
+      
+       <FaChevronCircleRight
+      />
+      <span className="text-sm  font-thin">order now  </span>
+      </motion.button> 
+      
+      
+      {isModalOpen && (
+          <div className='fixed top-0 left-0 w-full h-full  backdrop-blur-sm z-50 flex justify-center items-center'>
+            <div className='w-auto h-auto  rounded-lg p-4'>
               <button
-                className='mt-4 bg-orange-500 text-white px-4 py-2 rounded-md'
-                onClick={closeModal}
+                className='mt-4  text-white text-3xl px-4 py-2 rounded-md'
+
+                
                 >
-                Close Modal
+              <MdOutlineClose onClick={closeModal}/>
               </button>
                 <Total/>
             </div>
@@ -143,13 +159,9 @@ function CartTable() {
         )}
     <table className="table">
       {/* head */}
-      <thead>
+      <thead className="text-sm font-thin text-stone-400">
         <tr>
-          <th>
-            <label>
-              <input type="checkbox" className="checkbox" />
-            </label>
-          </th>
+         
           <th>Name</th>
           <th>price</th>
           <th>quantity</th>
@@ -160,29 +172,24 @@ function CartTable() {
         {/* row 1 */}
         {cartItem.map((item) => (
   <tr key={item._id}>
-    <th>
-      <label>
-        <input type="checkbox" className="checkbox" />
-      </label>
-    </th>
+    
     <td>
       <div className="flex items-center gap-3">
       <div className="avatar">
-  <div className="w-8 rounded">
+  <div className="w-14 rounded">
     <img src={item.image} alt="Tailwind-CSS-Avatar-component" />
   </div>
 </div>
 
         <div>
-          <div className="font-bold">{item.category
-}</div>
+          <div className="font-bold">{item.title}</div>
           <div className="md:text-sm md:flex hidden text-xs opacity-50 text-orange-500 text-opacity-90">{item.description.slice(0,30)}..</div>
         </div>
       </div>
     </td>
     <td className="text-red-500">{item.price}</td>
     <td>{item.productColor} ...</td>
-    <td><MdDelete/></td>
+    <td>  <button className='p-3 hover:border-b-[1px] text-xl'><MdDelete  onClick={()=>removeFromCart(item._id)}/> </button></td>
 
   </tr>
 ))}
@@ -198,7 +205,14 @@ function CartTable() {
     
       
     </table>
-  </div>   <Total/></div>
+  </div>
+  <div className="md:flex hidden">
+
+   <Total/>
+  </div>
+  
+  
+  </div>
   );
 }
 
