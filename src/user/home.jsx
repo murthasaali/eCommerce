@@ -23,18 +23,20 @@ import { setProducts } from '../redux/authSlice';
 import axiosInsatnce from '../axiosInstance/instance';
 import { selectToken, selectProducts } from '../redux/authSlice';
 import Footer from '../components/footer';
+import { container } from '../constants/container';
+import Offerbar from '../components/offerbar';
 
-const container = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.2
-    }
-  }
-};
+// const container = {
+//   hidden: { opacity: 1, scale: 0 },
+//   visible: {
+//     opacity: 1,
+//     scale: 1,
+//     transition: {
+//       delayChildren: 0.3,
+//       staggerChildren: 0.2
+//     }
+//   }
+// };
 
 const items = {
   hidden: { y: 20, opacity: 0 },
@@ -105,6 +107,7 @@ function Home() {
     <>
 
       <div className='home_main'  >
+        <Offerbar/>
 
         {modal && (
           <Modal
