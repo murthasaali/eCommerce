@@ -263,7 +263,7 @@ function Home() {
           </div>
         </section>
         <Navber />
-        <Footer />
+        {/* <Footer /> */}
 
       </div>
     </>
