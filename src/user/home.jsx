@@ -24,7 +24,6 @@ import axiosInsatnce from '../axiosInstance/instance';
 import { selectToken, selectProducts } from '../redux/authSlice';
 import Footer from '../components/footer';
 import { container } from '../constants/container';
-import Offerbar from '../components/offerbar';
 
 // const container = {
 //   hidden: { opacity: 1, scale: 0 },
@@ -107,7 +106,6 @@ function Home() {
     <>
 
       <div className='home_main'  >
-        <Offerbar/>
 
         {modal && (
           <Modal
@@ -250,6 +248,7 @@ function Home() {
                   <FaFacebook className='text-2xl   hover:text-blue-700 opacity-50' />
                 </div>
 
+              <Location/>
               </div></div>
           </div>    
         </div>

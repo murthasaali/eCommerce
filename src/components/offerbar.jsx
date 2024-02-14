@@ -14,7 +14,7 @@ function Offerbar() {
   return (
     <motion.div
       ref={offerbarRef}
-      className='fixed right-4 w-64 h-40 bg-white z-50 bottom-0  transform -translate-y-1/2'
+      className='fixed right-4 w-64 h-40 backdrop-blur-sm z-50 bottom-0  transform -translate-y-1/2'
     >
       Offerbar
       <button onClick={hideOfferbar}><MdClose/></button>
